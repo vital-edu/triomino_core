@@ -17,9 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$GameEventTearOff {
   const _$GameEventTearOff();
 
-  AddPlayerEvent addPlayer(Player player) {
+  AddPlayerEvent addPlayer(Player player, {required Identifier id}) {
     return AddPlayerEvent(
       player,
+      id: id,
     );
   }
 }
@@ -30,20 +31,21 @@ const $GameEvent = _$GameEventTearOff();
 /// @nodoc
 mixin _$GameEvent {
   Player get player => throw _privateConstructorUsedError;
+  Identifier get id => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Player player) addPlayer,
+    required TResult Function(Player player, Identifier id) addPlayer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Player player)? addPlayer,
+    TResult Function(Player player, Identifier id)? addPlayer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Player player)? addPlayer,
+    TResult Function(Player player, Identifier id)? addPlayer,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -73,7 +75,7 @@ mixin _$GameEvent {
 abstract class $GameEventCopyWith<$Res> {
   factory $GameEventCopyWith(GameEvent value, $Res Function(GameEvent) then) =
       _$GameEventCopyWithImpl<$Res>;
-  $Res call({Player player});
+  $Res call({Player player, Identifier id});
 
   $PlayerCopyWith<$Res> get player;
 }
@@ -89,12 +91,17 @@ class _$GameEventCopyWithImpl<$Res> implements $GameEventCopyWith<$Res> {
   @override
   $Res call({
     Object? player = freezed,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
       player: player == freezed
           ? _value.player
           : player // ignore: cast_nullable_to_non_nullable
               as Player,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as Identifier,
     ));
   }
 
@@ -113,7 +120,7 @@ abstract class $AddPlayerEventCopyWith<$Res>
           AddPlayerEvent value, $Res Function(AddPlayerEvent) then) =
       _$AddPlayerEventCopyWithImpl<$Res>;
   @override
-  $Res call({Player player});
+  $Res call({Player player, Identifier id});
 
   @override
   $PlayerCopyWith<$Res> get player;
@@ -132,12 +139,17 @@ class _$AddPlayerEventCopyWithImpl<$Res> extends _$GameEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? player = freezed,
+    Object? id = freezed,
   }) {
     return _then(AddPlayerEvent(
       player == freezed
           ? _value.player
           : player // ignore: cast_nullable_to_non_nullable
               as Player,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as Identifier,
     ));
   }
 }
@@ -145,14 +157,16 @@ class _$AddPlayerEventCopyWithImpl<$Res> extends _$GameEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddPlayerEvent extends AddPlayerEvent {
-  const _$AddPlayerEvent(this.player) : super._();
+  const _$AddPlayerEvent(this.player, {required this.id}) : super._();
 
   @override
   final Player player;
+  @override
+  final Identifier id;
 
   @override
   String toString() {
-    return 'GameEvent.addPlayer(player: $player)';
+    return 'GameEvent.addPlayer(player: $player, id: $id)';
   }
 
   @override
@@ -160,12 +174,16 @@ class _$AddPlayerEvent extends AddPlayerEvent {
     return identical(this, other) ||
         (other is AddPlayerEvent &&
             (identical(other.player, player) ||
-                const DeepCollectionEquality().equals(other.player, player)));
+                const DeepCollectionEquality().equals(other.player, player)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(player);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(player) ^
+      const DeepCollectionEquality().hash(id);
 
   @JsonKey(ignore: true)
   @override
@@ -175,27 +193,27 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Player player) addPlayer,
+    required TResult Function(Player player, Identifier id) addPlayer,
   }) {
-    return addPlayer(player);
+    return addPlayer(player, id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Player player)? addPlayer,
+    TResult Function(Player player, Identifier id)? addPlayer,
   }) {
-    return addPlayer?.call(player);
+    return addPlayer?.call(player, id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Player player)? addPlayer,
+    TResult Function(Player player, Identifier id)? addPlayer,
     required TResult orElse(),
   }) {
     if (addPlayer != null) {
-      return addPlayer(player);
+      return addPlayer(player, id);
     }
     return orElse();
   }
@@ -230,11 +248,14 @@ class _$AddPlayerEvent extends AddPlayerEvent {
 }
 
 abstract class AddPlayerEvent extends GameEvent {
-  const factory AddPlayerEvent(Player player) = _$AddPlayerEvent;
+  const factory AddPlayerEvent(Player player, {required Identifier id}) =
+      _$AddPlayerEvent;
   const AddPlayerEvent._() : super._();
 
   @override
   Player get player => throw _privateConstructorUsedError;
+  @override
+  Identifier get id => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $AddPlayerEventCopyWith<AddPlayerEvent> get copyWith =>

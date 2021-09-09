@@ -1,5 +1,6 @@
 import 'package:test/test.dart';
 import 'package:triomino_core/game_event.dart';
+import 'package:triomino_core/identifier.dart';
 import 'package:triomino_core/player.dart';
 import 'package:triomino_core/rules/quantity_of_players_rule.dart';
 
@@ -20,9 +21,9 @@ void main() {
     test('3 players should be invalid', () {
       final gameRule = QuantityOfPlayersGameRule(2, 2);
       final result = gameRule.validate([
-        AddPlayerEvent(Player(name: '1')),
-        AddPlayerEvent(Player(name: '2')),
-        AddPlayerEvent(Player(name: '3')),
+        AddPlayerEvent(Player(name: '1'), id: Identifier.uniq()),
+        AddPlayerEvent(Player(name: '2'), id: Identifier.uniq()),
+        AddPlayerEvent(Player(name: '3'), id: Identifier.uniq()),
       ]);
 
       expect(result, false);
@@ -31,8 +32,8 @@ void main() {
     test('2 players should be valid', () {
       final gameRule = QuantityOfPlayersGameRule(2, 2);
       final result = gameRule.validate([
-        AddPlayerEvent(Player(name: '1')),
-        AddPlayerEvent(Player(name: '2')),
+        AddPlayerEvent(Player(name: '1'), id: Identifier.uniq()),
+        AddPlayerEvent(Player(name: '2'), id: Identifier.uniq()),
       ]);
 
       expect(result, true);
@@ -41,7 +42,7 @@ void main() {
     test('1 player should be invalid', () {
       final gameRule = QuantityOfPlayersGameRule(2, 2);
       final result = gameRule.validate([
-        AddPlayerEvent(Player(name: '1')),
+        AddPlayerEvent(Player(name: '1'), id: Identifier.uniq()),
       ]);
 
       expect(result, false);

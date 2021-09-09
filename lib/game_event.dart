@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:triomino_core/identifier.dart';
 import 'package:triomino_core/player.dart';
 
 part 'game_event.freezed.dart';
@@ -7,5 +8,8 @@ part 'game_event.freezed.dart';
 class GameEvent with _$GameEvent {
   const GameEvent._();
 
-  const factory GameEvent.addPlayer(Player player) = AddPlayerEvent;
+  const factory GameEvent.addPlayer(
+    Player player, {
+    required Identifier id,
+  }) = AddPlayerEvent;
 }

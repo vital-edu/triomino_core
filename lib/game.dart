@@ -1,4 +1,5 @@
 import 'package:triomino_core/game_event.dart';
+import 'package:triomino_core/identifier.dart';
 import 'package:triomino_core/player.dart';
 import 'package:triomino_core/rule_book.dart';
 import 'package:triomino_core/rules/game_rule.dart';
@@ -8,8 +9,8 @@ class _GameValidationError extends Error {}
 
 class Game {
   final List<GameEvent> events = [
-    AddPlayerEvent(Player(name: 'Player 1')),
-    AddPlayerEvent(Player(name: 'Player 2')),
+    AddPlayerEvent(Player(name: 'Player 1'), id: Identifier.uniq()),
+    AddPlayerEvent(Player(name: 'Player 2'), id: Identifier.uniq()),
   ];
   final RuleBook ruleBook;
 
