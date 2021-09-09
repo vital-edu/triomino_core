@@ -115,10 +115,12 @@ class __$QuantityOfPlayersGameRuleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_QuantityOfPlayersGameRule implements _QuantityOfPlayersGameRule {
+@Implements(GameRule)
+class _$_QuantityOfPlayersGameRule extends _QuantityOfPlayersGameRule {
   const _$_QuantityOfPlayersGameRule(this.min, this.max)
       : assert(max >= min, 'max players must be greater than min players.'),
-        assert(min > 1, 'it is not allowed a game of only one person.');
+        assert(min > 1, 'it is not allowed a game of only one person.'),
+        super._();
 
   @override
   final int min;
@@ -154,9 +156,11 @@ class _$_QuantityOfPlayersGameRule implements _QuantityOfPlayersGameRule {
               this, _$identity);
 }
 
-abstract class _QuantityOfPlayersGameRule implements QuantityOfPlayersGameRule {
+abstract class _QuantityOfPlayersGameRule extends QuantityOfPlayersGameRule
+    implements GameRule {
   const factory _QuantityOfPlayersGameRule(int min, int max) =
       _$_QuantityOfPlayersGameRule;
+  const _QuantityOfPlayersGameRule._() : super._();
 
   @override
   int get min => throw _privateConstructorUsedError;
