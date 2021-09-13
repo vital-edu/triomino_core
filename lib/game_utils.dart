@@ -6,7 +6,7 @@ class GameUtils {
   final _playerNameRegex = RegExp(r'^Player (\d)+$');
 
   Player createRandomPlayer(List<GameEvent> events) {
-    int lastIndex = 1;
+    int nextPlayerName = 1;
 
     events
         .fold<List<int?>>(
@@ -24,16 +24,17 @@ class GameUtils {
         )
         .whereNotNull()
         .sorted(Comparable.compare)
-        .forEachIndexedWhile((index, element) {
-          if (element == index + 1) {
-            return true;
+        .forEachIndexedWhile((index, actualPlayerName) {
+          final expectedPlayerName = index + 1;
+          if (actualPlayerName != expectedPlayerName) {
+            return false;
           }
 
-          lastIndex = index + 1;
-          return false;
+          nextPlayerName = expectedPlayerName + 1;
+          return true;
         });
 
-    return Player(name: 'Player $lastIndex');
+    return Player(name: 'Player $nextPlayerName');
   }
 
   void show(List<GameEvent> events) {
