@@ -8,10 +8,11 @@ import 'package:triomino_core/rules/quantity_of_players_rule.dart';
 class _GameValidationError extends Error {}
 
 class Game {
-  final List<GameEvent> events = [
+  List<GameEvent> _events = [
     AddPlayerEvent(Player(name: 'Player 1'), id: Identifier.uniq()),
     AddPlayerEvent(Player(name: 'Player 2'), id: Identifier.uniq()),
   ];
+  List<GameEvent> get events => _events;
   final RuleBook ruleBook;
 
   Game()
@@ -20,11 +21,11 @@ class Game {
         );
 
   bool add(GameEvent event) {
+    final newEvents = <GameEvent>[...events, event];
     try {
       event.map(addPlayer: (newEvent) {
-        _validateEvent(
-          newEvent: newEvent,
-          oldEvents: events,
+        _validateEvents(
+          newEvents,
           rule: ruleBook.quantityOfPlayersGameRule,
         );
       });
@@ -36,12 +37,31 @@ class Game {
     return true;
   }
 
-  void _validateEvent({
-    required GameEvent newEvent,
-    required List<GameEvent> oldEvents,
+  bool remove(GameEvent event) {
+    final newEvents =
+        events.where((element) => element.id != event.id).toList();
+    try {
+      event.map(addPlayer: (newEvent) {
+        _validateEvents(
+          newEvents,
+          rule: ruleBook.quantityOfPlayersGameRule,
+        );
+      });
+    } on _GameValidationError {
+      return false;
+    }
+
+    final beforeRemovalEventsCount = events.length;
+    _events = newEvents;
+
+    return events.length < beforeRemovalEventsCount;
+  }
+
+  void _validateEvents(
+    List<GameEvent> events, {
     required GameRule rule,
   }) {
-    final isValid = rule.validate(<GameEvent>[newEvent, ...oldEvents]);
+    final isValid = rule.validate(events);
     if (!isValid) {
       throw _GameValidationError();
     }

@@ -18,7 +18,6 @@ void main() {
           game.add(AddPlayerEvent(Player(name: '$i'), id: Identifier.uniq()));
         }
       });
-
       test('should not add more players than allowed', () {
         expect(game.events.length, maxPlayersAllowed);
 
@@ -31,6 +30,31 @@ void main() {
         expect(success, false);
 
         expect(game.events.length, maxPlayersAllowed);
+      });
+    });
+
+    group('remove event', () {
+      test('should remove event correctly', () {
+        final game = Game();
+
+        final newEvent =
+            AddPlayerEvent(Player(name: 'Player 1'), id: Identifier.uniq());
+        game.add(newEvent);
+
+        final success = game.remove(newEvent);
+        expect(success, true);
+        expect(game.events.length, 2);
+      });
+
+      test('should not remove event that does not exist', () {
+        final game = Game();
+
+        final newEvent =
+            AddPlayerEvent(Player(name: 'Player 1'), id: Identifier.uniq());
+
+        final success = game.remove(newEvent);
+        expect(success, false);
+        expect(game.events.length, 2);
       });
     });
   });
