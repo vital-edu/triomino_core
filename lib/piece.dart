@@ -1,3 +1,5 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 class Piece {
   late final int side1;
   late final int side2;
@@ -27,4 +29,14 @@ class Piece {
     }
     return 'Piece($side1, $side2, $side3)';
   }
+
+  @override
+  operator ==(Object other) {
+    if (other is! Piece) return false;
+
+    return side1 == other.side1 && side2 == other.side2 && side3 == other.side3;
+  }
+
+  @override
+  int get hashCode => Object.hash(side1, side2, side3);
 }

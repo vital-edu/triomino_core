@@ -64,4 +64,18 @@ void main() {
       testToStringOf(Piece(3, 3, 3), expected: 'Triple 3');
     });
   });
+
+  group('operator ==', () {
+    test('different objects with same sides should be considered the same', () {
+      expect(Piece(1, 2, 3), Piece(1, 2, 3));
+    });
+
+    test('pieces with same sides should be considered the same', () {
+      expect(Piece(1, 2, 3), Piece(1, 3, 2));
+    });
+
+    test('a triple and a piece should be the same if all sides are equals', () {
+      expect(Piece(1, 1, 1), Piece.triple(1));
+    });
+  });
 }
