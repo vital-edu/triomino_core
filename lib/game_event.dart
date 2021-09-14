@@ -12,4 +12,8 @@ class GameEvent with _$GameEvent {
     Player player, {
     required Identifier id,
   }) = AddPlayerEvent;
+
+  const factory GameEvent.startGame({
+    required Identifier id,
+  }) = StartGameEvent;
 }

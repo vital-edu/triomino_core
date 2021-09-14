@@ -39,9 +39,14 @@ class GameUtils {
 
   void show(List<GameEvent> events) {
     for (final event in events) {
-      event.map(addPlayer: (e) {
-        print('${e.player.name} joined the game.');
-      });
+      event.map(
+        addPlayer: (e) {
+          print('${e.player.name} joined the game.');
+        },
+        startGame: (StartGameEvent value) {
+          print('Game started');
+        },
+      );
     }
   }
 }

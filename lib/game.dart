@@ -3,6 +3,7 @@ import 'package:triomino_core/identifier.dart';
 import 'package:triomino_core/player.dart';
 import 'package:triomino_core/rule_book.dart';
 import 'package:triomino_core/rules/game_rule.dart';
+import 'package:triomino_core/rules/piece_distribution_game_rule.dart';
 import 'package:triomino_core/rules/quantity_of_players_rule.dart';
 
 class _GameValidationError extends Error {}
@@ -18,17 +19,20 @@ class Game {
   Game()
       : ruleBook = RuleBook(
           quantityOfPlayersGameRule: QuantityOfPlayersGameRule(2, 6),
+          pieceDistributionGameRule: PieceDistributionGameRule(),
         );
 
   bool add(GameEvent event) {
     final newEvents = <GameEvent>[...events, event];
     try {
-      event.map(addPlayer: (newEvent) {
-        _validateEvents(
-          newEvents,
-          rule: ruleBook.quantityOfPlayersGameRule,
-        );
-      });
+      event.map(
+        addPlayer: (newEvent) {
+          _validateEvents(newEvents, rule: ruleBook.quantityOfPlayersGameRule);
+        },
+        startGame: (StartGameEvent value) {
+          _validateEvents(newEvents, rule: ruleBook.pieceDistributionGameRule);
+        },
+      );
     } on _GameValidationError {
       return false;
     }
@@ -41,12 +45,14 @@ class Game {
     final newEvents =
         events.where((element) => element.id != event.id).toList();
     try {
-      event.map(addPlayer: (newEvent) {
-        _validateEvents(
-          newEvents,
-          rule: ruleBook.quantityOfPlayersGameRule,
-        );
-      });
+      event.map(
+        addPlayer: (newEvent) {
+          _validateEvents(newEvents, rule: ruleBook.quantityOfPlayersGameRule);
+        },
+        startGame: (StartGameEvent value) {
+          _validateEvents(newEvents, rule: ruleBook.pieceDistributionGameRule);
+        },
+      );
     } on _GameValidationError {
       return false;
     }

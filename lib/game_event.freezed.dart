@@ -23,6 +23,12 @@ class _$GameEventTearOff {
       id: id,
     );
   }
+
+  StartGameEvent startGame({required Identifier id}) {
+    return StartGameEvent(
+      id: id,
+    );
+  }
 }
 
 /// @nodoc
@@ -30,38 +36,43 @@ const $GameEvent = _$GameEventTearOff();
 
 /// @nodoc
 mixin _$GameEvent {
-  Player get player => throw _privateConstructorUsedError;
   Identifier get id => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Player player, Identifier id) addPlayer,
+    required TResult Function(Identifier id) startGame,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
+    TResult Function(Identifier id)? startGame,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
+    TResult Function(Identifier id)? startGame,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AddPlayerEvent value) addPlayer,
+    required TResult Function(StartGameEvent value) startGame,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AddPlayerEvent value)? addPlayer,
+    TResult Function(StartGameEvent value)? startGame,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddPlayerEvent value)? addPlayer,
+    TResult Function(StartGameEvent value)? startGame,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -75,9 +86,7 @@ mixin _$GameEvent {
 abstract class $GameEventCopyWith<$Res> {
   factory $GameEventCopyWith(GameEvent value, $Res Function(GameEvent) then) =
       _$GameEventCopyWithImpl<$Res>;
-  $Res call({Player player, Identifier id});
-
-  $PlayerCopyWith<$Res> get player;
+  $Res call({Identifier id});
 }
 
 /// @nodoc
@@ -90,26 +99,14 @@ class _$GameEventCopyWithImpl<$Res> implements $GameEventCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? player = freezed,
     Object? id = freezed,
   }) {
     return _then(_value.copyWith(
-      player: player == freezed
-          ? _value.player
-          : player // ignore: cast_nullable_to_non_nullable
-              as Player,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as Identifier,
     ));
-  }
-
-  @override
-  $PlayerCopyWith<$Res> get player {
-    return $PlayerCopyWith<$Res>(_value.player, (value) {
-      return _then(_value.copyWith(player: value));
-    });
   }
 }
 
@@ -122,7 +119,6 @@ abstract class $AddPlayerEventCopyWith<$Res>
   @override
   $Res call({Player player, Identifier id});
 
-  @override
   $PlayerCopyWith<$Res> get player;
 }
 
@@ -151,6 +147,13 @@ class _$AddPlayerEventCopyWithImpl<$Res> extends _$GameEventCopyWithImpl<$Res>
           : id // ignore: cast_nullable_to_non_nullable
               as Identifier,
     ));
+  }
+
+  @override
+  $PlayerCopyWith<$Res> get player {
+    return $PlayerCopyWith<$Res>(_value.player, (value) {
+      return _then(_value.copyWith(player: value));
+    });
   }
 }
 
@@ -194,6 +197,7 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Player player, Identifier id) addPlayer,
+    required TResult Function(Identifier id) startGame,
   }) {
     return addPlayer(player, id);
   }
@@ -202,6 +206,7 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
+    TResult Function(Identifier id)? startGame,
   }) {
     return addPlayer?.call(player, id);
   }
@@ -210,6 +215,7 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
+    TResult Function(Identifier id)? startGame,
     required TResult orElse(),
   }) {
     if (addPlayer != null) {
@@ -222,6 +228,7 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AddPlayerEvent value) addPlayer,
+    required TResult Function(StartGameEvent value) startGame,
   }) {
     return addPlayer(this);
   }
@@ -230,6 +237,7 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AddPlayerEvent value)? addPlayer,
+    TResult Function(StartGameEvent value)? startGame,
   }) {
     return addPlayer?.call(this);
   }
@@ -238,6 +246,7 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddPlayerEvent value)? addPlayer,
+    TResult Function(StartGameEvent value)? startGame,
     required TResult orElse(),
   }) {
     if (addPlayer != null) {
@@ -252,12 +261,149 @@ abstract class AddPlayerEvent extends GameEvent {
       _$AddPlayerEvent;
   const AddPlayerEvent._() : super._();
 
-  @override
   Player get player => throw _privateConstructorUsedError;
   @override
   Identifier get id => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $AddPlayerEventCopyWith<AddPlayerEvent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $StartGameEventCopyWith<$Res>
+    implements $GameEventCopyWith<$Res> {
+  factory $StartGameEventCopyWith(
+          StartGameEvent value, $Res Function(StartGameEvent) then) =
+      _$StartGameEventCopyWithImpl<$Res>;
+  @override
+  $Res call({Identifier id});
+}
+
+/// @nodoc
+class _$StartGameEventCopyWithImpl<$Res> extends _$GameEventCopyWithImpl<$Res>
+    implements $StartGameEventCopyWith<$Res> {
+  _$StartGameEventCopyWithImpl(
+      StartGameEvent _value, $Res Function(StartGameEvent) _then)
+      : super(_value, (v) => _then(v as StartGameEvent));
+
+  @override
+  StartGameEvent get _value => super._value as StartGameEvent;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(StartGameEvent(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as Identifier,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$StartGameEvent extends StartGameEvent {
+  const _$StartGameEvent({required this.id}) : super._();
+
+  @override
+  final Identifier id;
+
+  @override
+  String toString() {
+    return 'GameEvent.startGame(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is StartGameEvent &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(id);
+
+  @JsonKey(ignore: true)
+  @override
+  $StartGameEventCopyWith<StartGameEvent> get copyWith =>
+      _$StartGameEventCopyWithImpl<StartGameEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Player player, Identifier id) addPlayer,
+    required TResult Function(Identifier id) startGame,
+  }) {
+    return startGame(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(Player player, Identifier id)? addPlayer,
+    TResult Function(Identifier id)? startGame,
+  }) {
+    return startGame?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Player player, Identifier id)? addPlayer,
+    TResult Function(Identifier id)? startGame,
+    required TResult orElse(),
+  }) {
+    if (startGame != null) {
+      return startGame(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AddPlayerEvent value) addPlayer,
+    required TResult Function(StartGameEvent value) startGame,
+  }) {
+    return startGame(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(AddPlayerEvent value)? addPlayer,
+    TResult Function(StartGameEvent value)? startGame,
+  }) {
+    return startGame?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AddPlayerEvent value)? addPlayer,
+    TResult Function(StartGameEvent value)? startGame,
+    required TResult orElse(),
+  }) {
+    if (startGame != null) {
+      return startGame(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class StartGameEvent extends GameEvent {
+  const factory StartGameEvent({required Identifier id}) = _$StartGameEvent;
+  const StartGameEvent._() : super._();
+
+  @override
+  Identifier get id => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  $StartGameEventCopyWith<StartGameEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
