@@ -1,5 +1,3 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
 class Piece {
   late final int side1;
   late final int side2;
