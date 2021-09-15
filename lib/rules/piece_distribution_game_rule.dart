@@ -15,6 +15,7 @@ class PieceDistributionGameRule
 
   @override
   bool validate(List<GameEvent> events) {
-    throw UnimplementedError();
+    // TODO: implement logic
+    return true;
   }
 }

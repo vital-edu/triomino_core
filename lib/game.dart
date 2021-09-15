@@ -8,6 +8,8 @@ import 'package:triomino_core/rules/quantity_of_players_rule.dart';
 
 class _GameValidationError extends Error {}
 
+class GameStateError extends Error {}
+
 class Game {
   List<GameEvent> _events = [
     AddPlayerEvent(Player(name: 'Player 1'), id: Identifier.uniq()),
@@ -22,6 +24,9 @@ class Game {
           pieceDistributionGameRule: PieceDistributionGameRule(),
         );
 
+  List<Player> get players =>
+      _events.whereType<AddPlayerEvent>().map((e) => e.player).toList();
+
   bool add(GameEvent event) {
     final newEvents = <GameEvent>[...events, event];
     try {
@@ -29,8 +34,23 @@ class Game {
         addPlayer: (newEvent) {
           _validateEvents(newEvents, rule: ruleBook.quantityOfPlayersGameRule);
         },
-        startGame: (StartGameEvent value) {
+        startGame: (_) {
           _validateEvents(newEvents, rule: ruleBook.pieceDistributionGameRule);
+        },
+        layPiece: (gameEvent) {
+          ruleBook.playerTurn(events: events).map(unknown: (turn) {
+            // nothing to do
+          }, invalid: (turn) {
+            throw GameStateError();
+          }, determined: (turn) {
+            if (turn.player != gameEvent.player) {
+              throw _GameValidationError();
+            }
+          }, partiallyDetermined: (turn) {
+            if (!turn.undeterminedPlayers.contains(gameEvent.player)) {
+              throw _GameValidationError();
+            }
+          });
         },
       );
     } on _GameValidationError {
@@ -51,6 +71,9 @@ class Game {
         },
         startGame: (StartGameEvent value) {
           _validateEvents(newEvents, rule: ruleBook.pieceDistributionGameRule);
+        },
+        layPiece: (LayPieceGameEvent value) {
+          throw UnimplementedError();
         },
       );
     } on _GameValidationError {

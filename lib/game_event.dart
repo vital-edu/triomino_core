@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:triomino_core/identifier.dart';
+import 'package:triomino_core/piece.dart';
 import 'package:triomino_core/player.dart';
 
 part 'game_event.freezed.dart';
@@ -16,4 +17,10 @@ class GameEvent with _$GameEvent {
   const factory GameEvent.startGame({
     required Identifier id,
   }) = StartGameEvent;
+
+  const factory GameEvent.layPiece(
+    Piece piece, {
+    required Player player,
+    required Identifier id,
+  }) = LayPieceGameEvent;
 }

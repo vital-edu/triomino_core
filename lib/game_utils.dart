@@ -43,8 +43,11 @@ class GameUtils {
         addPlayer: (e) {
           print('${e.player.name} joined the game.');
         },
-        startGame: (StartGameEvent value) {
+        startGame: (_) {
           print('Game started');
+        },
+        layPiece: (e) {
+          print('${e.player.name} played ${e.piece}');
         },
       );
     }
