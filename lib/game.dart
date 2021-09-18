@@ -4,6 +4,7 @@ import 'package:triomino_core/player.dart';
 import 'package:triomino_core/rule_book.dart';
 import 'package:triomino_core/rules/game_rule.dart';
 import 'package:triomino_core/rules/piece_distribution_game_rule.dart';
+import 'package:triomino_core/rules/piece_game_rule.dart';
 import 'package:triomino_core/rules/player_validation_game_rule.dart';
 import 'package:triomino_core/rules/quantity_of_players_rule.dart';
 
@@ -24,6 +25,7 @@ class Game {
           quantityOfPlayersGameRule: QuantityOfPlayersGameRule(2, 6),
           pieceDistributionGameRule: PieceDistributionGameRule(),
           playerValidationGameRule: PlayerValidationGameRule(),
+          pieceGameRule: PieceGameRule(),
         );
 
   List<Player> get players =>
@@ -41,19 +43,25 @@ class Game {
           _validateEvents(newEvents, rule: ruleBook.pieceDistributionGameRule);
         },
         layPiece: (gameEvent) {
-          ruleBook.playerTurn(events: events).map(unknown: (turn) {
-            // nothing to do
-          }, invalid: (turn) {
-            throw GameStateError();
-          }, determined: (turn) {
-            if (turn.player != gameEvent.player) {
-              throw _GameValidationError();
-            }
-          }, partiallyDetermined: (turn) {
-            if (!turn.undeterminedPlayers.contains(gameEvent.player)) {
-              throw _GameValidationError();
-            }
-          });
+          _validateEvents(newEvents, rule: ruleBook.pieceGameRule);
+          ruleBook.playerTurn(events: events).map(
+            unknown: (turn) {
+              // nothing to do
+            },
+            invalid: (turn) {
+              throw GameStateError();
+            },
+            determined: (turn) {
+              if (turn.player != gameEvent.player) {
+                throw _GameValidationError();
+              }
+            },
+            partiallyDetermined: (turn) {
+              if (!turn.undeterminedPlayers.contains(gameEvent.player)) {
+                throw _GameValidationError();
+              }
+            },
+          );
         },
       );
     } on _GameValidationError {
