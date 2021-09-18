@@ -4,6 +4,7 @@ import 'package:triomino_core/player.dart';
 import 'package:triomino_core/rule_book.dart';
 import 'package:triomino_core/rules/game_rule.dart';
 import 'package:triomino_core/rules/piece_distribution_game_rule.dart';
+import 'package:triomino_core/rules/player_validation_game_rule.dart';
 import 'package:triomino_core/rules/quantity_of_players_rule.dart';
 
 class _GameValidationError extends Error {}
@@ -22,6 +23,7 @@ class Game {
       : ruleBook = RuleBook(
           quantityOfPlayersGameRule: QuantityOfPlayersGameRule(2, 6),
           pieceDistributionGameRule: PieceDistributionGameRule(),
+          playerValidationGameRule: PlayerValidationGameRule(),
         );
 
   List<Player> get players =>
@@ -33,6 +35,7 @@ class Game {
       event.map(
         addPlayer: (newEvent) {
           _validateEvents(newEvents, rule: ruleBook.quantityOfPlayersGameRule);
+          _validateEvents(newEvents, rule: ruleBook.playerValidationGameRule);
         },
         startGame: (_) {
           _validateEvents(newEvents, rule: ruleBook.pieceDistributionGameRule);

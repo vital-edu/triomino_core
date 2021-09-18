@@ -1,15 +1,18 @@
 import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/game_player_turn.dart';
 import 'package:triomino_core/rules/piece_distribution_game_rule.dart';
+import 'package:triomino_core/rules/player_validation_game_rule.dart';
 import 'package:triomino_core/rules/quantity_of_players_rule.dart';
 
 class RuleBook {
   final QuantityOfPlayersGameRule quantityOfPlayersGameRule;
   final PieceDistributionGameRule pieceDistributionGameRule;
+  final PlayerValidationGameRule playerValidationGameRule;
 
   RuleBook({
     required this.quantityOfPlayersGameRule,
     required this.pieceDistributionGameRule,
+    required this.playerValidationGameRule,
   });
 
   GamePlayerTurn playerTurn({required List<GameEvent> events}) {
