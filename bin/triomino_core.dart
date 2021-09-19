@@ -26,14 +26,14 @@ void main(List<String> arguments) {
         removePlayer(game);
         break;
       case 5:
-        print('========== Logs ==========');
+        printHeader('Logs');
         utils.show(game.events);
     }
   } while (true);
 }
 
 int menu() {
-  print('========== Menu ==========');
+  printHeader('Menu');
   print('1 - Show players');
   print('2 - Add player');
   print('3 - Remove player');
@@ -56,7 +56,7 @@ int menu() {
 }
 
 void addPlayer(Game game) {
-  print('========== Adding Player ==========');
+  printHeader('Adding Player');
   print('Player\'s name: ');
   final name = stdin.readLineSync();
 
@@ -72,13 +72,12 @@ void addPlayer(Game game) {
   }
 }
 
-void removePlayer(Game game) {
-  print('========== Removing Player ==========');
-  print('Select the player to remove:');
+void printHeader(String title) {
+  print('========== $title ==========');
+}
 
-  for (final entry in game.players.asMap().entries) {
-    print('${entry.key} - ${entry.value.name}');
-  }
+void removePlayer(Game game) {
+  showPlayers(game, titleHeader: 'Select the player to remove');
 
   try {
     final selection = int.parse(stdin.readLineSync() ?? '');
@@ -98,9 +97,9 @@ void removePlayer(Game game) {
   }
 }
 
-void showPlayers(Game game) {
-  print('========== Players ==========');
-  for (final player in game.players) {
-    print(player.name);
+void showPlayers(Game game, {String titleHeader = 'Players'}) {
+  printHeader(titleHeader);
+  for (final entry in game.players.asMap().entries) {
+    print('${entry.key} - ${entry.value.name}');
   }
 }
