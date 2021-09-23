@@ -1,5 +1,5 @@
 import 'package:triomino_core/game_player_turn.dart';
-import 'package:triomino_core/player.dart';
+import 'package:triomino_core/modes/player.dart';
 import 'package:triomino_core/rules/errors/game_rule_error.dart';
 
 class WrongPlayerTurnError extends GameRuleError {

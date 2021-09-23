@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import 'package:triomino_core/game_event.dart';
-import 'package:triomino_core/identifier.dart';
-import 'package:triomino_core/player.dart';
+import 'package:triomino_core/modes/identifier.dart';
+import 'package:triomino_core/modes/player.dart';
 import 'package:triomino_core/rules/quantity_of_players_rule.dart';
 
 void main() {

@@ -1,6 +1,6 @@
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
-import 'package:triomino_core/piece.dart';
+import 'package:triomino_core/modes/piece.dart';
 
 void main() {
   group('default constructor', () {

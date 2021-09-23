@@ -1,8 +1,8 @@
 import 'package:test/test.dart';
 import 'package:triomino_core/game_event.dart';
-import 'package:triomino_core/identifier.dart';
-import 'package:triomino_core/piece.dart';
-import 'package:triomino_core/player.dart';
+import 'package:triomino_core/modes/identifier.dart';
+import 'package:triomino_core/modes/piece.dart';
+import 'package:triomino_core/modes/player.dart';
 import 'package:triomino_core/rules/errors/piece_game_rule_error.dart';
 import 'package:triomino_core/rules/piece_game_rule.dart';
 

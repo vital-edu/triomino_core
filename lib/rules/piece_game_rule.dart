@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:triomino_core/game_event.dart';
-import 'package:triomino_core/piece.dart';
+import 'package:triomino_core/modes/piece.dart';
 import 'package:triomino_core/rules/errors/piece_game_rule_error.dart';
 import 'package:triomino_core/rules/game_rule.dart';
 

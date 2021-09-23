@@ -1,5 +1,5 @@
 import 'package:triomino_core/game_event.dart';
-import 'package:triomino_core/player.dart';
+import 'package:triomino_core/modes/player.dart';
 import 'package:collection/collection.dart';
 
 class GameUtils {

@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:triomino_core/player.dart';
+import 'package:triomino_core/modes/player.dart';
 
 void main() {
   group('operator ==', () {

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:triomino_core/player.dart';
+import 'package:triomino_core/modes/player.dart';
 
 part 'game_player_turn.freezed.dart';
 
