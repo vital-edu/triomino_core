@@ -5,6 +5,7 @@ import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/game_utils.dart';
 import 'package:triomino_core/identifier.dart';
 import 'package:triomino_core/player.dart';
+import 'package:triomino_core/rules/game_rule.dart';
 
 void main(List<String> arguments) {
   final utils = GameUtils();
@@ -24,6 +25,9 @@ void main(List<String> arguments) {
         break;
       case 3:
         removePlayer(game);
+        break;
+      case 4:
+        editPlayer(game);
         break;
       case 5:
         printHeader('Logs');
@@ -64,11 +68,40 @@ void addPlayer(Game game) {
     return print('Invalid name');
   }
 
-  final isValid =
-      game.add(AddPlayerEvent(Player(name: name), id: Identifier.uniq()));
+  try {
+    game.add(AddPlayerEvent(Player(name: name), id: Identifier.uniq()));
+  } on GameRuleError catch (error) {
+    print(error.message);
+  }
+}
 
-  if (!isValid) {
-    print('Invalid name');
+void editPlayer(Game game) {
+  showPlayers(game, titleHeader: 'Edit Player');
+  final String? selection = stdin.readLineSync();
+  try {
+    final index = int.parse(selection ?? '');
+    final allAddPlayerEvent = game.events.whereType<AddPlayerEvent>();
+    final addPlayerEvent = allAddPlayerEvent.elementAt(index);
+
+    print('New Player\'s name: ');
+    final name = stdin.readLineSync();
+    if (name == null || name.isEmpty) {
+      return print('Invalid name');
+    }
+
+    try {
+      final newAddPlayerEvent = addPlayerEvent.copyWith.player(name: name);
+      final allEvents = List.of(game.events);
+      final index = game.events.indexOf(addPlayerEvent);
+      allEvents[index] = newAddPlayerEvent;
+      game.events = allEvents;
+    } on InvalidEvent catch (error) {
+      print(error.message);
+    }
+  } on FormatException {
+    return print('Invalid selection');
+  } on RangeError {
+    return print('Invalid selection');
   }
 }
 
@@ -86,11 +119,7 @@ void removePlayer(Game game) {
     final eventToRemove = events
         .firstWhere((element) => element.player == game.players[selection]);
 
-    final success = game.remove(eventToRemove);
-    if (!success) {
-      return print('Error removing player');
-    }
-
+    game.remove(eventToRemove);
     print('player removed successfully');
   } on FormatException {
     return print('Invalid selection');

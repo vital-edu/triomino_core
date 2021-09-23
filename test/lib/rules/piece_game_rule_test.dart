@@ -5,6 +5,8 @@ import 'package:triomino_core/piece.dart';
 import 'package:triomino_core/player.dart';
 import 'package:triomino_core/rules/piece_game_rule.dart';
 
+import '../../custom_matcher/game_rule_error_has_message.dart';
+
 void main() {
   group('validate', () {
     test('should not validate duplicated pieces', () {
@@ -22,9 +24,7 @@ void main() {
         ),
       ];
 
-      final isValid = rule.validate(events);
-
-      expect(isValid, false);
+      expect(() => rule.validate(events), throwsA(isA<PieceGameRuleError>()));
     });
 
     test('should not validate unique pieces', () {
@@ -42,9 +42,27 @@ void main() {
         ),
       ];
 
-      final isValid = rule.validate(events);
+      expect(() => rule.validate(events), returnsNormally);
+    });
 
-      expect(isValid, true);
+    test('error message should contain repeated events', () {
+      final rule = PieceGameRule();
+
+      final repeatedEvent = LayPieceGameEvent(
+        Piece.triple(1),
+        player: Player(name: 'Player'),
+        id: Identifier.uniq(),
+      );
+
+      expect(
+        () => rule.validate([repeatedEvent, repeatedEvent]),
+        throwsA(allOf(
+          isA<PieceGameRuleError>(),
+          GameRuleErrorHasMessage(
+            equals('Repeated piece(s) in the event(s): [$repeatedEvent]'),
+          ),
+        )),
+      );
     });
   });
 }

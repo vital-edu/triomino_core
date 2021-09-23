@@ -14,8 +14,5 @@ class PieceDistributionGameRule
   const factory PieceDistributionGameRule() = _PieceDistributionGameRule;
 
   @override
-  bool validate(List<GameEvent> events) {
-    // TODO: implement logic
-    return true;
-  }
+  void validate(List<GameEvent> events) {}
 }

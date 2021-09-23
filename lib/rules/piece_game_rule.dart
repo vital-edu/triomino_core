@@ -1,8 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:triomino_core/game_event.dart';
+import 'package:triomino_core/piece.dart';
 import 'package:triomino_core/rules/game_rule.dart';
 
 part 'piece_game_rule.freezed.dart';
+
+class PieceGameRuleError extends GameRuleError {
+  final List<LayPieceGameEvent> repeatedEvents;
+
+  PieceGameRuleError(this.repeatedEvents)
+      : super('Repeated piece(s) in the event(s): $repeatedEvents');
+}
 
 @freezed
 class PieceGameRule with _$PieceGameRule implements GameRule {
@@ -12,10 +20,19 @@ class PieceGameRule with _$PieceGameRule implements GameRule {
   const factory PieceGameRule() = _PieceGameRule;
 
   @override
-  bool validate(List<GameEvent> events) {
-    final pieces = events.whereType<LayPieceGameEvent>().map((e) => e.piece);
-    final uniquePieces = Set.from(pieces);
+  void validate(List<GameEvent> events) {
+    final Set<Piece> uniquePieces = {};
+    final List<LayPieceGameEvent> repeatedEvents = [];
 
-    return pieces.length == uniquePieces.length;
+    for (final event in events.whereType<LayPieceGameEvent>()) {
+      final added = uniquePieces.add(event.piece);
+      if (!added) {
+        repeatedEvents.add(event);
+      }
+    }
+
+    if (repeatedEvents.isNotEmpty) {
+      throw PieceGameRuleError(repeatedEvents);
+    }
   }
 }
