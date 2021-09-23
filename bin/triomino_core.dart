@@ -5,7 +5,8 @@ import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/game_utils.dart';
 import 'package:triomino_core/identifier.dart';
 import 'package:triomino_core/player.dart';
-import 'package:triomino_core/rules/game_rule.dart';
+import 'package:triomino_core/rules/errors/game_rule_error.dart';
+import 'package:triomino_core/rules/errors/invalid_event_error.dart';
 
 void main(List<String> arguments) {
   final utils = GameUtils();
@@ -95,7 +96,7 @@ void editPlayer(Game game) {
       final index = game.events.indexOf(addPlayerEvent);
       allEvents[index] = newAddPlayerEvent;
       game.events = allEvents;
-    } on InvalidEvent catch (error) {
+    } on InvalidEventError catch (error) {
       print(error.message);
     }
   } on FormatException {

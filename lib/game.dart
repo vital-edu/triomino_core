@@ -1,36 +1,16 @@
 import 'package:triomino_core/game_event.dart';
-import 'package:triomino_core/game_player_turn.dart';
 import 'package:triomino_core/identifier.dart';
 import 'package:triomino_core/player.dart';
 import 'package:triomino_core/rule_book.dart';
-import 'package:triomino_core/rules/game_rule.dart';
+import 'package:triomino_core/rules/errors/game_rule_error.dart';
+import 'package:triomino_core/rules/errors/game_state_error.dart';
+import 'package:triomino_core/rules/errors/invalid_event_error.dart';
+import 'package:triomino_core/rules/errors/remove_event_error.dart';
+import 'package:triomino_core/rules/errors/wrong_player_turn_error.dart';
 import 'package:triomino_core/rules/piece_distribution_game_rule.dart';
 import 'package:triomino_core/rules/piece_game_rule.dart';
 import 'package:triomino_core/rules/player_validation_game_rule.dart';
 import 'package:triomino_core/rules/quantity_of_players_rule.dart';
-
-class WrongPlayerTurnError extends GameRuleError {
-  final GamePlayerTurn turn;
-  final Player cheaterPlayer;
-
-  WrongPlayerTurnError({
-    required this.cheaterPlayer,
-    required this.turn,
-  }) : super('Player ${cheaterPlayer.name} played in the wrong turn.');
-}
-
-class RemoveEventError extends GameRuleError {
-  final GameEvent unknownEvent;
-  RemoveEventError(this.unknownEvent) : super('Event not found: $unknownEvent');
-}
-
-class GameStateError extends Error {}
-
-class InvalidEvent extends GameRuleError {
-  final GameEvent invalidEvent;
-
-  InvalidEvent(this.invalidEvent) : super('Invalid event: $invalidEvent');
-}
 
 class Game {
   List<GameEvent> _events = List.unmodifiable([
@@ -48,7 +28,7 @@ class Game {
         add(event);
       } on GameRuleError {
         _events = oldEvents;
-        throw InvalidEvent(event);
+        throw InvalidEventError(event);
       }
     }
 
@@ -85,7 +65,7 @@ class Game {
             // nothing to do
           },
           invalid: (turn) {
-            throw GameStateError();
+            throw GameStateError(turn: turn, events: events);
           },
           determined: (turn) {
             if (turn.player != gameEvent.player) {

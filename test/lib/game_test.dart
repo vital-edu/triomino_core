@@ -7,9 +7,11 @@ import 'package:triomino_core/game_utils.dart';
 import 'package:triomino_core/identifier.dart';
 import 'package:triomino_core/piece.dart';
 import 'package:triomino_core/player.dart';
-import 'package:triomino_core/rules/game_rule.dart';
-import 'package:triomino_core/rules/piece_game_rule.dart';
-import 'package:triomino_core/rules/player_validation_game_rule.dart';
+import 'package:triomino_core/rules/errors/game_rule_error.dart';
+import 'package:triomino_core/rules/errors/piece_game_rule_error.dart';
+import 'package:triomino_core/rules/errors/player_validation_game_rule_error.dart';
+import 'package:triomino_core/rules/errors/remove_event_error.dart';
+import 'package:triomino_core/rules/errors/wrong_player_turn_error.dart';
 
 import '../custom_matcher/game_rule_error_has_message.dart';
 

@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:triomino_core/rules/game_rule.dart';
+import 'package:triomino_core/rules/errors/game_rule_error.dart';
 
 class GameRuleErrorHasMessage extends CustomMatcher {
   GameRuleErrorHasMessage(matcher)

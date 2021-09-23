@@ -1,17 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/player.dart';
+import 'package:triomino_core/rules/errors/player_validation_game_rule_error.dart';
 import 'package:triomino_core/rules/game_rule.dart';
 
-import '../game_event.dart';
-
 part 'player_validation_game_rule.freezed.dart';
-
-class PlayerValidationGameRuleError extends GameRuleError {
-  final List<AddPlayerEvent> repeatedEvents;
-
-  PlayerValidationGameRuleError(this.repeatedEvents)
-      : super('Repeated player(s) in the event(s): $repeatedEvents');
-}
 
 @freezed
 class PlayerValidationGameRule
