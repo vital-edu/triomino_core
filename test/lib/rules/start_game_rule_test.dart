@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:triomino_core/game_event.dart';
-import 'package:triomino_core/modes/identifier.dart';
+import 'package:triomino_core/models/identifier.dart';
 import 'package:triomino_core/rules/errors/game_already_started_error.dart';
 import 'package:triomino_core/rules/start_game_rule.dart';
 

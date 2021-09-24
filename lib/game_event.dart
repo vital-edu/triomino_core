@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:triomino_core/modes/identifier.dart';
-import 'package:triomino_core/modes/piece.dart';
-import 'package:triomino_core/modes/player.dart';
+import 'package:triomino_core/models/identifier.dart';
+import 'package:triomino_core/models/piece.dart';
+import 'package:triomino_core/models/player.dart';
 
 part 'game_event.freezed.dart';
 

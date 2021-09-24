@@ -1,8 +1,8 @@
 import 'package:test/test.dart';
 import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/game_utils.dart';
-import 'package:triomino_core/modes/identifier.dart';
-import 'package:triomino_core/modes/player.dart';
+import 'package:triomino_core/models/identifier.dart';
+import 'package:triomino_core/models/player.dart';
 
 void main() {
   final utils = GameUtils();
