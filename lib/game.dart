@@ -90,6 +90,18 @@ class Game {
     _events = newEvents;
   }
 
+  Player? get playerOnTurn => ruleBook
+      .playerTurn(events: events)
+      .maybeMap(determined: (turn) => turn.player, orElse: () => null);
+
+  List<Player> get remainingPlayersToPlay =>
+      ruleBook.playerTurn(events: events).map(
+            unknown: (_) => players,
+            invalid: (turn) => throw GameStateError(turn: turn, events: events),
+            determined: (_) => [],
+            partiallyDetermined: (turn) => turn.undeterminedPlayers,
+          );
+
   void remove(GameEvent event) {
     final newEvents = events.where((e) => e.id != event.id).toList();
     if (newEvents.length == events.length) {
