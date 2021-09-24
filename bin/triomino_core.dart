@@ -33,6 +33,10 @@ void main(List<String> arguments) {
       case 5:
         printHeader('Logs');
         utils.show(game.events);
+        break;
+      case 6:
+        startGame(game);
+        break;
     }
   } while (true);
 }
@@ -44,12 +48,13 @@ int menu() {
   print('3 - Remove player');
   print('4 - Edit player');
   print('5 - Show logs');
+  print('6 - Start game');
   print('0 - Exit');
 
   String? value = stdin.readLineSync();
   try {
     int selection = int.parse(value ?? '');
-    if (selection < 0 || selection > 5) throw ArgumentError();
+    if (selection < 0 || selection > 6) throw ArgumentError();
     return selection;
   } on FormatException {
     print('Invalid option.');
@@ -131,5 +136,13 @@ void showPlayers(Game game, {String titleHeader = 'Players'}) {
   printHeader(titleHeader);
   for (final entry in game.players.asMap().entries) {
     print('${entry.key} - ${entry.value.name}');
+  }
+}
+
+void startGame(Game game) {
+  try {
+    game.add(StartGameEvent(id: Identifier.uniq()));
+  } on GameRuleError catch (error) {
+    print(error.message);
   }
 }
