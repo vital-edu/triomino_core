@@ -59,6 +59,7 @@ class Game {
       },
       startGame: (newEvent) {
         ruleBook.startGameRule.validate(newEvents);
+        ruleBook.quantityOfPlayersGameRule.validate(newEvents);
       },
       layPiece: (gameEvent) {
         ruleBook.pieceGameRule.validate(newEvents);

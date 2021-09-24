@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:triomino_core/game_event.dart';
+import 'package:triomino_core/rules/errors/invalid_quantity_of_players_error.dart';
 import 'package:triomino_core/rules/game_rule.dart';
 
 part 'quantity_of_players_rule.freezed.dart';
@@ -17,8 +18,15 @@ class QuantityOfPlayersGameRule
       _QuantityOfPlayersGameRule;
 
   @override
-  bool validate(List<GameEvent> events) {
+  void validate(List<GameEvent> events) {
     final playersCount = events.whereType<AddPlayerEvent>().length;
-    return playersCount >= min && playersCount <= max;
+
+    if (playersCount < min || playersCount > max) {
+      throw InvalidQuantityOfPlayersError(
+        playersCount,
+        minQuantityOfPlayers: min,
+        maxQuantityOfPlayers: max,
+      );
+    }
   }
 }
