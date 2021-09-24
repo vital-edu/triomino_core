@@ -11,6 +11,7 @@ import 'package:triomino_core/rules/piece_distribution_game_rule.dart';
 import 'package:triomino_core/rules/piece_game_rule.dart';
 import 'package:triomino_core/rules/player_validation_game_rule.dart';
 import 'package:triomino_core/rules/quantity_of_players_rule.dart';
+import 'package:triomino_core/rules/start_game_rule.dart';
 
 class Game {
   List<GameEvent> _events = List.unmodifiable([
@@ -44,6 +45,7 @@ class Game {
           pieceDistributionGameRule: PieceDistributionGameRule(),
           playerValidationGameRule: PlayerValidationGameRule(),
           pieceGameRule: PieceGameRule(),
+          startGameRule: StartGameRule(),
         );
 
   List<Player> get players =>
@@ -55,8 +57,8 @@ class Game {
       addPlayer: (newEvent) {
         ruleBook.playerValidationGameRule.validate(newEvents);
       },
-      startGame: (_) {
-        ruleBook.pieceDistributionGameRule.validate(newEvents);
+      startGame: (newEvent) {
+        ruleBook.startGameRule.validate(newEvents);
       },
       layPiece: (gameEvent) {
         ruleBook.pieceGameRule.validate(newEvents);
