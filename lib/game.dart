@@ -93,6 +93,8 @@ class Game {
     _events = newEvents;
   }
 
+  bool get hasGameStarted => events.whereType<StartGameEvent>().isNotEmpty;
+
   Player? get playerOnTurn => ruleBook
       .playerTurn(events: events)
       .maybeMap(determined: (turn) => turn.player, orElse: () => null);

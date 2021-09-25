@@ -4,6 +4,7 @@ import 'package:triomino_core/game.dart';
 import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/game_utils.dart';
 import 'package:triomino_core/models/identifier.dart';
+import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
 import 'package:triomino_core/rules/errors/game_rule_error.dart';
 import 'package:triomino_core/rules/errors/invalid_event_error.dart';
@@ -13,7 +14,15 @@ void main(List<String> arguments) {
   final game = Game();
 
   do {
-    int selection = menu();
+    run(game, utils);
+  } while (true);
+}
+
+void run(Game game, GameUtils utils) {
+  if (game.hasGameStarted) {
+    playMenu(game, utils);
+  } else {
+    int selection = registrationMenu();
 
     switch (selection) {
       case 0:
@@ -38,10 +47,67 @@ void main(List<String> arguments) {
         startGame(game);
         break;
     }
-  } while (true);
+  }
 }
 
-int menu() {
+void playMenu(Game game, GameUtils utils) {
+  printScore(game);
+  showPlayOptions(game, utils);
+
+  Player? playerOnTurn = game.playerOnTurn;
+  playerOnTurn ??= choosePlayerToPlay(game);
+
+  final piece = playPiece();
+  if (piece == null) return;
+
+  try {
+    game.add(
+        GameEvent.layPiece(piece, player: playerOnTurn, id: Identifier.uniq()));
+  } on GameRuleError catch (error) {
+    print(error.message);
+    return playMenu(game, utils);
+  }
+}
+
+void showPlayOptions(Game game, GameUtils utils) {
+  print('1 - Play piece');
+  print('2 - Show Logs');
+  print('0 - Exit game');
+
+  try {
+    switch (int.parse(stdin.readLineSync() ?? '')) {
+      case 0:
+        exit(0);
+      case 1:
+        return;
+      case 2:
+        utils.show(game.events);
+        showPlayOptions(game, utils);
+    }
+  } on FormatException {
+    print('Invalid option.');
+    showPlayOptions(game, utils);
+  }
+}
+
+Player choosePlayerToPlay(Game game) {
+  print('Choose a player to play: ');
+  for (final entry in game.remainingPlayersToPlay.asMap().entries) {
+    print('${entry.key} - ${entry.value.name}');
+  }
+  try {
+    int selection = int.parse(stdin.readLineSync() ?? '');
+    return game.remainingPlayersToPlay[selection];
+  } on FormatException {
+    print('Invalid selection.');
+    return choosePlayerToPlay(game);
+  } on RangeError {
+    print('Invalid selection.');
+    return choosePlayerToPlay(game);
+  }
+}
+
+int registrationMenu() {
   printHeader('Menu');
   print('1 - Show players');
   print('2 - Add player');
@@ -58,10 +124,10 @@ int menu() {
     return selection;
   } on FormatException {
     print('Invalid option.');
-    return menu();
+    return registrationMenu();
   } on ArgumentError {
     print('Invalid option.');
-    return menu();
+    return registrationMenu();
   }
 }
 
@@ -144,5 +210,49 @@ void startGame(Game game) {
     game.add(StartGameEvent(id: Identifier.uniq()));
   } on GameRuleError catch (error) {
     print(error.message);
+  }
+}
+
+void printScore(Game game) {
+  printHeader('Score');
+  for (final player in game.players) {
+    // todo: implement score
+    print('${player.name} - 0pts');
+  }
+}
+
+Piece? playPiece() {
+  final pieceRegex = RegExp(r'(\d+)');
+
+  print(
+      'Inform the piece to play in the format 1-2-3 (Regular piece) or 3 (Triple 3).');
+  final pieceStringRepresentation = stdin.readLineSync();
+
+  if (pieceStringRepresentation == null) {
+    print('Wrong format. Supported formats: \n1-2-3 \n3');
+    return null;
+  }
+
+  try {
+    final matches = pieceRegex.allMatches(pieceStringRepresentation);
+
+    if (matches.length == 1) {
+      int side = int.parse(matches.first.group(1)!);
+      return Piece.triple(side);
+    }
+
+    if (matches.length == 3) {
+      final listOfMatches = matches.toList();
+      int side1 = int.parse(listOfMatches[0].group(1)!);
+      int side2 = int.parse(listOfMatches[1].group(1)!);
+      int side3 = int.parse(listOfMatches[2].group(1)!);
+
+      return Piece(side1, side2, side3);
+    }
+
+    print('Wrong format. Supported formats: \n1-2-3 \n3');
+    return null;
+  } on GameRuleError catch (error) {
+    print(error);
   }
 }
