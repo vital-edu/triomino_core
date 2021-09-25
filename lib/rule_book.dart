@@ -1,3 +1,4 @@
+import 'package:triomino_core/extensions/list_extension.dart';
 import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/game_player_turn.dart';
 import 'package:triomino_core/rules/piece_distribution_game_rule.dart';
@@ -22,10 +23,7 @@ class RuleBook {
   });
 
   GamePlayerTurn playerTurn({required List<GameEvent> events}) {
-    // todo: consider create an extension of List<T> where T is GameEvent and add the
-    // code below as a getter to avoid duplicate this logic
-    final players =
-        events.whereType<AddPlayerEvent>().map((e) => e.player).toList();
+    final players = events.players;
 
     final List<LayPieceGameEvent> layPieceEvents =
         events.whereType<LayPieceGameEvent>().toList();

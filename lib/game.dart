@@ -1,3 +1,4 @@
+import 'package:triomino_core/extensions/list_extension.dart';
 import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/models/identifier.dart';
 import 'package:triomino_core/models/player.dart';
@@ -48,8 +49,7 @@ class Game {
           startGameRule: StartGameRule(),
         );
 
-  List<Player> get players =>
-      events.whereType<AddPlayerEvent>().map((e) => e.player).toList();
+  List<Player> get players => events.players.toList();
 
   void add(GameEvent event) {
     final newEvents = <GameEvent>[...events, event];
