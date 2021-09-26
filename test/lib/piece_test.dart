@@ -1,6 +1,9 @@
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 import 'package:triomino_core/models/piece.dart';
+import 'package:triomino_core/rules/errors/invalid_piece_error.dart';
+
+import '../custom_matcher/game_rule_error_has_message.dart';
 
 void main() {
   group('default constructor', () {
@@ -8,7 +11,11 @@ void main() {
       test('Piece($side1, $side2, $side3) should be an invalid piece', () {
         expect(
           () => Piece(side1, side2, side3),
-          throwsA(isA<AssertionError>()),
+          throwsA(allOf(
+            isA<InvalidPieceError>(),
+            GameRuleErrorHasMessage(
+                contains('A piece must have all sides between [0, 5]')),
+          )),
         );
       });
     }
@@ -23,8 +30,22 @@ void main() {
     });
 
     test('triples should not be outside of range [0, 5]', () {
-      expect(() => Piece.triple(-1), throwsA(isA<AssertionError>()));
-      expect(() => Piece.triple(6), throwsA(isA<AssertionError>()));
+      expect(
+        () => Piece.triple(-1),
+        throwsA(allOf(
+          isA<InvalidPieceError>(),
+          GameRuleErrorHasMessage(
+              contains('A piece must have all sides between [0, 5]')),
+        )),
+      );
+      expect(
+        () => Piece.triple(6),
+        throwsA(allOf(
+          isA<InvalidPieceError>(),
+          GameRuleErrorHasMessage(
+              contains('A piece must have all sides between [0, 5]')),
+        )),
+      );
     });
 
     test('should create a valid Piece with sorted sides', () {

@@ -1,3 +1,5 @@
+import 'package:triomino_core/rules/errors/invalid_piece_error.dart';
+
 class Piece {
   late final int side1;
   late final int side2;
@@ -5,13 +7,16 @@ class Piece {
   final bool isTriple;
 
   Piece(int side1, int side2, int side3)
-      : assert(side1 >= 0),
-        assert(side2 >= 0),
-        assert(side3 >= 0),
-        assert(side1 <= 5),
-        assert(side2 <= 5),
-        assert(side3 <= 5),
-        isTriple = side1 == side2 && side1 == side3 {
+      : isTriple = side1 == side2 && side1 == side3 {
+    if (side1 < 0 ||
+        side1 > 5 ||
+        side2 < 0 ||
+        side2 > 5 ||
+        side3 < 0 ||
+        side3 > 5) {
+      throw InvalidPieceError(side1, side2, side3);
+    }
+
     final sortedSides = [side1, side2, side3]..sort();
     this.side1 = sortedSides[0];
     this.side2 = sortedSides[1];
