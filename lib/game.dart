@@ -1,6 +1,7 @@
 import 'package:triomino_core/extensions/list_extension.dart';
 import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/models/identifier.dart';
+import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
 import 'package:triomino_core/rule_book.dart';
 import 'package:triomino_core/rules/errors/game_rule_error.dart';
@@ -10,6 +11,7 @@ import 'package:triomino_core/rules/errors/remove_event_error.dart';
 import 'package:triomino_core/rules/errors/wrong_player_turn_error.dart';
 import 'package:triomino_core/rules/piece_distribution_game_rule.dart';
 import 'package:triomino_core/rules/piece_game_rule.dart';
+import 'package:triomino_core/rules/player_status.dart';
 import 'package:triomino_core/rules/player_validation_game_rule.dart';
 import 'package:triomino_core/rules/quantity_of_players_rule.dart';
 import 'package:triomino_core/rules/start_game_rule.dart';
@@ -50,6 +52,36 @@ class Game {
         );
 
   List<Player> get players => events.players.toList();
+
+  List<Piece> get playedPieces =>
+      events.whereType<LayPieceGameEvent>().map((e) => e.piece).toList();
+
+  List<PlayerStatus> get playerStatuses {
+    final layPieceEvents = events.whereType<LayPieceGameEvent>();
+    final addplayerEvents = events.whereType<AddPlayerEvent>();
+
+    final playersStatuses = {
+      for (final event in addplayerEvents)
+        // TODO: determine piecesInPlayersHand
+        event.player.hashCode:
+            PlayerStatus(player: event.player, piecesInPlayersHand: 33)
+    };
+
+    return layPieceEvents
+        .fold<Map<int, PlayerStatus>>(playersStatuses,
+            (previousValue, element) {
+          final status = previousValue[element.player.hashCode]!;
+
+          return {
+            ...previousValue,
+            element.player.hashCode: status.copyWith(
+              playedPieces: [...status.playedPieces, element.piece],
+            )
+          };
+        })
+        .values
+        .toList();
+  }
 
   void add(GameEvent event) {
     final newEvents = <GameEvent>[...events, event];

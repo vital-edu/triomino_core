@@ -215,9 +215,10 @@ void startGame(Game game) {
 
 void printScore(Game game) {
   printHeader('Score');
-  for (final player in game.players) {
+  for (final status in game.playerStatuses) {
     // todo: implement score
-    print('${player.name} - 0pts');
+    print(
+        '${status.player.name}. Played pieces: ${status.playedPieces.length}. Ponts: 0');
   }
 }
 
