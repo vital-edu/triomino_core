@@ -122,11 +122,11 @@ int registrationMenu() {
     int selection = int.parse(value ?? '');
     if (selection < 0 || selection > 6) throw ArgumentError();
     return selection;
-  } on FormatException {
-    print('Invalid option.');
+  } on FormatException catch (error) {
+    print('Invalid option: ${error.message}');
     return registrationMenu();
-  } on ArgumentError {
-    print('Invalid option.');
+  } on ArgumentError catch (error) {
+    print('Invalid option: ${error.message}');
     return registrationMenu();
   }
 }
@@ -170,10 +170,10 @@ void editPlayer(Game game) {
     } on InvalidEventError catch (error) {
       print(error.message);
     }
-  } on FormatException {
-    return print('Invalid selection');
-  } on RangeError {
-    return print('Invalid selection');
+  } on FormatException catch (error) {
+    return print('Invalid selection: ${error.message}');
+  } on RangeError catch (error) {
+    return print('Invalid selection: ${error.message}');
   }
 }
 
@@ -188,13 +188,16 @@ void removePlayer(Game game) {
     final selection = int.parse(stdin.readLineSync() ?? '');
 
     final events = game.events.whereType<AddPlayerEvent>();
-    final eventToRemove = events
-        .firstWhere((element) => element.player == game.players[selection]);
+    final playerToRemove = game.players[selection];
+    final eventToRemove =
+        events.firstWhere((element) => element.player == playerToRemove);
 
     game.remove(eventToRemove);
     print('player removed successfully');
-  } on FormatException {
-    return print('Invalid selection');
+  } on FormatException catch (error) {
+    return print('Invalid selection: ${error.message}');
+  } on RangeError catch (error) {
+    return print('Invalid selection: ${error.message}');
   }
 }
 
@@ -256,4 +259,5 @@ Piece? playPiece() {
   } on GameRuleError catch (error) {
     print(error);
   }
+  return null;
 }

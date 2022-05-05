@@ -1,5 +1,3 @@
-import 'package:test/expect.dart';
-import 'package:test/scaffolding.dart';
 import 'package:test/test.dart';
 import 'package:triomino_core/game.dart';
 import 'package:triomino_core/game_event.dart';
@@ -60,6 +58,13 @@ void main() {
                 GameRuleErrorHasMessage(contains('[$invalidEvent]')),
               ),
             ));
+      });
+
+      test('should not allow remove players', () {
+        // TODO: when there are two players, it should not be allowed to remove
+
+        // TODO: when there are no players, the app crashes on trying to remove
+        // TODO: investigate if pass an invalid index causes the crash
       });
     });
 

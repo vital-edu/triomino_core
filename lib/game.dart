@@ -36,7 +36,7 @@ class Game {
       }
     }
 
-    // todo: decide if should keep valid events and concatenate all error in a single one.
+    // TODO: decide if should keep valid events and concatenate all error in a single one.
     _events = events;
   }
 

@@ -9,3 +9,12 @@ extension ListExtension on List<GameEvent> {
   Iterable<Piece> get pieces =>
       whereType<LayPieceGameEvent>().map((e) => e.piece);
 }
+
+extension SafeListExtension<E> on List<E> {
+  E? safe({required int index}) {
+    if (index < 0) return null;
+    if (index >= length) return null;
+
+    return this[index];
+  }
+}

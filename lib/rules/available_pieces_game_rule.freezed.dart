@@ -149,6 +149,11 @@ class _$_AvailablePiecesGameRule implements _AvailablePiecesGameRule {
   _$AvailablePiecesGameRuleCopyWith<_AvailablePiecesGameRule> get copyWith =>
       __$AvailablePiecesGameRuleCopyWithImpl<_AvailablePiecesGameRule>(
           this, _$identity);
+
+  @override
+  void validate(List<GameEvent> events) {
+    // TODO: implement validate
+  }
 }
 
 abstract class _AvailablePiecesGameRule

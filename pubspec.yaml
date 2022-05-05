@@ -1,4 +1,5 @@
 name: triomino_core
+# TODO: improve description
 description: A simple command-line application.
 version: 1.0.0
 
@@ -11,5 +12,6 @@ dev_dependencies:
   freezed: ^0.14.5
   lints: ^1.0.0
   test: ^1.17.12
+  test_process: ^2.0.2
 dependencies:
   freezed_annotation: ^0.14.3
