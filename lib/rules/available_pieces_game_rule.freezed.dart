@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'available_pieces_game_rule.dart';
@@ -11,22 +12,7 @@ part of 'available_pieces_game_rule.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$AvailablePiecesGameRuleTearOff {
-  const _$AvailablePiecesGameRuleTearOff();
-
-  _AvailablePiecesGameRule call(
-      QuantityOfPlayersGameRule quantityOfPlayersRule) {
-    return _AvailablePiecesGameRule(
-      quantityOfPlayersRule,
-    );
-  }
-}
-
-/// @nodoc
-const $AvailablePiecesGameRule = _$AvailablePiecesGameRuleTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$AvailablePiecesGameRule {
@@ -79,11 +65,11 @@ class _$AvailablePiecesGameRuleCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$AvailablePiecesGameRuleCopyWith<$Res>
+abstract class _$$_AvailablePiecesGameRuleCopyWith<$Res>
     implements $AvailablePiecesGameRuleCopyWith<$Res> {
-  factory _$AvailablePiecesGameRuleCopyWith(_AvailablePiecesGameRule value,
-          $Res Function(_AvailablePiecesGameRule) then) =
-      __$AvailablePiecesGameRuleCopyWithImpl<$Res>;
+  factory _$$_AvailablePiecesGameRuleCopyWith(_$_AvailablePiecesGameRule value,
+          $Res Function(_$_AvailablePiecesGameRule) then) =
+      __$$_AvailablePiecesGameRuleCopyWithImpl<$Res>;
   @override
   $Res call({QuantityOfPlayersGameRule quantityOfPlayersRule});
 
@@ -92,22 +78,22 @@ abstract class _$AvailablePiecesGameRuleCopyWith<$Res>
 }
 
 /// @nodoc
-class __$AvailablePiecesGameRuleCopyWithImpl<$Res>
+class __$$_AvailablePiecesGameRuleCopyWithImpl<$Res>
     extends _$AvailablePiecesGameRuleCopyWithImpl<$Res>
-    implements _$AvailablePiecesGameRuleCopyWith<$Res> {
-  __$AvailablePiecesGameRuleCopyWithImpl(_AvailablePiecesGameRule _value,
-      $Res Function(_AvailablePiecesGameRule) _then)
-      : super(_value, (v) => _then(v as _AvailablePiecesGameRule));
+    implements _$$_AvailablePiecesGameRuleCopyWith<$Res> {
+  __$$_AvailablePiecesGameRuleCopyWithImpl(_$_AvailablePiecesGameRule _value,
+      $Res Function(_$_AvailablePiecesGameRule) _then)
+      : super(_value, (v) => _then(v as _$_AvailablePiecesGameRule));
 
   @override
-  _AvailablePiecesGameRule get _value =>
-      super._value as _AvailablePiecesGameRule;
+  _$_AvailablePiecesGameRule get _value =>
+      super._value as _$_AvailablePiecesGameRule;
 
   @override
   $Res call({
     Object? quantityOfPlayersRule = freezed,
   }) {
-    return _then(_AvailablePiecesGameRule(
+    return _then(_$_AvailablePiecesGameRule(
       quantityOfPlayersRule == freezed
           ? _value.quantityOfPlayersRule
           : quantityOfPlayersRule // ignore: cast_nullable_to_non_nullable
@@ -118,7 +104,6 @@ class __$AvailablePiecesGameRuleCopyWithImpl<$Res>
 
 /// @nodoc
 
-@Implements(GameRule)
 class _$_AvailablePiecesGameRule implements _AvailablePiecesGameRule {
   const _$_AvailablePiecesGameRule(this.quantityOfPlayersRule);
 
@@ -133,33 +118,28 @@ class _$_AvailablePiecesGameRule implements _AvailablePiecesGameRule {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _AvailablePiecesGameRule &&
-            (identical(other.quantityOfPlayersRule, quantityOfPlayersRule) ||
-                const DeepCollectionEquality().equals(
-                    other.quantityOfPlayersRule, quantityOfPlayersRule)));
+        (other.runtimeType == runtimeType &&
+            other is _$_AvailablePiecesGameRule &&
+            const DeepCollectionEquality()
+                .equals(other.quantityOfPlayersRule, quantityOfPlayersRule));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(quantityOfPlayersRule);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(quantityOfPlayersRule));
 
   @JsonKey(ignore: true)
   @override
-  _$AvailablePiecesGameRuleCopyWith<_AvailablePiecesGameRule> get copyWith =>
-      __$AvailablePiecesGameRuleCopyWithImpl<_AvailablePiecesGameRule>(
-          this, _$identity);
-
-  @override
-  void validate(List<GameEvent> events) {
-    // TODO: implement validate
-  }
+  _$$_AvailablePiecesGameRuleCopyWith<_$_AvailablePiecesGameRule>
+      get copyWith =>
+          __$$_AvailablePiecesGameRuleCopyWithImpl<_$_AvailablePiecesGameRule>(
+              this, _$identity);
 }
 
 abstract class _AvailablePiecesGameRule
     implements AvailablePiecesGameRule, GameRule {
   const factory _AvailablePiecesGameRule(
-          QuantityOfPlayersGameRule quantityOfPlayersRule) =
+          final QuantityOfPlayersGameRule quantityOfPlayersRule) =
       _$_AvailablePiecesGameRule;
 
   @override
@@ -167,6 +147,6 @@ abstract class _AvailablePiecesGameRule
       throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$AvailablePiecesGameRuleCopyWith<_AvailablePiecesGameRule> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_AvailablePiecesGameRuleCopyWith<_$_AvailablePiecesGameRule>
+      get copyWith => throw _privateConstructorUsedError;
 }

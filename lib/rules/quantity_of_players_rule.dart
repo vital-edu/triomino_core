@@ -13,7 +13,7 @@ class QuantityOfPlayersGameRule
 
   @Assert('max>=min', 'max players must be greater than min players.')
   @Assert('min>1', 'it is not allowed a game of only one person.')
-  @Implements(GameRule)
+  @Implements<GameRule>()
   const factory QuantityOfPlayersGameRule(int min, int max) =
       _QuantityOfPlayersGameRule;
 

@@ -9,7 +9,7 @@ part 'start_game_rule.freezed.dart';
 class StartGameRule with _$StartGameRule implements GameRule {
   const StartGameRule._();
 
-  @Implements(GameRule)
+  @Implements<GameRule>()
   const factory StartGameRule() = _StartGameRule;
 
   @override

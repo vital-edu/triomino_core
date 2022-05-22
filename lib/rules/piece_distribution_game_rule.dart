@@ -10,7 +10,7 @@ class PieceDistributionGameRule
     implements GameRule {
   const PieceDistributionGameRule._();
 
-  @Implements(GameRule)
+  @Implements<GameRule>()
   const factory PieceDistributionGameRule() = _PieceDistributionGameRule;
 
   @override

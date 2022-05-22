@@ -9,7 +9,7 @@ part 'available_pieces_game_rule.freezed.dart';
 class AvailablePiecesGameRule
     with _$AvailablePiecesGameRule
     implements GameRule {
-  @Implements(GameRule)
+  @Implements<GameRule>()
   const factory AvailablePiecesGameRule(
           QuantityOfPlayersGameRule quantityOfPlayersRule) =
       _AvailablePiecesGameRule;

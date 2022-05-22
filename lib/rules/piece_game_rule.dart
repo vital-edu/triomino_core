@@ -10,7 +10,7 @@ part 'piece_game_rule.freezed.dart';
 class PieceGameRule with _$PieceGameRule implements GameRule {
   const PieceGameRule._();
 
-  @With(GameRule)
+  @With<GameRule>()
   const factory PieceGameRule() = _PieceGameRule;
 
   @override

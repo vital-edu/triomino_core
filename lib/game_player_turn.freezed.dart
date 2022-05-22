@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'game_player_turn.dart';
@@ -11,40 +12,7 @@ part of 'game_player_turn.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$GamePlayerTurnTearOff {
-  const _$GamePlayerTurnTearOff();
-
-  UnknownGamePlayerTurn unknown() {
-    return const UnknownGamePlayerTurn();
-  }
-
-  InvalidGamePlayerTurn invalid() {
-    return const InvalidGamePlayerTurn();
-  }
-
-  DeterminedGamePlayerTurn determined(Player player,
-      {required List<Player> playersOnOrder}) {
-    return DeterminedGamePlayerTurn(
-      player,
-      playersOnOrder: playersOnOrder,
-    );
-  }
-
-  PartiallyDeterminedGamePlayerTurn partiallyDetermined(
-      {required List<Player> determinedPlayers,
-      required List<Player> undeterminedPlayers}) {
-    return PartiallyDeterminedGamePlayerTurn(
-      determinedPlayers: determinedPlayers,
-      undeterminedPlayers: undeterminedPlayers,
-    );
-  }
-}
-
-/// @nodoc
-const $GamePlayerTurn = _$GamePlayerTurnTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$GamePlayerTurn {
@@ -128,22 +96,22 @@ class _$GamePlayerTurnCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class $UnknownGamePlayerTurnCopyWith<$Res> {
-  factory $UnknownGamePlayerTurnCopyWith(UnknownGamePlayerTurn value,
-          $Res Function(UnknownGamePlayerTurn) then) =
-      _$UnknownGamePlayerTurnCopyWithImpl<$Res>;
+abstract class _$$UnknownGamePlayerTurnCopyWith<$Res> {
+  factory _$$UnknownGamePlayerTurnCopyWith(_$UnknownGamePlayerTurn value,
+          $Res Function(_$UnknownGamePlayerTurn) then) =
+      __$$UnknownGamePlayerTurnCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$UnknownGamePlayerTurnCopyWithImpl<$Res>
+class __$$UnknownGamePlayerTurnCopyWithImpl<$Res>
     extends _$GamePlayerTurnCopyWithImpl<$Res>
-    implements $UnknownGamePlayerTurnCopyWith<$Res> {
-  _$UnknownGamePlayerTurnCopyWithImpl(
-      UnknownGamePlayerTurn _value, $Res Function(UnknownGamePlayerTurn) _then)
-      : super(_value, (v) => _then(v as UnknownGamePlayerTurn));
+    implements _$$UnknownGamePlayerTurnCopyWith<$Res> {
+  __$$UnknownGamePlayerTurnCopyWithImpl(_$UnknownGamePlayerTurn _value,
+      $Res Function(_$UnknownGamePlayerTurn) _then)
+      : super(_value, (v) => _then(v as _$UnknownGamePlayerTurn));
 
   @override
-  UnknownGamePlayerTurn get _value => super._value as UnknownGamePlayerTurn;
+  _$UnknownGamePlayerTurn get _value => super._value as _$UnknownGamePlayerTurn;
 }
 
 /// @nodoc
@@ -158,7 +126,8 @@ class _$UnknownGamePlayerTurn extends UnknownGamePlayerTurn {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is UnknownGamePlayerTurn);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$UnknownGamePlayerTurn);
   }
 
   @override
@@ -255,22 +224,22 @@ abstract class UnknownGamePlayerTurn extends GamePlayerTurn {
 }
 
 /// @nodoc
-abstract class $InvalidGamePlayerTurnCopyWith<$Res> {
-  factory $InvalidGamePlayerTurnCopyWith(InvalidGamePlayerTurn value,
-          $Res Function(InvalidGamePlayerTurn) then) =
-      _$InvalidGamePlayerTurnCopyWithImpl<$Res>;
+abstract class _$$InvalidGamePlayerTurnCopyWith<$Res> {
+  factory _$$InvalidGamePlayerTurnCopyWith(_$InvalidGamePlayerTurn value,
+          $Res Function(_$InvalidGamePlayerTurn) then) =
+      __$$InvalidGamePlayerTurnCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$InvalidGamePlayerTurnCopyWithImpl<$Res>
+class __$$InvalidGamePlayerTurnCopyWithImpl<$Res>
     extends _$GamePlayerTurnCopyWithImpl<$Res>
-    implements $InvalidGamePlayerTurnCopyWith<$Res> {
-  _$InvalidGamePlayerTurnCopyWithImpl(
-      InvalidGamePlayerTurn _value, $Res Function(InvalidGamePlayerTurn) _then)
-      : super(_value, (v) => _then(v as InvalidGamePlayerTurn));
+    implements _$$InvalidGamePlayerTurnCopyWith<$Res> {
+  __$$InvalidGamePlayerTurnCopyWithImpl(_$InvalidGamePlayerTurn _value,
+      $Res Function(_$InvalidGamePlayerTurn) _then)
+      : super(_value, (v) => _then(v as _$InvalidGamePlayerTurn));
 
   @override
-  InvalidGamePlayerTurn get _value => super._value as InvalidGamePlayerTurn;
+  _$InvalidGamePlayerTurn get _value => super._value as _$InvalidGamePlayerTurn;
 }
 
 /// @nodoc
@@ -285,7 +254,8 @@ class _$InvalidGamePlayerTurn extends InvalidGamePlayerTurn {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is InvalidGamePlayerTurn);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$InvalidGamePlayerTurn);
   }
 
   @override
@@ -382,39 +352,39 @@ abstract class InvalidGamePlayerTurn extends GamePlayerTurn {
 }
 
 /// @nodoc
-abstract class $DeterminedGamePlayerTurnCopyWith<$Res> {
-  factory $DeterminedGamePlayerTurnCopyWith(DeterminedGamePlayerTurn value,
-          $Res Function(DeterminedGamePlayerTurn) then) =
-      _$DeterminedGamePlayerTurnCopyWithImpl<$Res>;
+abstract class _$$DeterminedGamePlayerTurnCopyWith<$Res> {
+  factory _$$DeterminedGamePlayerTurnCopyWith(_$DeterminedGamePlayerTurn value,
+          $Res Function(_$DeterminedGamePlayerTurn) then) =
+      __$$DeterminedGamePlayerTurnCopyWithImpl<$Res>;
   $Res call({Player player, List<Player> playersOnOrder});
 
   $PlayerCopyWith<$Res> get player;
 }
 
 /// @nodoc
-class _$DeterminedGamePlayerTurnCopyWithImpl<$Res>
+class __$$DeterminedGamePlayerTurnCopyWithImpl<$Res>
     extends _$GamePlayerTurnCopyWithImpl<$Res>
-    implements $DeterminedGamePlayerTurnCopyWith<$Res> {
-  _$DeterminedGamePlayerTurnCopyWithImpl(DeterminedGamePlayerTurn _value,
-      $Res Function(DeterminedGamePlayerTurn) _then)
-      : super(_value, (v) => _then(v as DeterminedGamePlayerTurn));
+    implements _$$DeterminedGamePlayerTurnCopyWith<$Res> {
+  __$$DeterminedGamePlayerTurnCopyWithImpl(_$DeterminedGamePlayerTurn _value,
+      $Res Function(_$DeterminedGamePlayerTurn) _then)
+      : super(_value, (v) => _then(v as _$DeterminedGamePlayerTurn));
 
   @override
-  DeterminedGamePlayerTurn get _value =>
-      super._value as DeterminedGamePlayerTurn;
+  _$DeterminedGamePlayerTurn get _value =>
+      super._value as _$DeterminedGamePlayerTurn;
 
   @override
   $Res call({
     Object? player = freezed,
     Object? playersOnOrder = freezed,
   }) {
-    return _then(DeterminedGamePlayerTurn(
+    return _then(_$DeterminedGamePlayerTurn(
       player == freezed
           ? _value.player
           : player // ignore: cast_nullable_to_non_nullable
               as Player,
       playersOnOrder: playersOnOrder == freezed
-          ? _value.playersOnOrder
+          ? _value._playersOnOrder
           : playersOnOrder // ignore: cast_nullable_to_non_nullable
               as List<Player>,
     ));
@@ -431,13 +401,19 @@ class _$DeterminedGamePlayerTurnCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeterminedGamePlayerTurn extends DeterminedGamePlayerTurn {
-  const _$DeterminedGamePlayerTurn(this.player, {required this.playersOnOrder})
-      : super._();
+  const _$DeterminedGamePlayerTurn(this.player,
+      {required final List<Player> playersOnOrder})
+      : _playersOnOrder = playersOnOrder,
+        super._();
 
   @override
   final Player player;
+  final List<Player> _playersOnOrder;
   @override
-  final List<Player> playersOnOrder;
+  List<Player> get playersOnOrder {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_playersOnOrder);
+  }
 
   @override
   String toString() {
@@ -447,25 +423,25 @@ class _$DeterminedGamePlayerTurn extends DeterminedGamePlayerTurn {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is DeterminedGamePlayerTurn &&
-            (identical(other.player, player) ||
-                const DeepCollectionEquality().equals(other.player, player)) &&
-            (identical(other.playersOnOrder, playersOnOrder) ||
-                const DeepCollectionEquality()
-                    .equals(other.playersOnOrder, playersOnOrder)));
+        (other.runtimeType == runtimeType &&
+            other is _$DeterminedGamePlayerTurn &&
+            const DeepCollectionEquality().equals(other.player, player) &&
+            const DeepCollectionEquality()
+                .equals(other._playersOnOrder, _playersOnOrder));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(player) ^
-      const DeepCollectionEquality().hash(playersOnOrder);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(player),
+      const DeepCollectionEquality().hash(_playersOnOrder));
 
   @JsonKey(ignore: true)
   @override
-  $DeterminedGamePlayerTurnCopyWith<DeterminedGamePlayerTurn> get copyWith =>
-      _$DeterminedGamePlayerTurnCopyWithImpl<DeterminedGamePlayerTurn>(
-          this, _$identity);
+  _$$DeterminedGamePlayerTurnCopyWith<_$DeterminedGamePlayerTurn>
+      get copyWith =>
+          __$$DeterminedGamePlayerTurnCopyWithImpl<_$DeterminedGamePlayerTurn>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -553,51 +529,52 @@ class _$DeterminedGamePlayerTurn extends DeterminedGamePlayerTurn {
 }
 
 abstract class DeterminedGamePlayerTurn extends GamePlayerTurn {
-  const factory DeterminedGamePlayerTurn(Player player,
-      {required List<Player> playersOnOrder}) = _$DeterminedGamePlayerTurn;
+  const factory DeterminedGamePlayerTurn(final Player player,
+          {required final List<Player> playersOnOrder}) =
+      _$DeterminedGamePlayerTurn;
   const DeterminedGamePlayerTurn._() : super._();
 
   Player get player => throw _privateConstructorUsedError;
   List<Player> get playersOnOrder => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DeterminedGamePlayerTurnCopyWith<DeterminedGamePlayerTurn> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DeterminedGamePlayerTurnCopyWith<_$DeterminedGamePlayerTurn>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PartiallyDeterminedGamePlayerTurnCopyWith<$Res> {
-  factory $PartiallyDeterminedGamePlayerTurnCopyWith(
-          PartiallyDeterminedGamePlayerTurn value,
-          $Res Function(PartiallyDeterminedGamePlayerTurn) then) =
-      _$PartiallyDeterminedGamePlayerTurnCopyWithImpl<$Res>;
+abstract class _$$PartiallyDeterminedGamePlayerTurnCopyWith<$Res> {
+  factory _$$PartiallyDeterminedGamePlayerTurnCopyWith(
+          _$PartiallyDeterminedGamePlayerTurn value,
+          $Res Function(_$PartiallyDeterminedGamePlayerTurn) then) =
+      __$$PartiallyDeterminedGamePlayerTurnCopyWithImpl<$Res>;
   $Res call({List<Player> determinedPlayers, List<Player> undeterminedPlayers});
 }
 
 /// @nodoc
-class _$PartiallyDeterminedGamePlayerTurnCopyWithImpl<$Res>
+class __$$PartiallyDeterminedGamePlayerTurnCopyWithImpl<$Res>
     extends _$GamePlayerTurnCopyWithImpl<$Res>
-    implements $PartiallyDeterminedGamePlayerTurnCopyWith<$Res> {
-  _$PartiallyDeterminedGamePlayerTurnCopyWithImpl(
-      PartiallyDeterminedGamePlayerTurn _value,
-      $Res Function(PartiallyDeterminedGamePlayerTurn) _then)
-      : super(_value, (v) => _then(v as PartiallyDeterminedGamePlayerTurn));
+    implements _$$PartiallyDeterminedGamePlayerTurnCopyWith<$Res> {
+  __$$PartiallyDeterminedGamePlayerTurnCopyWithImpl(
+      _$PartiallyDeterminedGamePlayerTurn _value,
+      $Res Function(_$PartiallyDeterminedGamePlayerTurn) _then)
+      : super(_value, (v) => _then(v as _$PartiallyDeterminedGamePlayerTurn));
 
   @override
-  PartiallyDeterminedGamePlayerTurn get _value =>
-      super._value as PartiallyDeterminedGamePlayerTurn;
+  _$PartiallyDeterminedGamePlayerTurn get _value =>
+      super._value as _$PartiallyDeterminedGamePlayerTurn;
 
   @override
   $Res call({
     Object? determinedPlayers = freezed,
     Object? undeterminedPlayers = freezed,
   }) {
-    return _then(PartiallyDeterminedGamePlayerTurn(
+    return _then(_$PartiallyDeterminedGamePlayerTurn(
       determinedPlayers: determinedPlayers == freezed
-          ? _value.determinedPlayers
+          ? _value._determinedPlayers
           : determinedPlayers // ignore: cast_nullable_to_non_nullable
               as List<Player>,
       undeterminedPlayers: undeterminedPlayers == freezed
-          ? _value.undeterminedPlayers
+          ? _value._undeterminedPlayers
           : undeterminedPlayers // ignore: cast_nullable_to_non_nullable
               as List<Player>,
     ));
@@ -609,13 +586,25 @@ class _$PartiallyDeterminedGamePlayerTurnCopyWithImpl<$Res>
 class _$PartiallyDeterminedGamePlayerTurn
     extends PartiallyDeterminedGamePlayerTurn {
   const _$PartiallyDeterminedGamePlayerTurn(
-      {required this.determinedPlayers, required this.undeterminedPlayers})
-      : super._();
+      {required final List<Player> determinedPlayers,
+      required final List<Player> undeterminedPlayers})
+      : _determinedPlayers = determinedPlayers,
+        _undeterminedPlayers = undeterminedPlayers,
+        super._();
 
+  final List<Player> _determinedPlayers;
   @override
-  final List<Player> determinedPlayers;
+  List<Player> get determinedPlayers {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_determinedPlayers);
+  }
+
+  final List<Player> _undeterminedPlayers;
   @override
-  final List<Player> undeterminedPlayers;
+  List<Player> get undeterminedPlayers {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_undeterminedPlayers);
+  }
 
   @override
   String toString() {
@@ -625,26 +614,26 @@ class _$PartiallyDeterminedGamePlayerTurn
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is PartiallyDeterminedGamePlayerTurn &&
-            (identical(other.determinedPlayers, determinedPlayers) ||
-                const DeepCollectionEquality()
-                    .equals(other.determinedPlayers, determinedPlayers)) &&
-            (identical(other.undeterminedPlayers, undeterminedPlayers) ||
-                const DeepCollectionEquality()
-                    .equals(other.undeterminedPlayers, undeterminedPlayers)));
+        (other.runtimeType == runtimeType &&
+            other is _$PartiallyDeterminedGamePlayerTurn &&
+            const DeepCollectionEquality()
+                .equals(other._determinedPlayers, _determinedPlayers) &&
+            const DeepCollectionEquality()
+                .equals(other._undeterminedPlayers, _undeterminedPlayers));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(determinedPlayers) ^
-      const DeepCollectionEquality().hash(undeterminedPlayers);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_determinedPlayers),
+      const DeepCollectionEquality().hash(_undeterminedPlayers));
 
   @JsonKey(ignore: true)
   @override
-  $PartiallyDeterminedGamePlayerTurnCopyWith<PartiallyDeterminedGamePlayerTurn>
-      get copyWith => _$PartiallyDeterminedGamePlayerTurnCopyWithImpl<
-          PartiallyDeterminedGamePlayerTurn>(this, _$identity);
+  _$$PartiallyDeterminedGamePlayerTurnCopyWith<
+          _$PartiallyDeterminedGamePlayerTurn>
+      get copyWith => __$$PartiallyDeterminedGamePlayerTurnCopyWithImpl<
+          _$PartiallyDeterminedGamePlayerTurn>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -733,14 +722,15 @@ class _$PartiallyDeterminedGamePlayerTurn
 
 abstract class PartiallyDeterminedGamePlayerTurn extends GamePlayerTurn {
   const factory PartiallyDeterminedGamePlayerTurn(
-          {required List<Player> determinedPlayers,
-          required List<Player> undeterminedPlayers}) =
+          {required final List<Player> determinedPlayers,
+          required final List<Player> undeterminedPlayers}) =
       _$PartiallyDeterminedGamePlayerTurn;
   const PartiallyDeterminedGamePlayerTurn._() : super._();
 
   List<Player> get determinedPlayers => throw _privateConstructorUsedError;
   List<Player> get undeterminedPlayers => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PartiallyDeterminedGamePlayerTurnCopyWith<PartiallyDeterminedGamePlayerTurn>
+  _$$PartiallyDeterminedGamePlayerTurnCopyWith<
+          _$PartiallyDeterminedGamePlayerTurn>
       get copyWith => throw _privateConstructorUsedError;
 }

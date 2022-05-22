@@ -12,7 +12,7 @@ class PlayerValidationGameRule
     implements GameRule {
   const PlayerValidationGameRule._();
 
-  @Implements(GameRule)
+  @Implements<GameRule>()
   const factory PlayerValidationGameRule() = _PlayerValidationGameRule;
 
   @override

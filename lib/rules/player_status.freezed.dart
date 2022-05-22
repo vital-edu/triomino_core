@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'player_status.dart';
@@ -11,26 +12,7 @@ part of 'player_status.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$PlayerStatusTearOff {
-  const _$PlayerStatusTearOff();
-
-  _PlayerStatus call(
-      {required Player player,
-      required int piecesInPlayersHand,
-      List<Piece> playedPieces = const []}) {
-    return _PlayerStatus(
-      player: player,
-      piecesInPlayersHand: piecesInPlayersHand,
-      playedPieces: playedPieces,
-    );
-  }
-}
-
-/// @nodoc
-const $PlayerStatus = _$PlayerStatusTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$PlayerStatus {
@@ -92,11 +74,11 @@ class _$PlayerStatusCopyWithImpl<$Res> implements $PlayerStatusCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$PlayerStatusCopyWith<$Res>
+abstract class _$$_PlayerStatusCopyWith<$Res>
     implements $PlayerStatusCopyWith<$Res> {
-  factory _$PlayerStatusCopyWith(
-          _PlayerStatus value, $Res Function(_PlayerStatus) then) =
-      __$PlayerStatusCopyWithImpl<$Res>;
+  factory _$$_PlayerStatusCopyWith(
+          _$_PlayerStatus value, $Res Function(_$_PlayerStatus) then) =
+      __$$_PlayerStatusCopyWithImpl<$Res>;
   @override
   $Res call({Player player, int piecesInPlayersHand, List<Piece> playedPieces});
 
@@ -105,14 +87,15 @@ abstract class _$PlayerStatusCopyWith<$Res>
 }
 
 /// @nodoc
-class __$PlayerStatusCopyWithImpl<$Res> extends _$PlayerStatusCopyWithImpl<$Res>
-    implements _$PlayerStatusCopyWith<$Res> {
-  __$PlayerStatusCopyWithImpl(
-      _PlayerStatus _value, $Res Function(_PlayerStatus) _then)
-      : super(_value, (v) => _then(v as _PlayerStatus));
+class __$$_PlayerStatusCopyWithImpl<$Res>
+    extends _$PlayerStatusCopyWithImpl<$Res>
+    implements _$$_PlayerStatusCopyWith<$Res> {
+  __$$_PlayerStatusCopyWithImpl(
+      _$_PlayerStatus _value, $Res Function(_$_PlayerStatus) _then)
+      : super(_value, (v) => _then(v as _$_PlayerStatus));
 
   @override
-  _PlayerStatus get _value => super._value as _PlayerStatus;
+  _$_PlayerStatus get _value => super._value as _$_PlayerStatus;
 
   @override
   $Res call({
@@ -120,7 +103,7 @@ class __$PlayerStatusCopyWithImpl<$Res> extends _$PlayerStatusCopyWithImpl<$Res>
     Object? piecesInPlayersHand = freezed,
     Object? playedPieces = freezed,
   }) {
-    return _then(_PlayerStatus(
+    return _then(_$_PlayerStatus(
       player: player == freezed
           ? _value.player
           : player // ignore: cast_nullable_to_non_nullable
@@ -130,7 +113,7 @@ class __$PlayerStatusCopyWithImpl<$Res> extends _$PlayerStatusCopyWithImpl<$Res>
           : piecesInPlayersHand // ignore: cast_nullable_to_non_nullable
               as int,
       playedPieces: playedPieces == freezed
-          ? _value.playedPieces
+          ? _value._playedPieces
           : playedPieces // ignore: cast_nullable_to_non_nullable
               as List<Piece>,
     ));
@@ -143,15 +126,20 @@ class _$_PlayerStatus implements _PlayerStatus {
   const _$_PlayerStatus(
       {required this.player,
       required this.piecesInPlayersHand,
-      this.playedPieces = const []});
+      final List<Piece> playedPieces = const []})
+      : _playedPieces = playedPieces;
 
   @override
   final Player player;
   @override
   final int piecesInPlayersHand;
-  @JsonKey(defaultValue: const [])
+  final List<Piece> _playedPieces;
   @override
-  final List<Piece> playedPieces;
+  @JsonKey()
+  List<Piece> get playedPieces {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_playedPieces);
+  }
 
   @override
   String toString() {
@@ -161,35 +149,33 @@ class _$_PlayerStatus implements _PlayerStatus {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PlayerStatus &&
-            (identical(other.player, player) ||
-                const DeepCollectionEquality().equals(other.player, player)) &&
-            (identical(other.piecesInPlayersHand, piecesInPlayersHand) ||
-                const DeepCollectionEquality()
-                    .equals(other.piecesInPlayersHand, piecesInPlayersHand)) &&
-            (identical(other.playedPieces, playedPieces) ||
-                const DeepCollectionEquality()
-                    .equals(other.playedPieces, playedPieces)));
+        (other.runtimeType == runtimeType &&
+            other is _$_PlayerStatus &&
+            const DeepCollectionEquality().equals(other.player, player) &&
+            const DeepCollectionEquality()
+                .equals(other.piecesInPlayersHand, piecesInPlayersHand) &&
+            const DeepCollectionEquality()
+                .equals(other._playedPieces, _playedPieces));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(player) ^
-      const DeepCollectionEquality().hash(piecesInPlayersHand) ^
-      const DeepCollectionEquality().hash(playedPieces);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(player),
+      const DeepCollectionEquality().hash(piecesInPlayersHand),
+      const DeepCollectionEquality().hash(_playedPieces));
 
   @JsonKey(ignore: true)
   @override
-  _$PlayerStatusCopyWith<_PlayerStatus> get copyWith =>
-      __$PlayerStatusCopyWithImpl<_PlayerStatus>(this, _$identity);
+  _$$_PlayerStatusCopyWith<_$_PlayerStatus> get copyWith =>
+      __$$_PlayerStatusCopyWithImpl<_$_PlayerStatus>(this, _$identity);
 }
 
 abstract class _PlayerStatus implements PlayerStatus {
   const factory _PlayerStatus(
-      {required Player player,
-      required int piecesInPlayersHand,
-      List<Piece> playedPieces}) = _$_PlayerStatus;
+      {required final Player player,
+      required final int piecesInPlayersHand,
+      final List<Piece> playedPieces}) = _$_PlayerStatus;
 
   @override
   Player get player => throw _privateConstructorUsedError;
@@ -199,6 +185,6 @@ abstract class _PlayerStatus implements PlayerStatus {
   List<Piece> get playedPieces => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PlayerStatusCopyWith<_PlayerStatus> get copyWith =>
+  _$$_PlayerStatusCopyWith<_$_PlayerStatus> get copyWith =>
       throw _privateConstructorUsedError;
 }
