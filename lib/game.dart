@@ -145,6 +145,7 @@ class Game {
       throw RemoveEventError(event);
     }
 
+    ruleBook.quantityOfPlayersGameRule.validate(newEvents);
     events = newEvents;
   }
 }

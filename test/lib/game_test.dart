@@ -1,11 +1,11 @@
 import 'package:test/test.dart';
 import 'package:triomino_core/game.dart';
 import 'package:triomino_core/game_event.dart';
-import 'package:triomino_core/game_utils.dart';
 import 'package:triomino_core/models/identifier.dart';
 import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
 import 'package:triomino_core/rules/errors/game_rule_error.dart';
+import 'package:triomino_core/rules/errors/invalid_quantity_of_players_error.dart';
 import 'package:triomino_core/rules/errors/piece_game_rule_error.dart';
 import 'package:triomino_core/rules/errors/player_validation_game_rule_error.dart';
 import 'package:triomino_core/rules/errors/remove_event_error.dart';
@@ -60,11 +60,24 @@ void main() {
             ));
       });
 
-      test('should not allow remove players', () {
-        // TODO: when there are two players, it should not be allowed to remove
+      test('should not allow remove required players', () {
+        final players = game.events.whereType<AddPlayerEvent>().toList();
 
-        // TODO: when there are no players, the app crashes on trying to remove
-        // TODO: investigate if pass an invalid index causes the crash
+        for (int i = 2; i < players.length; i++) {
+          game.remove(players[i]);
+        }
+
+        expect(
+          () => game.remove(players[0]),
+          throwsA(
+            allOf(
+              isA<InvalidQuantityOfPlayersError>(),
+              GameRuleErrorHasMessage(
+                contains('Invalid quantity of player(s): 1.'),
+              ),
+            ),
+          ),
+        );
       });
     });
 
@@ -222,34 +235,6 @@ void main() {
         );
         expect(game.events.length, 2);
       });
-    });
-
-    test('game', () {
-      final game = Game();
-      game.add(
-          GameEvent.addPlayer(Player(name: 'Player 3'), id: Identifier.uniq()));
-
-      final allPlayers = game.players;
-
-      for (int i = 0; i <= 5; i++) {
-        for (int j = 0; j <= 5; j++) {
-          for (int k = 0; k <= 5; k++) {
-            final index = (i + j + k) % allPlayers.length;
-            final player = allPlayers[index];
-
-            game.add(GameEvent.layPiece(
-              Piece(i, j, k),
-              player: player,
-              id: Identifier.uniq(),
-            ));
-          }
-        }
-      }
-
-      final utils = GameUtils();
-      utils.show(game.events);
-
-      expect(game.events.whereType<LayPieceGameEvent>().length, 56);
     });
   });
 }

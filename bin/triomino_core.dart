@@ -8,6 +8,7 @@ import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
 import 'package:triomino_core/rules/errors/game_rule_error.dart';
 import 'package:triomino_core/rules/errors/invalid_event_error.dart';
+import 'package:triomino_core/rules/errors/invalid_quantity_of_players_error.dart';
 
 void main(List<String> arguments) {
   final utils = GameUtils();
@@ -198,6 +199,8 @@ void removePlayer(Game game) {
     return print('Invalid selection: ${error.message}');
   } on RangeError catch (error) {
     return print('Invalid selection: ${error.message}');
+  } on InvalidQuantityOfPlayersError catch (error) {
+    return print(error.message);
   }
 }
 
