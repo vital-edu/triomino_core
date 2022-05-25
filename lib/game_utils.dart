@@ -46,10 +46,23 @@ class GameUtils {
         startGame: (_) {
           print('Game started');
         },
+        startRound: (e) {
+          print(
+            'Round started by ${e.event.player.name}: ${e.event.piece}',
+          );
+        },
         layPiece: (e) {
-          print('${e.player.name} played ${e.piece}');
+          print(
+              '${e.player.name} played ${e.piece}. Points: ${_calculatePoints(e)}');
+        },
+        drawPiece: (e) {
+          print('${e.player.name} drew ${e.piece}');
         },
       );
     }
+  }
+
+  int _calculatePoints(LayPieceGameEvent event) {
+    return event.points.fold(0, (previousValue, element) => element.points);
   }
 }

@@ -1,6 +1,7 @@
 import 'package:test/test.dart';
 import 'package:triomino_core/game.dart';
 import 'package:triomino_core/game_event.dart';
+import 'package:triomino_core/game_point.dart';
 import 'package:triomino_core/models/identifier.dart';
 import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
@@ -86,8 +87,10 @@ void main() {
         final game = Game();
 
         final firstPlayer = game.players.first;
+        final piece = Piece.triple(5);
         final lay1stPieceEvent = GameEvent.layPiece(
-          Piece.triple(5),
+          piece,
+          points: [GamePoint.layPiece(piece, identifier: Identifier.uniq())],
           player: firstPlayer,
           id: Identifier.uniq(),
         );
@@ -108,13 +111,18 @@ void main() {
         final game = Game();
 
         final firstPlayer = game.players.first;
+        final piece1 = Piece.triple(5);
         final lay1stPieceEvent = GameEvent.layPiece(
-          Piece.triple(5),
+          piece1,
+          points: [GamePoint.layPiece(piece1, identifier: Identifier.uniq())],
           player: firstPlayer,
           id: Identifier.uniq(),
         );
+
+        final piece2 = Piece.triple(4);
         final lay2ndPieceEvent = GameEvent.layPiece(
-          Piece.triple(4),
+          piece2,
+          points: [GamePoint.layPiece(piece2, identifier: Identifier.uniq())],
           player: firstPlayer,
           id: Identifier.uniq(),
         );
@@ -140,13 +148,18 @@ void main() {
             id: Identifier.uniq()));
 
         final firstPlayer = game.players.first;
+        final piece1 = Piece.triple(5);
         final lay1stPieceEvent = GameEvent.layPiece(
-          Piece.triple(5),
+          piece1,
+          points: [GamePoint.layPiece(piece1, identifier: Identifier.uniq())],
           player: firstPlayer,
           id: Identifier.uniq(),
         );
+
+        final piece2 = Piece.triple(4);
         final lay2ndPieceEvent = GameEvent.layPiece(
-          Piece.triple(4),
+          piece2,
+          points: [GamePoint.layPiece(piece2, identifier: Identifier.uniq())],
           player: firstPlayer,
           id: Identifier.uniq(),
         );
@@ -173,28 +186,42 @@ void main() {
 
         final allPlayers = game.players;
 
+        final piece1 = Piece.triple(5);
         final lay1stPieceEvent = GameEvent.layPiece(
           Piece.triple(5),
+          points: [GamePoint.layPiece(piece1, identifier: Identifier.uniq())],
           player: allPlayers[0],
           id: Identifier.uniq(),
         );
+
+        final piece2 = Piece.triple(4);
         final lay2ndPieceEvent = GameEvent.layPiece(
-          Piece.triple(4),
+          piece2,
+          points: [GamePoint.layPiece(piece2, identifier: Identifier.uniq())],
           player: allPlayers[1],
           id: Identifier.uniq(),
         );
+
+        final piece3 = Piece.triple(3);
         final lay3rdPieceEvent = GameEvent.layPiece(
-          Piece.triple(3),
+          piece3,
+          points: [GamePoint.layPiece(piece3, identifier: Identifier.uniq())],
           player: allPlayers[2],
           id: Identifier.uniq(),
         );
+
+        final piece4 = Piece.triple(2);
         final lay4thPieceEvent = GameEvent.layPiece(
-          Piece.triple(2),
+          piece4,
+          points: [GamePoint.layPiece(piece4, identifier: Identifier.uniq())],
           player: allPlayers[3],
           id: Identifier.uniq(),
         );
+
+        final piece5 = Piece.triple(1);
         final lay5thPieceEvent = GameEvent.layPiece(
-          Piece.triple(1),
+          piece5,
+          points: [GamePoint.layPiece(piece5, identifier: Identifier.uniq())],
           player: allPlayers[0],
           id: Identifier.uniq(),
         );

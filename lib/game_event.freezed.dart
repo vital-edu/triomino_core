@@ -21,22 +21,35 @@ mixin _$GameEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Player player, Identifier id) addPlayer,
     required TResult Function(Identifier id) startGame,
-    required TResult Function(Piece piece, Player player, Identifier id)
+    required TResult Function(LayPieceGameEvent event, Identifier id)
+        startRound,
+    required TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)
         layPiece,
+    required TResult Function(Piece piece, Player player, Identifier id)
+        drawPiece,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(Piece piece, Player player, Identifier id)? layPiece,
+    TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
+    TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+        layPiece,
+    TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(Piece piece, Player player, Identifier id)? layPiece,
+    TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
+    TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+        layPiece,
+    TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -44,21 +57,27 @@ mixin _$GameEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(AddPlayerEvent value) addPlayer,
     required TResult Function(StartGameEvent value) startGame,
+    required TResult Function(StartRoundGameEvent value) startRound,
     required TResult Function(LayPieceGameEvent value) layPiece,
+    required TResult Function(DrawPieceGameEvent value) drawPiece,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AddPlayerEvent value)? addPlayer,
     TResult Function(StartGameEvent value)? startGame,
+    TResult Function(StartRoundGameEvent value)? startRound,
     TResult Function(LayPieceGameEvent value)? layPiece,
+    TResult Function(DrawPieceGameEvent value)? drawPiece,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddPlayerEvent value)? addPlayer,
     TResult Function(StartGameEvent value)? startGame,
+    TResult Function(StartRoundGameEvent value)? startRound,
     TResult Function(LayPieceGameEvent value)? layPiece,
+    TResult Function(DrawPieceGameEvent value)? drawPiece,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -183,8 +202,13 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Player player, Identifier id) addPlayer,
     required TResult Function(Identifier id) startGame,
-    required TResult Function(Piece piece, Player player, Identifier id)
+    required TResult Function(LayPieceGameEvent event, Identifier id)
+        startRound,
+    required TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)
         layPiece,
+    required TResult Function(Piece piece, Player player, Identifier id)
+        drawPiece,
   }) {
     return addPlayer(player, id);
   }
@@ -194,7 +218,11 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(Piece piece, Player player, Identifier id)? layPiece,
+    TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
+    TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+        layPiece,
+    TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
   }) {
     return addPlayer?.call(player, id);
   }
@@ -204,7 +232,11 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(Piece piece, Player player, Identifier id)? layPiece,
+    TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
+    TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+        layPiece,
+    TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
     required TResult orElse(),
   }) {
     if (addPlayer != null) {
@@ -218,7 +250,9 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(AddPlayerEvent value) addPlayer,
     required TResult Function(StartGameEvent value) startGame,
+    required TResult Function(StartRoundGameEvent value) startRound,
     required TResult Function(LayPieceGameEvent value) layPiece,
+    required TResult Function(DrawPieceGameEvent value) drawPiece,
   }) {
     return addPlayer(this);
   }
@@ -228,7 +262,9 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AddPlayerEvent value)? addPlayer,
     TResult Function(StartGameEvent value)? startGame,
+    TResult Function(StartRoundGameEvent value)? startRound,
     TResult Function(LayPieceGameEvent value)? layPiece,
+    TResult Function(DrawPieceGameEvent value)? drawPiece,
   }) {
     return addPlayer?.call(this);
   }
@@ -238,7 +274,9 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddPlayerEvent value)? addPlayer,
     TResult Function(StartGameEvent value)? startGame,
+    TResult Function(StartRoundGameEvent value)? startRound,
     TResult Function(LayPieceGameEvent value)? layPiece,
+    TResult Function(DrawPieceGameEvent value)? drawPiece,
     required TResult orElse(),
   }) {
     if (addPlayer != null) {
@@ -330,8 +368,13 @@ class _$StartGameEvent extends StartGameEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Player player, Identifier id) addPlayer,
     required TResult Function(Identifier id) startGame,
-    required TResult Function(Piece piece, Player player, Identifier id)
+    required TResult Function(LayPieceGameEvent event, Identifier id)
+        startRound,
+    required TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)
         layPiece,
+    required TResult Function(Piece piece, Player player, Identifier id)
+        drawPiece,
   }) {
     return startGame(id);
   }
@@ -341,7 +384,11 @@ class _$StartGameEvent extends StartGameEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(Piece piece, Player player, Identifier id)? layPiece,
+    TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
+    TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+        layPiece,
+    TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
   }) {
     return startGame?.call(id);
   }
@@ -351,7 +398,11 @@ class _$StartGameEvent extends StartGameEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(Piece piece, Player player, Identifier id)? layPiece,
+    TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
+    TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+        layPiece,
+    TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
     required TResult orElse(),
   }) {
     if (startGame != null) {
@@ -365,7 +416,9 @@ class _$StartGameEvent extends StartGameEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(AddPlayerEvent value) addPlayer,
     required TResult Function(StartGameEvent value) startGame,
+    required TResult Function(StartRoundGameEvent value) startRound,
     required TResult Function(LayPieceGameEvent value) layPiece,
+    required TResult Function(DrawPieceGameEvent value) drawPiece,
   }) {
     return startGame(this);
   }
@@ -375,7 +428,9 @@ class _$StartGameEvent extends StartGameEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AddPlayerEvent value)? addPlayer,
     TResult Function(StartGameEvent value)? startGame,
+    TResult Function(StartRoundGameEvent value)? startRound,
     TResult Function(LayPieceGameEvent value)? layPiece,
+    TResult Function(DrawPieceGameEvent value)? drawPiece,
   }) {
     return startGame?.call(this);
   }
@@ -385,7 +440,9 @@ class _$StartGameEvent extends StartGameEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddPlayerEvent value)? addPlayer,
     TResult Function(StartGameEvent value)? startGame,
+    TResult Function(StartRoundGameEvent value)? startRound,
     TResult Function(LayPieceGameEvent value)? layPiece,
+    TResult Function(DrawPieceGameEvent value)? drawPiece,
     required TResult orElse(),
   }) {
     if (startGame != null) {
@@ -409,13 +466,192 @@ abstract class StartGameEvent extends GameEvent {
 }
 
 /// @nodoc
+abstract class _$$StartRoundGameEventCopyWith<$Res>
+    implements $GameEventCopyWith<$Res> {
+  factory _$$StartRoundGameEventCopyWith(_$StartRoundGameEvent value,
+          $Res Function(_$StartRoundGameEvent) then) =
+      __$$StartRoundGameEventCopyWithImpl<$Res>;
+  @override
+  $Res call({LayPieceGameEvent event, Identifier id});
+}
+
+/// @nodoc
+class __$$StartRoundGameEventCopyWithImpl<$Res>
+    extends _$GameEventCopyWithImpl<$Res>
+    implements _$$StartRoundGameEventCopyWith<$Res> {
+  __$$StartRoundGameEventCopyWithImpl(
+      _$StartRoundGameEvent _value, $Res Function(_$StartRoundGameEvent) _then)
+      : super(_value, (v) => _then(v as _$StartRoundGameEvent));
+
+  @override
+  _$StartRoundGameEvent get _value => super._value as _$StartRoundGameEvent;
+
+  @override
+  $Res call({
+    Object? event = freezed,
+    Object? id = freezed,
+  }) {
+    return _then(_$StartRoundGameEvent(
+      event == freezed
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as LayPieceGameEvent,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as Identifier,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$StartRoundGameEvent extends StartRoundGameEvent {
+  const _$StartRoundGameEvent(this.event, {required this.id}) : super._();
+
+  @override
+  final LayPieceGameEvent event;
+  @override
+  final Identifier id;
+
+  @override
+  String toString() {
+    return 'GameEvent.startRound(event: $event, id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$StartRoundGameEvent &&
+            const DeepCollectionEquality().equals(other.event, event) &&
+            const DeepCollectionEquality().equals(other.id, id));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(event),
+      const DeepCollectionEquality().hash(id));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$StartRoundGameEventCopyWith<_$StartRoundGameEvent> get copyWith =>
+      __$$StartRoundGameEventCopyWithImpl<_$StartRoundGameEvent>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Player player, Identifier id) addPlayer,
+    required TResult Function(Identifier id) startGame,
+    required TResult Function(LayPieceGameEvent event, Identifier id)
+        startRound,
+    required TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)
+        layPiece,
+    required TResult Function(Piece piece, Player player, Identifier id)
+        drawPiece,
+  }) {
+    return startRound(event, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(Player player, Identifier id)? addPlayer,
+    TResult Function(Identifier id)? startGame,
+    TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
+    TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+        layPiece,
+    TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
+  }) {
+    return startRound?.call(event, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Player player, Identifier id)? addPlayer,
+    TResult Function(Identifier id)? startGame,
+    TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
+    TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+        layPiece,
+    TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
+    required TResult orElse(),
+  }) {
+    if (startRound != null) {
+      return startRound(event, id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AddPlayerEvent value) addPlayer,
+    required TResult Function(StartGameEvent value) startGame,
+    required TResult Function(StartRoundGameEvent value) startRound,
+    required TResult Function(LayPieceGameEvent value) layPiece,
+    required TResult Function(DrawPieceGameEvent value) drawPiece,
+  }) {
+    return startRound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(AddPlayerEvent value)? addPlayer,
+    TResult Function(StartGameEvent value)? startGame,
+    TResult Function(StartRoundGameEvent value)? startRound,
+    TResult Function(LayPieceGameEvent value)? layPiece,
+    TResult Function(DrawPieceGameEvent value)? drawPiece,
+  }) {
+    return startRound?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AddPlayerEvent value)? addPlayer,
+    TResult Function(StartGameEvent value)? startGame,
+    TResult Function(StartRoundGameEvent value)? startRound,
+    TResult Function(LayPieceGameEvent value)? layPiece,
+    TResult Function(DrawPieceGameEvent value)? drawPiece,
+    required TResult orElse(),
+  }) {
+    if (startRound != null) {
+      return startRound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class StartRoundGameEvent extends GameEvent {
+  const factory StartRoundGameEvent(final LayPieceGameEvent event,
+      {required final Identifier id}) = _$StartRoundGameEvent;
+  const StartRoundGameEvent._() : super._();
+
+  LayPieceGameEvent get event => throw _privateConstructorUsedError;
+  @override
+  Identifier get id => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$StartRoundGameEventCopyWith<_$StartRoundGameEvent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$LayPieceGameEventCopyWith<$Res>
     implements $GameEventCopyWith<$Res> {
   factory _$$LayPieceGameEventCopyWith(
           _$LayPieceGameEvent value, $Res Function(_$LayPieceGameEvent) then) =
       __$$LayPieceGameEventCopyWithImpl<$Res>;
   @override
-  $Res call({Piece piece, Player player, Identifier id});
+  $Res call(
+      {Piece piece, List<GamePoint> points, Player player, Identifier id});
 
   $PlayerCopyWith<$Res> get player;
 }
@@ -434,10 +670,228 @@ class __$$LayPieceGameEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? piece = freezed,
+    Object? points = freezed,
     Object? player = freezed,
     Object? id = freezed,
   }) {
     return _then(_$LayPieceGameEvent(
+      piece == freezed
+          ? _value.piece
+          : piece // ignore: cast_nullable_to_non_nullable
+              as Piece,
+      points: points == freezed
+          ? _value._points
+          : points // ignore: cast_nullable_to_non_nullable
+              as List<GamePoint>,
+      player: player == freezed
+          ? _value.player
+          : player // ignore: cast_nullable_to_non_nullable
+              as Player,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as Identifier,
+    ));
+  }
+
+  @override
+  $PlayerCopyWith<$Res> get player {
+    return $PlayerCopyWith<$Res>(_value.player, (value) {
+      return _then(_value.copyWith(player: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$LayPieceGameEvent extends LayPieceGameEvent {
+  const _$LayPieceGameEvent(this.piece,
+      {required final List<GamePoint> points,
+      required this.player,
+      required this.id})
+      : _points = points,
+        super._();
+
+  @override
+  final Piece piece;
+  final List<GamePoint> _points;
+  @override
+  List<GamePoint> get points {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_points);
+  }
+
+  @override
+  final Player player;
+  @override
+  final Identifier id;
+
+  @override
+  String toString() {
+    return 'GameEvent.layPiece(piece: $piece, points: $points, player: $player, id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LayPieceGameEvent &&
+            const DeepCollectionEquality().equals(other.piece, piece) &&
+            const DeepCollectionEquality().equals(other._points, _points) &&
+            const DeepCollectionEquality().equals(other.player, player) &&
+            const DeepCollectionEquality().equals(other.id, id));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(piece),
+      const DeepCollectionEquality().hash(_points),
+      const DeepCollectionEquality().hash(player),
+      const DeepCollectionEquality().hash(id));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$LayPieceGameEventCopyWith<_$LayPieceGameEvent> get copyWith =>
+      __$$LayPieceGameEventCopyWithImpl<_$LayPieceGameEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Player player, Identifier id) addPlayer,
+    required TResult Function(Identifier id) startGame,
+    required TResult Function(LayPieceGameEvent event, Identifier id)
+        startRound,
+    required TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)
+        layPiece,
+    required TResult Function(Piece piece, Player player, Identifier id)
+        drawPiece,
+  }) {
+    return layPiece(piece, points, player, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(Player player, Identifier id)? addPlayer,
+    TResult Function(Identifier id)? startGame,
+    TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
+    TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+        layPiece,
+    TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
+  }) {
+    return layPiece?.call(piece, points, player, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Player player, Identifier id)? addPlayer,
+    TResult Function(Identifier id)? startGame,
+    TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
+    TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+        layPiece,
+    TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
+    required TResult orElse(),
+  }) {
+    if (layPiece != null) {
+      return layPiece(piece, points, player, id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AddPlayerEvent value) addPlayer,
+    required TResult Function(StartGameEvent value) startGame,
+    required TResult Function(StartRoundGameEvent value) startRound,
+    required TResult Function(LayPieceGameEvent value) layPiece,
+    required TResult Function(DrawPieceGameEvent value) drawPiece,
+  }) {
+    return layPiece(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(AddPlayerEvent value)? addPlayer,
+    TResult Function(StartGameEvent value)? startGame,
+    TResult Function(StartRoundGameEvent value)? startRound,
+    TResult Function(LayPieceGameEvent value)? layPiece,
+    TResult Function(DrawPieceGameEvent value)? drawPiece,
+  }) {
+    return layPiece?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AddPlayerEvent value)? addPlayer,
+    TResult Function(StartGameEvent value)? startGame,
+    TResult Function(StartRoundGameEvent value)? startRound,
+    TResult Function(LayPieceGameEvent value)? layPiece,
+    TResult Function(DrawPieceGameEvent value)? drawPiece,
+    required TResult orElse(),
+  }) {
+    if (layPiece != null) {
+      return layPiece(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LayPieceGameEvent extends GameEvent {
+  const factory LayPieceGameEvent(final Piece piece,
+      {required final List<GamePoint> points,
+      required final Player player,
+      required final Identifier id}) = _$LayPieceGameEvent;
+  const LayPieceGameEvent._() : super._();
+
+  Piece get piece => throw _privateConstructorUsedError;
+  List<GamePoint> get points => throw _privateConstructorUsedError;
+  Player get player => throw _privateConstructorUsedError;
+  @override
+  Identifier get id => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$LayPieceGameEventCopyWith<_$LayPieceGameEvent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DrawPieceGameEventCopyWith<$Res>
+    implements $GameEventCopyWith<$Res> {
+  factory _$$DrawPieceGameEventCopyWith(_$DrawPieceGameEvent value,
+          $Res Function(_$DrawPieceGameEvent) then) =
+      __$$DrawPieceGameEventCopyWithImpl<$Res>;
+  @override
+  $Res call({Piece piece, Player player, Identifier id});
+
+  $PlayerCopyWith<$Res> get player;
+}
+
+/// @nodoc
+class __$$DrawPieceGameEventCopyWithImpl<$Res>
+    extends _$GameEventCopyWithImpl<$Res>
+    implements _$$DrawPieceGameEventCopyWith<$Res> {
+  __$$DrawPieceGameEventCopyWithImpl(
+      _$DrawPieceGameEvent _value, $Res Function(_$DrawPieceGameEvent) _then)
+      : super(_value, (v) => _then(v as _$DrawPieceGameEvent));
+
+  @override
+  _$DrawPieceGameEvent get _value => super._value as _$DrawPieceGameEvent;
+
+  @override
+  $Res call({
+    Object? piece = freezed,
+    Object? player = freezed,
+    Object? id = freezed,
+  }) {
+    return _then(_$DrawPieceGameEvent(
       piece == freezed
           ? _value.piece
           : piece // ignore: cast_nullable_to_non_nullable
@@ -463,8 +917,8 @@ class __$$LayPieceGameEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LayPieceGameEvent extends LayPieceGameEvent {
-  const _$LayPieceGameEvent(this.piece,
+class _$DrawPieceGameEvent extends DrawPieceGameEvent {
+  const _$DrawPieceGameEvent(this.piece,
       {required this.player, required this.id})
       : super._();
 
@@ -477,14 +931,14 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
 
   @override
   String toString() {
-    return 'GameEvent.layPiece(piece: $piece, player: $player, id: $id)';
+    return 'GameEvent.drawPiece(piece: $piece, player: $player, id: $id)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LayPieceGameEvent &&
+            other is _$DrawPieceGameEvent &&
             const DeepCollectionEquality().equals(other.piece, piece) &&
             const DeepCollectionEquality().equals(other.player, player) &&
             const DeepCollectionEquality().equals(other.id, id));
@@ -499,18 +953,24 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
 
   @JsonKey(ignore: true)
   @override
-  _$$LayPieceGameEventCopyWith<_$LayPieceGameEvent> get copyWith =>
-      __$$LayPieceGameEventCopyWithImpl<_$LayPieceGameEvent>(this, _$identity);
+  _$$DrawPieceGameEventCopyWith<_$DrawPieceGameEvent> get copyWith =>
+      __$$DrawPieceGameEventCopyWithImpl<_$DrawPieceGameEvent>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Player player, Identifier id) addPlayer,
     required TResult Function(Identifier id) startGame,
-    required TResult Function(Piece piece, Player player, Identifier id)
+    required TResult Function(LayPieceGameEvent event, Identifier id)
+        startRound,
+    required TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)
         layPiece,
+    required TResult Function(Piece piece, Player player, Identifier id)
+        drawPiece,
   }) {
-    return layPiece(piece, player, id);
+    return drawPiece(piece, player, id);
   }
 
   @override
@@ -518,9 +978,13 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(Piece piece, Player player, Identifier id)? layPiece,
+    TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
+    TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+        layPiece,
+    TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
   }) {
-    return layPiece?.call(piece, player, id);
+    return drawPiece?.call(piece, player, id);
   }
 
   @override
@@ -528,11 +992,15 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(Piece piece, Player player, Identifier id)? layPiece,
+    TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
+    TResult Function(
+            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+        layPiece,
+    TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
     required TResult orElse(),
   }) {
-    if (layPiece != null) {
-      return layPiece(piece, player, id);
+    if (drawPiece != null) {
+      return drawPiece(piece, player, id);
     }
     return orElse();
   }
@@ -542,9 +1010,11 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(AddPlayerEvent value) addPlayer,
     required TResult Function(StartGameEvent value) startGame,
+    required TResult Function(StartRoundGameEvent value) startRound,
     required TResult Function(LayPieceGameEvent value) layPiece,
+    required TResult Function(DrawPieceGameEvent value) drawPiece,
   }) {
-    return layPiece(this);
+    return drawPiece(this);
   }
 
   @override
@@ -552,9 +1022,11 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AddPlayerEvent value)? addPlayer,
     TResult Function(StartGameEvent value)? startGame,
+    TResult Function(StartRoundGameEvent value)? startRound,
     TResult Function(LayPieceGameEvent value)? layPiece,
+    TResult Function(DrawPieceGameEvent value)? drawPiece,
   }) {
-    return layPiece?.call(this);
+    return drawPiece?.call(this);
   }
 
   @override
@@ -562,21 +1034,23 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddPlayerEvent value)? addPlayer,
     TResult Function(StartGameEvent value)? startGame,
+    TResult Function(StartRoundGameEvent value)? startRound,
     TResult Function(LayPieceGameEvent value)? layPiece,
+    TResult Function(DrawPieceGameEvent value)? drawPiece,
     required TResult orElse(),
   }) {
-    if (layPiece != null) {
-      return layPiece(this);
+    if (drawPiece != null) {
+      return drawPiece(this);
     }
     return orElse();
   }
 }
 
-abstract class LayPieceGameEvent extends GameEvent {
-  const factory LayPieceGameEvent(final Piece piece,
+abstract class DrawPieceGameEvent extends GameEvent {
+  const factory DrawPieceGameEvent(final Piece piece,
       {required final Player player,
-      required final Identifier id}) = _$LayPieceGameEvent;
-  const LayPieceGameEvent._() : super._();
+      required final Identifier id}) = _$DrawPieceGameEvent;
+  const DrawPieceGameEvent._() : super._();
 
   Piece get piece => throw _privateConstructorUsedError;
   Player get player => throw _privateConstructorUsedError;
@@ -584,6 +1058,6 @@ abstract class LayPieceGameEvent extends GameEvent {
   Identifier get id => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$LayPieceGameEventCopyWith<_$LayPieceGameEvent> get copyWith =>
+  _$$DrawPieceGameEventCopyWith<_$DrawPieceGameEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }

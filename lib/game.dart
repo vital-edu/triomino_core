@@ -63,8 +63,11 @@ class Game {
     final playersStatuses = {
       for (final event in addplayerEvents)
         // TODO: determine piecesInPlayersHand
-        event.player.hashCode:
-            PlayerStatus(player: event.player, piecesInPlayersHand: 33)
+        event.player.hashCode: PlayerStatus(
+          player: event.player,
+          score: 0,
+          piecesInPlayersHand: 33,
+        )
     };
 
     return layPieceEvents
@@ -76,6 +79,11 @@ class Game {
             ...previousValue,
             element.player.hashCode: status.copyWith(
               playedPieces: [...status.playedPieces, element.piece],
+              piecesInPlayersHand: status.piecesInPlayersHand - 1,
+              score: element.points.fold(
+                status.score,
+                (points, newEvent) => points + newEvent.points,
+              ),
             )
           };
         })
@@ -92,6 +100,9 @@ class Game {
       startGame: (newEvent) {
         ruleBook.startGameRule.validate(newEvents);
         ruleBook.quantityOfPlayersGameRule.validate(newEvents);
+      },
+      startRound: (StartRoundGameEvent value) {
+        // TODO: implement it
       },
       layPiece: (gameEvent) {
         ruleBook.pieceGameRule.validate(newEvents);
@@ -119,6 +130,9 @@ class Game {
             }
           },
         );
+      },
+      drawPiece: (DrawPieceGameEvent value) {
+        // TODO: implement it
       },
     );
 

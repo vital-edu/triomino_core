@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:triomino_core/game.dart';
 import 'package:triomino_core/game_event.dart';
+import 'package:triomino_core/game_point.dart';
 import 'package:triomino_core/game_utils.dart';
 import 'package:triomino_core/models/identifier.dart';
 import 'package:triomino_core/models/piece.dart';
@@ -63,7 +64,13 @@ void playMenu(Game game, GameUtils utils) {
 
   try {
     game.add(
-        GameEvent.layPiece(piece, player: playerOnTurn, id: Identifier.uniq()));
+      GameEvent.layPiece(
+        piece,
+        points: [GamePoint.layPiece(piece, identifier: Identifier.uniq())],
+        player: playerOnTurn,
+        id: Identifier.uniq(),
+      ),
+    );
   } on GameRuleError catch (error) {
     print(error.message);
     return playMenu(game, utils);
@@ -224,8 +231,16 @@ void printScore(Game game) {
   for (final status in game.playerStatuses) {
     // todo: implement score
     print(
-        '${status.player.name}. Played pieces: ${status.playedPieces.length}. Ponts: 0');
+        '${status.player.name}. Played pieces: ${status.playedPieces.length}. Points: ${status.score}');
   }
+}
+
+void printAvailablePieces(Game game) {
+  // TODO: implement it
+  printHeader('Available pieces');
+  // for (final piece in game.availablePieces) {
+  //   print(piece);
+  // }
 }
 
 Piece? playPiece() {

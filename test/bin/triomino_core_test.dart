@@ -7,7 +7,7 @@ void main() {
   const addPlayerMenuOption = 3;
 
   group('CLI', () {
-    test('remove players', () async {
+    test('remove players', skip: true, () async {
       final process = await TestProcess.start(
         'dart',
         ['bin/triomino_core.dart'],

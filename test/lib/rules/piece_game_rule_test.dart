@@ -15,11 +15,13 @@ void main() {
       final events = <GameEvent>[
         LayPieceGameEvent(
           Piece.triple(1),
+          points: [],
           player: Player(name: '1'),
           id: Identifier.uniq(),
         ),
         LayPieceGameEvent(
           Piece.triple(1),
+          points: [],
           player: Player(name: '2'),
           id: Identifier.uniq(),
         ),
@@ -33,11 +35,13 @@ void main() {
       final events = <GameEvent>[
         LayPieceGameEvent(
           Piece.triple(1),
+          points: [],
           player: Player(name: '1'),
           id: Identifier.uniq(),
         ),
         LayPieceGameEvent(
           Piece.triple(2),
+          points: [],
           player: Player(name: '1'),
           id: Identifier.uniq(),
         ),
@@ -51,6 +55,7 @@ void main() {
 
       final repeatedEvent = LayPieceGameEvent(
         Piece.triple(1),
+        points: [],
         player: Player(name: 'Player'),
         id: Identifier.uniq(),
       );

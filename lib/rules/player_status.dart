@@ -9,6 +9,7 @@ class PlayerStatus with _$PlayerStatus {
   const factory PlayerStatus({
     required Player player,
     required int piecesInPlayersHand,
+    required int score,
     @Default([]) List<Piece> playedPieces,
   }) = _PlayerStatus;
 }

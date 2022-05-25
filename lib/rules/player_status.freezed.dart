@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PlayerStatus {
   Player get player => throw _privateConstructorUsedError;
   int get piecesInPlayersHand => throw _privateConstructorUsedError;
+  int get score => throw _privateConstructorUsedError;
   List<Piece> get playedPieces => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,11 @@ abstract class $PlayerStatusCopyWith<$Res> {
   factory $PlayerStatusCopyWith(
           PlayerStatus value, $Res Function(PlayerStatus) then) =
       _$PlayerStatusCopyWithImpl<$Res>;
-  $Res call({Player player, int piecesInPlayersHand, List<Piece> playedPieces});
+  $Res call(
+      {Player player,
+      int piecesInPlayersHand,
+      int score,
+      List<Piece> playedPieces});
 
   $PlayerCopyWith<$Res> get player;
 }
@@ -47,6 +52,7 @@ class _$PlayerStatusCopyWithImpl<$Res> implements $PlayerStatusCopyWith<$Res> {
   $Res call({
     Object? player = freezed,
     Object? piecesInPlayersHand = freezed,
+    Object? score = freezed,
     Object? playedPieces = freezed,
   }) {
     return _then(_value.copyWith(
@@ -57,6 +63,10 @@ class _$PlayerStatusCopyWithImpl<$Res> implements $PlayerStatusCopyWith<$Res> {
       piecesInPlayersHand: piecesInPlayersHand == freezed
           ? _value.piecesInPlayersHand
           : piecesInPlayersHand // ignore: cast_nullable_to_non_nullable
+              as int,
+      score: score == freezed
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
               as int,
       playedPieces: playedPieces == freezed
           ? _value.playedPieces
@@ -80,7 +90,11 @@ abstract class _$$_PlayerStatusCopyWith<$Res>
           _$_PlayerStatus value, $Res Function(_$_PlayerStatus) then) =
       __$$_PlayerStatusCopyWithImpl<$Res>;
   @override
-  $Res call({Player player, int piecesInPlayersHand, List<Piece> playedPieces});
+  $Res call(
+      {Player player,
+      int piecesInPlayersHand,
+      int score,
+      List<Piece> playedPieces});
 
   @override
   $PlayerCopyWith<$Res> get player;
@@ -101,6 +115,7 @@ class __$$_PlayerStatusCopyWithImpl<$Res>
   $Res call({
     Object? player = freezed,
     Object? piecesInPlayersHand = freezed,
+    Object? score = freezed,
     Object? playedPieces = freezed,
   }) {
     return _then(_$_PlayerStatus(
@@ -111,6 +126,10 @@ class __$$_PlayerStatusCopyWithImpl<$Res>
       piecesInPlayersHand: piecesInPlayersHand == freezed
           ? _value.piecesInPlayersHand
           : piecesInPlayersHand // ignore: cast_nullable_to_non_nullable
+              as int,
+      score: score == freezed
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
               as int,
       playedPieces: playedPieces == freezed
           ? _value._playedPieces
@@ -126,6 +145,7 @@ class _$_PlayerStatus implements _PlayerStatus {
   const _$_PlayerStatus(
       {required this.player,
       required this.piecesInPlayersHand,
+      required this.score,
       final List<Piece> playedPieces = const []})
       : _playedPieces = playedPieces;
 
@@ -133,6 +153,8 @@ class _$_PlayerStatus implements _PlayerStatus {
   final Player player;
   @override
   final int piecesInPlayersHand;
+  @override
+  final int score;
   final List<Piece> _playedPieces;
   @override
   @JsonKey()
@@ -143,7 +165,7 @@ class _$_PlayerStatus implements _PlayerStatus {
 
   @override
   String toString() {
-    return 'PlayerStatus(player: $player, piecesInPlayersHand: $piecesInPlayersHand, playedPieces: $playedPieces)';
+    return 'PlayerStatus(player: $player, piecesInPlayersHand: $piecesInPlayersHand, score: $score, playedPieces: $playedPieces)';
   }
 
   @override
@@ -154,6 +176,7 @@ class _$_PlayerStatus implements _PlayerStatus {
             const DeepCollectionEquality().equals(other.player, player) &&
             const DeepCollectionEquality()
                 .equals(other.piecesInPlayersHand, piecesInPlayersHand) &&
+            const DeepCollectionEquality().equals(other.score, score) &&
             const DeepCollectionEquality()
                 .equals(other._playedPieces, _playedPieces));
   }
@@ -163,6 +186,7 @@ class _$_PlayerStatus implements _PlayerStatus {
       runtimeType,
       const DeepCollectionEquality().hash(player),
       const DeepCollectionEquality().hash(piecesInPlayersHand),
+      const DeepCollectionEquality().hash(score),
       const DeepCollectionEquality().hash(_playedPieces));
 
   @JsonKey(ignore: true)
@@ -175,12 +199,15 @@ abstract class _PlayerStatus implements PlayerStatus {
   const factory _PlayerStatus(
       {required final Player player,
       required final int piecesInPlayersHand,
+      required final int score,
       final List<Piece> playedPieces}) = _$_PlayerStatus;
 
   @override
   Player get player => throw _privateConstructorUsedError;
   @override
   int get piecesInPlayersHand => throw _privateConstructorUsedError;
+  @override
+  int get score => throw _privateConstructorUsedError;
   @override
   List<Piece> get playedPieces => throw _privateConstructorUsedError;
   @override
