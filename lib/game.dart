@@ -4,6 +4,7 @@ import 'package:triomino_core/models/identifier.dart';
 import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
 import 'package:triomino_core/rule_book.dart';
+import 'package:triomino_core/rules/bonus_game_rule.dart';
 import 'package:triomino_core/rules/errors/game_rule_error.dart';
 import 'package:triomino_core/rules/errors/game_state_error.dart';
 import 'package:triomino_core/rules/errors/invalid_event_error.dart';
@@ -49,6 +50,10 @@ class Game {
           playerValidationGameRule: PlayerValidationGameRule(),
           pieceGameRule: PieceGameRule(),
           startGameRule: StartGameRule(),
+          bonusGameRule: BonusGameRule(
+            bridgeBonus: 50,
+            hexagonBonus: 40,
+          ),
         );
 
   List<Player> get players => events.players.toList();

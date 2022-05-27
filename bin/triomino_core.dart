@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:triomino_core/game.dart';
 import 'package:triomino_core/game_event.dart';
-import 'package:triomino_core/game_point.dart';
 import 'package:triomino_core/game_utils.dart';
+import 'package:triomino_core/lay_piece_event_builder.dart';
 import 'package:triomino_core/models/identifier.dart';
 import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
@@ -62,15 +62,14 @@ void playMenu(Game game, GameUtils utils) {
   final piece = playPiece();
   if (piece == null) return;
 
+  final layPieceEvent = addBonus(LayPieceEventBuilder(
+    player: playerOnTurn,
+    piece: piece,
+    rule: game.ruleBook.bonusGameRule,
+  )).build();
+
   try {
-    game.add(
-      GameEvent.layPiece(
-        piece,
-        points: [GamePoint.layPiece(piece, identifier: Identifier.uniq())],
-        player: playerOnTurn,
-        id: Identifier.uniq(),
-      ),
-    );
+    game.add(layPieceEvent);
   } on GameRuleError catch (error) {
     print(error.message);
     return playMenu(game, utils);
@@ -278,4 +277,31 @@ Piece? playPiece() {
     print(error);
   }
   return null;
+}
+
+LayPieceEventBuilder addBonus(LayPieceEventBuilder builder) {
+  print("Would you like to add a bonus?");
+  print("1 - hexagon");
+  print("2 - bridge");
+  print("0 - no bonus");
+
+  try {
+    final int selection = int.parse(stdin.readLineSync() ?? '');
+    switch (selection) {
+      case 0:
+        return builder;
+      case 1:
+        return addBonus(builder.addBonus(LayPieceBonusType.hexagon));
+      case 2:
+        return addBonus(builder.addBonus(LayPieceBonusType.bridge));
+      default:
+        throw ArgumentError();
+    }
+  } on FormatException catch (error) {
+    print('Invalid option: ${error.message}');
+    return addBonus(builder);
+  } on ArgumentError catch (error) {
+    print('Invalid option: ${error.message}');
+    return addBonus(builder);
+  }
 }

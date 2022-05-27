@@ -90,7 +90,7 @@ void main() {
         final piece = Piece.triple(5);
         final lay1stPieceEvent = GameEvent.layPiece(
           piece,
-          points: [GamePoint.layPiece(piece, identifier: Identifier.uniq())],
+          points: [],
           player: firstPlayer,
           id: Identifier.uniq(),
         );
@@ -114,7 +114,7 @@ void main() {
         final piece1 = Piece.triple(5);
         final lay1stPieceEvent = GameEvent.layPiece(
           piece1,
-          points: [GamePoint.layPiece(piece1, identifier: Identifier.uniq())],
+          points: [],
           player: firstPlayer,
           id: Identifier.uniq(),
         );
@@ -122,7 +122,7 @@ void main() {
         final piece2 = Piece.triple(4);
         final lay2ndPieceEvent = GameEvent.layPiece(
           piece2,
-          points: [GamePoint.layPiece(piece2, identifier: Identifier.uniq())],
+          points: [],
           player: firstPlayer,
           id: Identifier.uniq(),
         );
@@ -151,7 +151,7 @@ void main() {
         final piece1 = Piece.triple(5);
         final lay1stPieceEvent = GameEvent.layPiece(
           piece1,
-          points: [GamePoint.layPiece(piece1, identifier: Identifier.uniq())],
+          points: [],
           player: firstPlayer,
           id: Identifier.uniq(),
         );
@@ -159,7 +159,7 @@ void main() {
         final piece2 = Piece.triple(4);
         final lay2ndPieceEvent = GameEvent.layPiece(
           piece2,
-          points: [GamePoint.layPiece(piece2, identifier: Identifier.uniq())],
+          points: [],
           player: firstPlayer,
           id: Identifier.uniq(),
         );
@@ -189,7 +189,7 @@ void main() {
         final piece1 = Piece.triple(5);
         final lay1stPieceEvent = GameEvent.layPiece(
           Piece.triple(5),
-          points: [GamePoint.layPiece(piece1, identifier: Identifier.uniq())],
+          points: [],
           player: allPlayers[0],
           id: Identifier.uniq(),
         );
@@ -197,7 +197,7 @@ void main() {
         final piece2 = Piece.triple(4);
         final lay2ndPieceEvent = GameEvent.layPiece(
           piece2,
-          points: [GamePoint.layPiece(piece2, identifier: Identifier.uniq())],
+          points: [],
           player: allPlayers[1],
           id: Identifier.uniq(),
         );
@@ -205,7 +205,7 @@ void main() {
         final piece3 = Piece.triple(3);
         final lay3rdPieceEvent = GameEvent.layPiece(
           piece3,
-          points: [GamePoint.layPiece(piece3, identifier: Identifier.uniq())],
+          points: [],
           player: allPlayers[2],
           id: Identifier.uniq(),
         );
@@ -213,7 +213,7 @@ void main() {
         final piece4 = Piece.triple(2);
         final lay4thPieceEvent = GameEvent.layPiece(
           piece4,
-          points: [GamePoint.layPiece(piece4, identifier: Identifier.uniq())],
+          points: [],
           player: allPlayers[3],
           id: Identifier.uniq(),
         );
@@ -221,7 +221,7 @@ void main() {
         final piece5 = Piece.triple(1);
         final lay5thPieceEvent = GameEvent.layPiece(
           piece5,
-          points: [GamePoint.layPiece(piece5, identifier: Identifier.uniq())],
+          points: [],
           player: allPlayers[0],
           id: Identifier.uniq(),
         );

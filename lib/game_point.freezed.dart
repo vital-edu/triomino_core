@@ -18,6 +18,50 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$GamePoint {
   int get points => throw _privateConstructorUsedError;
   Identifier get identifier => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int points, Identifier identifier) layPiece,
+    required TResult Function(int points, Identifier identifier) createBridge,
+    required TResult Function(int points, Identifier identifier) createHexagon,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(int points, Identifier identifier)? layPiece,
+    TResult Function(int points, Identifier identifier)? createBridge,
+    TResult Function(int points, Identifier identifier)? createHexagon,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int points, Identifier identifier)? layPiece,
+    TResult Function(int points, Identifier identifier)? createBridge,
+    TResult Function(int points, Identifier identifier)? createHexagon,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LayPieceGamePoint value) layPiece,
+    required TResult Function(CreateBridgeGamePoint value) createBridge,
+    required TResult Function(CreateHexagonGamePoint value) createHexagon,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(LayPieceGamePoint value)? layPiece,
+    TResult Function(CreateBridgeGamePoint value)? createBridge,
+    TResult Function(CreateHexagonGamePoint value)? createHexagon,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LayPieceGamePoint value)? layPiece,
+    TResult Function(CreateBridgeGamePoint value)? createBridge,
+    TResult Function(CreateHexagonGamePoint value)? createHexagon,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GamePointCopyWith<GamePoint> get copyWith =>
@@ -58,30 +102,32 @@ class _$GamePointCopyWithImpl<$Res> implements $GamePointCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_GamePointCopyWith<$Res> implements $GamePointCopyWith<$Res> {
-  factory _$$_GamePointCopyWith(
-          _$_GamePoint value, $Res Function(_$_GamePoint) then) =
-      __$$_GamePointCopyWithImpl<$Res>;
+abstract class _$$LayPieceGamePointCopyWith<$Res>
+    implements $GamePointCopyWith<$Res> {
+  factory _$$LayPieceGamePointCopyWith(
+          _$LayPieceGamePoint value, $Res Function(_$LayPieceGamePoint) then) =
+      __$$LayPieceGamePointCopyWithImpl<$Res>;
   @override
   $Res call({int points, Identifier identifier});
 }
 
 /// @nodoc
-class __$$_GamePointCopyWithImpl<$Res> extends _$GamePointCopyWithImpl<$Res>
-    implements _$$_GamePointCopyWith<$Res> {
-  __$$_GamePointCopyWithImpl(
-      _$_GamePoint _value, $Res Function(_$_GamePoint) _then)
-      : super(_value, (v) => _then(v as _$_GamePoint));
+class __$$LayPieceGamePointCopyWithImpl<$Res>
+    extends _$GamePointCopyWithImpl<$Res>
+    implements _$$LayPieceGamePointCopyWith<$Res> {
+  __$$LayPieceGamePointCopyWithImpl(
+      _$LayPieceGamePoint _value, $Res Function(_$LayPieceGamePoint) _then)
+      : super(_value, (v) => _then(v as _$LayPieceGamePoint));
 
   @override
-  _$_GamePoint get _value => super._value as _$_GamePoint;
+  _$LayPieceGamePoint get _value => super._value as _$LayPieceGamePoint;
 
   @override
   $Res call({
     Object? points = freezed,
     Object? identifier = freezed,
   }) {
-    return _then(_$_GamePoint(
+    return _then(_$LayPieceGamePoint(
       points: points == freezed
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
@@ -96,8 +142,8 @@ class __$$_GamePointCopyWithImpl<$Res> extends _$GamePointCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GamePoint extends _GamePoint {
-  const _$_GamePoint({required this.points, required this.identifier})
+class _$LayPieceGamePoint extends LayPieceGamePoint {
+  _$LayPieceGamePoint({required this.points, required this.identifier})
       : super._();
 
   @override
@@ -107,14 +153,14 @@ class _$_GamePoint extends _GamePoint {
 
   @override
   String toString() {
-    return 'GamePoint(points: $points, identifier: $identifier)';
+    return 'GamePoint.layPiece(points: $points, identifier: $identifier)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GamePoint &&
+            other is _$LayPieceGamePoint &&
             const DeepCollectionEquality().equals(other.points, points) &&
             const DeepCollectionEquality()
                 .equals(other.identifier, identifier));
@@ -128,15 +174,83 @@ class _$_GamePoint extends _GamePoint {
 
   @JsonKey(ignore: true)
   @override
-  _$$_GamePointCopyWith<_$_GamePoint> get copyWith =>
-      __$$_GamePointCopyWithImpl<_$_GamePoint>(this, _$identity);
+  _$$LayPieceGamePointCopyWith<_$LayPieceGamePoint> get copyWith =>
+      __$$LayPieceGamePointCopyWithImpl<_$LayPieceGamePoint>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int points, Identifier identifier) layPiece,
+    required TResult Function(int points, Identifier identifier) createBridge,
+    required TResult Function(int points, Identifier identifier) createHexagon,
+  }) {
+    return layPiece(points, identifier);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(int points, Identifier identifier)? layPiece,
+    TResult Function(int points, Identifier identifier)? createBridge,
+    TResult Function(int points, Identifier identifier)? createHexagon,
+  }) {
+    return layPiece?.call(points, identifier);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int points, Identifier identifier)? layPiece,
+    TResult Function(int points, Identifier identifier)? createBridge,
+    TResult Function(int points, Identifier identifier)? createHexagon,
+    required TResult orElse(),
+  }) {
+    if (layPiece != null) {
+      return layPiece(points, identifier);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LayPieceGamePoint value) layPiece,
+    required TResult Function(CreateBridgeGamePoint value) createBridge,
+    required TResult Function(CreateHexagonGamePoint value) createHexagon,
+  }) {
+    return layPiece(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(LayPieceGamePoint value)? layPiece,
+    TResult Function(CreateBridgeGamePoint value)? createBridge,
+    TResult Function(CreateHexagonGamePoint value)? createHexagon,
+  }) {
+    return layPiece?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LayPieceGamePoint value)? layPiece,
+    TResult Function(CreateBridgeGamePoint value)? createBridge,
+    TResult Function(CreateHexagonGamePoint value)? createHexagon,
+    required TResult orElse(),
+  }) {
+    if (layPiece != null) {
+      return layPiece(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _GamePoint extends GamePoint {
-  const factory _GamePoint(
+abstract class LayPieceGamePoint extends GamePoint {
+  factory LayPieceGamePoint(
       {required final int points,
-      required final Identifier identifier}) = _$_GamePoint;
-  const _GamePoint._() : super._();
+      required final Identifier identifier}) = _$LayPieceGamePoint;
+  LayPieceGamePoint._() : super._();
 
   @override
   int get points => throw _privateConstructorUsedError;
@@ -144,6 +258,332 @@ abstract class _GamePoint extends GamePoint {
   Identifier get identifier => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_GamePointCopyWith<_$_GamePoint> get copyWith =>
+  _$$LayPieceGamePointCopyWith<_$LayPieceGamePoint> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CreateBridgeGamePointCopyWith<$Res>
+    implements $GamePointCopyWith<$Res> {
+  factory _$$CreateBridgeGamePointCopyWith(_$CreateBridgeGamePoint value,
+          $Res Function(_$CreateBridgeGamePoint) then) =
+      __$$CreateBridgeGamePointCopyWithImpl<$Res>;
+  @override
+  $Res call({int points, Identifier identifier});
+}
+
+/// @nodoc
+class __$$CreateBridgeGamePointCopyWithImpl<$Res>
+    extends _$GamePointCopyWithImpl<$Res>
+    implements _$$CreateBridgeGamePointCopyWith<$Res> {
+  __$$CreateBridgeGamePointCopyWithImpl(_$CreateBridgeGamePoint _value,
+      $Res Function(_$CreateBridgeGamePoint) _then)
+      : super(_value, (v) => _then(v as _$CreateBridgeGamePoint));
+
+  @override
+  _$CreateBridgeGamePoint get _value => super._value as _$CreateBridgeGamePoint;
+
+  @override
+  $Res call({
+    Object? points = freezed,
+    Object? identifier = freezed,
+  }) {
+    return _then(_$CreateBridgeGamePoint(
+      points: points == freezed
+          ? _value.points
+          : points // ignore: cast_nullable_to_non_nullable
+              as int,
+      identifier: identifier == freezed
+          ? _value.identifier
+          : identifier // ignore: cast_nullable_to_non_nullable
+              as Identifier,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CreateBridgeGamePoint extends CreateBridgeGamePoint {
+  _$CreateBridgeGamePoint({required this.points, required this.identifier})
+      : super._();
+
+  @override
+  final int points;
+  @override
+  final Identifier identifier;
+
+  @override
+  String toString() {
+    return 'GamePoint.createBridge(points: $points, identifier: $identifier)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateBridgeGamePoint &&
+            const DeepCollectionEquality().equals(other.points, points) &&
+            const DeepCollectionEquality()
+                .equals(other.identifier, identifier));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(points),
+      const DeepCollectionEquality().hash(identifier));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$CreateBridgeGamePointCopyWith<_$CreateBridgeGamePoint> get copyWith =>
+      __$$CreateBridgeGamePointCopyWithImpl<_$CreateBridgeGamePoint>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int points, Identifier identifier) layPiece,
+    required TResult Function(int points, Identifier identifier) createBridge,
+    required TResult Function(int points, Identifier identifier) createHexagon,
+  }) {
+    return createBridge(points, identifier);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(int points, Identifier identifier)? layPiece,
+    TResult Function(int points, Identifier identifier)? createBridge,
+    TResult Function(int points, Identifier identifier)? createHexagon,
+  }) {
+    return createBridge?.call(points, identifier);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int points, Identifier identifier)? layPiece,
+    TResult Function(int points, Identifier identifier)? createBridge,
+    TResult Function(int points, Identifier identifier)? createHexagon,
+    required TResult orElse(),
+  }) {
+    if (createBridge != null) {
+      return createBridge(points, identifier);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LayPieceGamePoint value) layPiece,
+    required TResult Function(CreateBridgeGamePoint value) createBridge,
+    required TResult Function(CreateHexagonGamePoint value) createHexagon,
+  }) {
+    return createBridge(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(LayPieceGamePoint value)? layPiece,
+    TResult Function(CreateBridgeGamePoint value)? createBridge,
+    TResult Function(CreateHexagonGamePoint value)? createHexagon,
+  }) {
+    return createBridge?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LayPieceGamePoint value)? layPiece,
+    TResult Function(CreateBridgeGamePoint value)? createBridge,
+    TResult Function(CreateHexagonGamePoint value)? createHexagon,
+    required TResult orElse(),
+  }) {
+    if (createBridge != null) {
+      return createBridge(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CreateBridgeGamePoint extends GamePoint {
+  factory CreateBridgeGamePoint(
+      {required final int points,
+      required final Identifier identifier}) = _$CreateBridgeGamePoint;
+  CreateBridgeGamePoint._() : super._();
+
+  @override
+  int get points => throw _privateConstructorUsedError;
+  @override
+  Identifier get identifier => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$CreateBridgeGamePointCopyWith<_$CreateBridgeGamePoint> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CreateHexagonGamePointCopyWith<$Res>
+    implements $GamePointCopyWith<$Res> {
+  factory _$$CreateHexagonGamePointCopyWith(_$CreateHexagonGamePoint value,
+          $Res Function(_$CreateHexagonGamePoint) then) =
+      __$$CreateHexagonGamePointCopyWithImpl<$Res>;
+  @override
+  $Res call({int points, Identifier identifier});
+}
+
+/// @nodoc
+class __$$CreateHexagonGamePointCopyWithImpl<$Res>
+    extends _$GamePointCopyWithImpl<$Res>
+    implements _$$CreateHexagonGamePointCopyWith<$Res> {
+  __$$CreateHexagonGamePointCopyWithImpl(_$CreateHexagonGamePoint _value,
+      $Res Function(_$CreateHexagonGamePoint) _then)
+      : super(_value, (v) => _then(v as _$CreateHexagonGamePoint));
+
+  @override
+  _$CreateHexagonGamePoint get _value =>
+      super._value as _$CreateHexagonGamePoint;
+
+  @override
+  $Res call({
+    Object? points = freezed,
+    Object? identifier = freezed,
+  }) {
+    return _then(_$CreateHexagonGamePoint(
+      points: points == freezed
+          ? _value.points
+          : points // ignore: cast_nullable_to_non_nullable
+              as int,
+      identifier: identifier == freezed
+          ? _value.identifier
+          : identifier // ignore: cast_nullable_to_non_nullable
+              as Identifier,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CreateHexagonGamePoint extends CreateHexagonGamePoint {
+  const _$CreateHexagonGamePoint(
+      {required this.points, required this.identifier})
+      : super._();
+
+  @override
+  final int points;
+  @override
+  final Identifier identifier;
+
+  @override
+  String toString() {
+    return 'GamePoint.createHexagon(points: $points, identifier: $identifier)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateHexagonGamePoint &&
+            const DeepCollectionEquality().equals(other.points, points) &&
+            const DeepCollectionEquality()
+                .equals(other.identifier, identifier));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(points),
+      const DeepCollectionEquality().hash(identifier));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$CreateHexagonGamePointCopyWith<_$CreateHexagonGamePoint> get copyWith =>
+      __$$CreateHexagonGamePointCopyWithImpl<_$CreateHexagonGamePoint>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int points, Identifier identifier) layPiece,
+    required TResult Function(int points, Identifier identifier) createBridge,
+    required TResult Function(int points, Identifier identifier) createHexagon,
+  }) {
+    return createHexagon(points, identifier);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(int points, Identifier identifier)? layPiece,
+    TResult Function(int points, Identifier identifier)? createBridge,
+    TResult Function(int points, Identifier identifier)? createHexagon,
+  }) {
+    return createHexagon?.call(points, identifier);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int points, Identifier identifier)? layPiece,
+    TResult Function(int points, Identifier identifier)? createBridge,
+    TResult Function(int points, Identifier identifier)? createHexagon,
+    required TResult orElse(),
+  }) {
+    if (createHexagon != null) {
+      return createHexagon(points, identifier);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LayPieceGamePoint value) layPiece,
+    required TResult Function(CreateBridgeGamePoint value) createBridge,
+    required TResult Function(CreateHexagonGamePoint value) createHexagon,
+  }) {
+    return createHexagon(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(LayPieceGamePoint value)? layPiece,
+    TResult Function(CreateBridgeGamePoint value)? createBridge,
+    TResult Function(CreateHexagonGamePoint value)? createHexagon,
+  }) {
+    return createHexagon?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LayPieceGamePoint value)? layPiece,
+    TResult Function(CreateBridgeGamePoint value)? createBridge,
+    TResult Function(CreateHexagonGamePoint value)? createHexagon,
+    required TResult orElse(),
+  }) {
+    if (createHexagon != null) {
+      return createHexagon(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CreateHexagonGamePoint extends GamePoint {
+  const factory CreateHexagonGamePoint(
+      {required final int points,
+      required final Identifier identifier}) = _$CreateHexagonGamePoint;
+  const CreateHexagonGamePoint._() : super._();
+
+  @override
+  int get points => throw _privateConstructorUsedError;
+  @override
+  Identifier get identifier => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$CreateHexagonGamePointCopyWith<_$CreateHexagonGamePoint> get copyWith =>
       throw _privateConstructorUsedError;
 }

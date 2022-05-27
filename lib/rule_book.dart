@@ -1,6 +1,7 @@
 import 'package:triomino_core/extensions/list_extension.dart';
 import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/game_player_turn.dart';
+import 'package:triomino_core/rules/bonus_game_rule.dart';
 import 'package:triomino_core/rules/piece_distribution_game_rule.dart';
 import 'package:triomino_core/rules/piece_game_rule.dart';
 import 'package:triomino_core/rules/player_validation_game_rule.dart';
@@ -13,6 +14,7 @@ class RuleBook {
   final PlayerValidationGameRule playerValidationGameRule;
   final PieceGameRule pieceGameRule;
   final StartGameRule startGameRule;
+  final BonusGameRule bonusGameRule;
 
   RuleBook({
     required this.quantityOfPlayersGameRule,
@@ -20,6 +22,7 @@ class RuleBook {
     required this.playerValidationGameRule,
     required this.pieceGameRule,
     required this.startGameRule,
+    required this.bonusGameRule,
   });
 
   GamePlayerTurn playerTurn({required List<GameEvent> events}) {
