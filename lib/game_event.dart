@@ -26,7 +26,7 @@ class GameEvent with _$GameEvent {
 
   const factory GameEvent.layPiece(
     Piece piece, {
-    required List<GamePoint> points,
+    required List<GamePoint> gamePoints,
     required Player player,
     required Identifier id,
   }) = LayPieceGameEvent;
@@ -36,4 +36,9 @@ class GameEvent with _$GameEvent {
     required Player player,
     required Identifier id,
   }) = DrawPieceGameEvent;
+}
+
+extension LayPieceGameEventPoints on LayPieceGameEvent {
+  int get points => gamePoints.fold(
+      0, (previousValue, gamePoint) => previousValue + gamePoint.points);
 }

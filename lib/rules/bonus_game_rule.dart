@@ -20,7 +20,7 @@ class BonusGameRule with _$BonusGameRule implements GameRule {
     final pieceEvents = events.whereType<LayPieceGameEvent>();
 
     for (final event in pieceEvents) {
-      for (final bonusEvent in event.points) {
+      for (final bonusEvent in event.gamePoints) {
         bonusEvent.map(
           layPiece: (bonus) {
             if (bonus.points !=

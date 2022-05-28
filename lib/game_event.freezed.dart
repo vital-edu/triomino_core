@@ -23,8 +23,8 @@ mixin _$GameEvent {
     required TResult Function(Identifier id) startGame,
     required TResult Function(LayPieceGameEvent event, Identifier id)
         startRound,
-    required TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)
+    required TResult Function(Piece piece, List<GamePoint> gamePoints,
+            Player player, Identifier id)
         layPiece,
     required TResult Function(Piece piece, Player player, Identifier id)
         drawPiece,
@@ -35,8 +35,8 @@ mixin _$GameEvent {
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
     TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
-    TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+    TResult Function(Piece piece, List<GamePoint> gamePoints, Player player,
+            Identifier id)?
         layPiece,
     TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
   }) =>
@@ -46,8 +46,8 @@ mixin _$GameEvent {
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
     TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
-    TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+    TResult Function(Piece piece, List<GamePoint> gamePoints, Player player,
+            Identifier id)?
         layPiece,
     TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
     required TResult orElse(),
@@ -204,8 +204,8 @@ class _$AddPlayerEvent extends AddPlayerEvent {
     required TResult Function(Identifier id) startGame,
     required TResult Function(LayPieceGameEvent event, Identifier id)
         startRound,
-    required TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)
+    required TResult Function(Piece piece, List<GamePoint> gamePoints,
+            Player player, Identifier id)
         layPiece,
     required TResult Function(Piece piece, Player player, Identifier id)
         drawPiece,
@@ -219,8 +219,8 @@ class _$AddPlayerEvent extends AddPlayerEvent {
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
     TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
-    TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+    TResult Function(Piece piece, List<GamePoint> gamePoints, Player player,
+            Identifier id)?
         layPiece,
     TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
   }) {
@@ -233,8 +233,8 @@ class _$AddPlayerEvent extends AddPlayerEvent {
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
     TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
-    TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+    TResult Function(Piece piece, List<GamePoint> gamePoints, Player player,
+            Identifier id)?
         layPiece,
     TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
     required TResult orElse(),
@@ -370,8 +370,8 @@ class _$StartGameEvent extends StartGameEvent {
     required TResult Function(Identifier id) startGame,
     required TResult Function(LayPieceGameEvent event, Identifier id)
         startRound,
-    required TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)
+    required TResult Function(Piece piece, List<GamePoint> gamePoints,
+            Player player, Identifier id)
         layPiece,
     required TResult Function(Piece piece, Player player, Identifier id)
         drawPiece,
@@ -385,8 +385,8 @@ class _$StartGameEvent extends StartGameEvent {
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
     TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
-    TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+    TResult Function(Piece piece, List<GamePoint> gamePoints, Player player,
+            Identifier id)?
         layPiece,
     TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
   }) {
@@ -399,8 +399,8 @@ class _$StartGameEvent extends StartGameEvent {
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
     TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
-    TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+    TResult Function(Piece piece, List<GamePoint> gamePoints, Player player,
+            Identifier id)?
         layPiece,
     TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
     required TResult orElse(),
@@ -547,8 +547,8 @@ class _$StartRoundGameEvent extends StartRoundGameEvent {
     required TResult Function(Identifier id) startGame,
     required TResult Function(LayPieceGameEvent event, Identifier id)
         startRound,
-    required TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)
+    required TResult Function(Piece piece, List<GamePoint> gamePoints,
+            Player player, Identifier id)
         layPiece,
     required TResult Function(Piece piece, Player player, Identifier id)
         drawPiece,
@@ -562,8 +562,8 @@ class _$StartRoundGameEvent extends StartRoundGameEvent {
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
     TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
-    TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+    TResult Function(Piece piece, List<GamePoint> gamePoints, Player player,
+            Identifier id)?
         layPiece,
     TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
   }) {
@@ -576,8 +576,8 @@ class _$StartRoundGameEvent extends StartRoundGameEvent {
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
     TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
-    TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+    TResult Function(Piece piece, List<GamePoint> gamePoints, Player player,
+            Identifier id)?
         layPiece,
     TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
     required TResult orElse(),
@@ -651,7 +651,7 @@ abstract class _$$LayPieceGameEventCopyWith<$Res>
       __$$LayPieceGameEventCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Piece piece, List<GamePoint> points, Player player, Identifier id});
+      {Piece piece, List<GamePoint> gamePoints, Player player, Identifier id});
 
   $PlayerCopyWith<$Res> get player;
 }
@@ -670,7 +670,7 @@ class __$$LayPieceGameEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? piece = freezed,
-    Object? points = freezed,
+    Object? gamePoints = freezed,
     Object? player = freezed,
     Object? id = freezed,
   }) {
@@ -679,9 +679,9 @@ class __$$LayPieceGameEventCopyWithImpl<$Res>
           ? _value.piece
           : piece // ignore: cast_nullable_to_non_nullable
               as Piece,
-      points: points == freezed
-          ? _value._points
-          : points // ignore: cast_nullable_to_non_nullable
+      gamePoints: gamePoints == freezed
+          ? _value._gamePoints
+          : gamePoints // ignore: cast_nullable_to_non_nullable
               as List<GamePoint>,
       player: player == freezed
           ? _value.player
@@ -706,19 +706,19 @@ class __$$LayPieceGameEventCopyWithImpl<$Res>
 
 class _$LayPieceGameEvent extends LayPieceGameEvent {
   const _$LayPieceGameEvent(this.piece,
-      {required final List<GamePoint> points,
+      {required final List<GamePoint> gamePoints,
       required this.player,
       required this.id})
-      : _points = points,
+      : _gamePoints = gamePoints,
         super._();
 
   @override
   final Piece piece;
-  final List<GamePoint> _points;
+  final List<GamePoint> _gamePoints;
   @override
-  List<GamePoint> get points {
+  List<GamePoint> get gamePoints {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_points);
+    return EqualUnmodifiableListView(_gamePoints);
   }
 
   @override
@@ -728,7 +728,7 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
 
   @override
   String toString() {
-    return 'GameEvent.layPiece(piece: $piece, points: $points, player: $player, id: $id)';
+    return 'GameEvent.layPiece(piece: $piece, gamePoints: $gamePoints, player: $player, id: $id)';
   }
 
   @override
@@ -737,7 +737,8 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
         (other.runtimeType == runtimeType &&
             other is _$LayPieceGameEvent &&
             const DeepCollectionEquality().equals(other.piece, piece) &&
-            const DeepCollectionEquality().equals(other._points, _points) &&
+            const DeepCollectionEquality()
+                .equals(other._gamePoints, _gamePoints) &&
             const DeepCollectionEquality().equals(other.player, player) &&
             const DeepCollectionEquality().equals(other.id, id));
   }
@@ -746,7 +747,7 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(piece),
-      const DeepCollectionEquality().hash(_points),
+      const DeepCollectionEquality().hash(_gamePoints),
       const DeepCollectionEquality().hash(player),
       const DeepCollectionEquality().hash(id));
 
@@ -762,13 +763,13 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
     required TResult Function(Identifier id) startGame,
     required TResult Function(LayPieceGameEvent event, Identifier id)
         startRound,
-    required TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)
+    required TResult Function(Piece piece, List<GamePoint> gamePoints,
+            Player player, Identifier id)
         layPiece,
     required TResult Function(Piece piece, Player player, Identifier id)
         drawPiece,
   }) {
-    return layPiece(piece, points, player, id);
+    return layPiece(piece, gamePoints, player, id);
   }
 
   @override
@@ -777,12 +778,12 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
     TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
-    TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+    TResult Function(Piece piece, List<GamePoint> gamePoints, Player player,
+            Identifier id)?
         layPiece,
     TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
   }) {
-    return layPiece?.call(piece, points, player, id);
+    return layPiece?.call(piece, gamePoints, player, id);
   }
 
   @override
@@ -791,14 +792,14 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
     TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
-    TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+    TResult Function(Piece piece, List<GamePoint> gamePoints, Player player,
+            Identifier id)?
         layPiece,
     TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
     required TResult orElse(),
   }) {
     if (layPiece != null) {
-      return layPiece(piece, points, player, id);
+      return layPiece(piece, gamePoints, player, id);
     }
     return orElse();
   }
@@ -846,13 +847,13 @@ class _$LayPieceGameEvent extends LayPieceGameEvent {
 
 abstract class LayPieceGameEvent extends GameEvent {
   const factory LayPieceGameEvent(final Piece piece,
-      {required final List<GamePoint> points,
+      {required final List<GamePoint> gamePoints,
       required final Player player,
       required final Identifier id}) = _$LayPieceGameEvent;
   const LayPieceGameEvent._() : super._();
 
   Piece get piece => throw _privateConstructorUsedError;
-  List<GamePoint> get points => throw _privateConstructorUsedError;
+  List<GamePoint> get gamePoints => throw _privateConstructorUsedError;
   Player get player => throw _privateConstructorUsedError;
   @override
   Identifier get id => throw _privateConstructorUsedError;
@@ -964,8 +965,8 @@ class _$DrawPieceGameEvent extends DrawPieceGameEvent {
     required TResult Function(Identifier id) startGame,
     required TResult Function(LayPieceGameEvent event, Identifier id)
         startRound,
-    required TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)
+    required TResult Function(Piece piece, List<GamePoint> gamePoints,
+            Player player, Identifier id)
         layPiece,
     required TResult Function(Piece piece, Player player, Identifier id)
         drawPiece,
@@ -979,8 +980,8 @@ class _$DrawPieceGameEvent extends DrawPieceGameEvent {
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
     TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
-    TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+    TResult Function(Piece piece, List<GamePoint> gamePoints, Player player,
+            Identifier id)?
         layPiece,
     TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
   }) {
@@ -993,8 +994,8 @@ class _$DrawPieceGameEvent extends DrawPieceGameEvent {
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
     TResult Function(LayPieceGameEvent event, Identifier id)? startRound,
-    TResult Function(
-            Piece piece, List<GamePoint> points, Player player, Identifier id)?
+    TResult Function(Piece piece, List<GamePoint> gamePoints, Player player,
+            Identifier id)?
         layPiece,
     TResult Function(Piece piece, Player player, Identifier id)? drawPiece,
     required TResult orElse(),

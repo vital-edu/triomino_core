@@ -85,10 +85,7 @@ class Game {
             element.player.hashCode: status.copyWith(
               playedPieces: [...status.playedPieces, element.piece],
               piecesInPlayersHand: status.piecesInPlayersHand - 1,
-              score: element.points.fold(
-                status.score,
-                (points, newEvent) => points + newEvent.points,
-              ),
+              score: element.points,
             )
           };
         })

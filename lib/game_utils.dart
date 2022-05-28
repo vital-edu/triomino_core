@@ -52,17 +52,22 @@ class GameUtils {
           );
         },
         layPiece: (e) {
-          print(
-              '${e.player.name} played ${e.piece}. Points: ${_calculatePoints(e)}');
+          print('${e.player.name} played ${e.piece}. Points: ${e.points}');
+          print('  --> Bonuses');
+          for (final bonus in e.gamePoints) {
+            bonus.map(layPiece: (e) {
+              print('    -> Lay piece bonus: ${e.points} points.');
+            }, createBridge: (e) {
+              print('    -> Create bridge bonus: ${e.points} points.');
+            }, createHexagon: (e) {
+              print('    -> Create hexagon bonus: ${e.points} points.');
+            });
+          }
         },
         drawPiece: (e) {
           print('${e.player.name} drew ${e.piece}');
         },
       );
     }
-  }
-
-  int _calculatePoints(LayPieceGameEvent event) {
-    return event.points.fold(0, (previousValue, element) => element.points);
   }
 }

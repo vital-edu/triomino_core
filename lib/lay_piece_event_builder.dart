@@ -5,7 +5,7 @@ import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
 import 'package:triomino_core/rules/bonus_game_rule.dart';
 
-enum LayPieceBonusType { layPiece, bridge, hexagon }
+enum LayPieceBonusType { bridge, hexagon }
 
 class LayPieceEventBuilder {
   final Player player;
@@ -17,19 +17,20 @@ class LayPieceEventBuilder {
     required this.player,
     required this.piece,
     required this.rule,
-  });
+  }) {
+    _bonuses.add(GamePoint.layPiece(
+      points: piece.side1 + piece.side2 + piece.side3,
+      identifier: Identifier.uniq(),
+    ));
+  }
 
   LayPieceEventBuilder addBonus(LayPieceBonusType bonusType) {
     switch (bonusType) {
-      case LayPieceBonusType.layPiece:
-        _bonuses.add(
-          GamePoint.layPiece(
-            points: piece.side1 + piece.side2 + piece.side3,
-            identifier: Identifier.uniq(),
-          ),
-        );
-        break;
       case LayPieceBonusType.bridge:
+        if (_bonuses.whereType<CreateBridgeGamePoint>().isNotEmpty) {
+          return this;
+        }
+
         _bonuses.add(
           GamePoint.createBridge(
             points: rule.bridgeBonus,
@@ -38,6 +39,10 @@ class LayPieceEventBuilder {
         );
         break;
       case LayPieceBonusType.hexagon:
+        if (_bonuses.whereType<CreateHexagonGamePoint>().isNotEmpty) {
+          return this;
+        }
+
         _bonuses.add(
           GamePoint.createHexagon(
             points: rule.hexagonBonus,
@@ -55,7 +60,7 @@ class LayPieceEventBuilder {
       piece,
       id: Identifier.uniq(),
       player: player,
-      points: _bonuses,
+      gamePoints: _bonuses,
     );
   }
 }

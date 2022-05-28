@@ -88,6 +88,7 @@ void showPlayOptions(Game game, GameUtils utils) {
       case 1:
         return;
       case 2:
+        printHeader('Logs');
         utils.show(game.events);
         showPlayOptions(game, utils);
     }
