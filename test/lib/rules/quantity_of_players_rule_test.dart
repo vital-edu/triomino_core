@@ -10,19 +10,25 @@ import '../../custom_matcher/game_rule_error_has_message.dart';
 void main() {
   group('creation of rule', () {
     test('min players should be greater than 1', () {
-      expect(() => QuantityOfPlayersGameRule(1, 2),
+      expect(
+          () => QuantityOfPlayersGameRule(min: 1, max: 2, distribution: {1: 6}),
           throwsA(isA<AssertionError>()));
     });
 
     test('max players should be greater than min players', () {
-      expect(() => QuantityOfPlayersGameRule(3, 2),
+      expect(
+          () => QuantityOfPlayersGameRule(min: 3, max: 2, distribution: {3: 6}),
           throwsA(isA<AssertionError>()));
     });
   });
 
   group('validate with (2,2) rule', () {
     test('3 players should be invalid', () {
-      final gameRule = QuantityOfPlayersGameRule(2, 2);
+      final gameRule = QuantityOfPlayersGameRule(
+        min: 2,
+        max: 2,
+        distribution: {2: 6},
+      );
       void result() => gameRule.validate([
             AddPlayerEvent(Player(name: '1'), id: Identifier.uniq()),
             AddPlayerEvent(Player(name: '2'), id: Identifier.uniq()),
@@ -40,7 +46,11 @@ void main() {
     });
 
     test('2 players should be valid', () {
-      final gameRule = QuantityOfPlayersGameRule(2, 2);
+      final gameRule = QuantityOfPlayersGameRule(
+        min: 2,
+        max: 2,
+        distribution: {2: 6},
+      );
       void result() => gameRule.validate([
             AddPlayerEvent(Player(name: '1'), id: Identifier.uniq()),
             AddPlayerEvent(Player(name: '2'), id: Identifier.uniq()),
@@ -50,7 +60,11 @@ void main() {
     });
 
     test('1 player should be invalid', () {
-      final gameRule = QuantityOfPlayersGameRule(2, 2);
+      final gameRule = QuantityOfPlayersGameRule(
+        min: 2,
+        max: 2,
+        distribution: {2: 6},
+      );
       void result() => gameRule.validate([
             AddPlayerEvent(Player(name: '1'), id: Identifier.uniq()),
           ]);

@@ -30,8 +30,6 @@ abstract class $AvailablePiecesGameRuleCopyWith<$Res> {
           $Res Function(AvailablePiecesGameRule) then) =
       _$AvailablePiecesGameRuleCopyWithImpl<$Res>;
   $Res call({QuantityOfPlayersGameRule quantityOfPlayersRule});
-
-  $QuantityOfPlayersGameRuleCopyWith<$Res> get quantityOfPlayersRule;
 }
 
 /// @nodoc
@@ -54,14 +52,6 @@ class _$AvailablePiecesGameRuleCopyWithImpl<$Res>
               as QuantityOfPlayersGameRule,
     ));
   }
-
-  @override
-  $QuantityOfPlayersGameRuleCopyWith<$Res> get quantityOfPlayersRule {
-    return $QuantityOfPlayersGameRuleCopyWith<$Res>(
-        _value.quantityOfPlayersRule, (value) {
-      return _then(_value.copyWith(quantityOfPlayersRule: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -72,9 +62,6 @@ abstract class _$$_AvailablePiecesGameRuleCopyWith<$Res>
       __$$_AvailablePiecesGameRuleCopyWithImpl<$Res>;
   @override
   $Res call({QuantityOfPlayersGameRule quantityOfPlayersRule});
-
-  @override
-  $QuantityOfPlayersGameRuleCopyWith<$Res> get quantityOfPlayersRule;
 }
 
 /// @nodoc

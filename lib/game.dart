@@ -10,7 +10,6 @@ import 'package:triomino_core/rules/errors/game_state_error.dart';
 import 'package:triomino_core/rules/errors/invalid_event_error.dart';
 import 'package:triomino_core/rules/errors/remove_event_error.dart';
 import 'package:triomino_core/rules/errors/wrong_player_turn_error.dart';
-import 'package:triomino_core/rules/piece_distribution_game_rule.dart';
 import 'package:triomino_core/rules/piece_game_rule.dart';
 import 'package:triomino_core/rules/player_status.dart';
 import 'package:triomino_core/rules/player_validation_game_rule.dart';
@@ -45,8 +44,7 @@ class Game {
 
   Game()
       : ruleBook = RuleBook(
-          quantityOfPlayersGameRule: QuantityOfPlayersGameRule(2, 6),
-          pieceDistributionGameRule: PieceDistributionGameRule(),
+          quantityOfPlayersGameRule: QuantityOfPlayersGameRule.regular(),
           playerValidationGameRule: PlayerValidationGameRule(),
           pieceGameRule: PieceGameRule(),
           startGameRule: StartGameRule(),
