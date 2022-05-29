@@ -62,14 +62,15 @@ class Game {
   List<PlayerStatus> get playerStatuses {
     final layPieceEvents = events.whereType<LayPieceGameEvent>();
     final addplayerEvents = events.whereType<AddPlayerEvent>();
+    final initialPiecesInPlayersHand = ruleBook.quantityOfPlayersGameRule
+        .piecesByPlayer(quantityOfPlayers: addplayerEvents.length);
 
     final playersStatuses = {
       for (final event in addplayerEvents)
-        // TODO: determine piecesInPlayersHand
         event.player.hashCode: PlayerStatus(
           player: event.player,
           score: 0,
-          piecesInPlayersHand: 33,
+          piecesInPlayersHand: initialPiecesInPlayersHand,
         )
     };
 

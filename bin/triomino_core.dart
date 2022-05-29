@@ -229,9 +229,12 @@ void startGame(Game game) {
 void printScore(Game game) {
   printHeader('Score');
   for (final status in game.playerStatuses) {
-    // todo: implement score
     print(
-        '${status.player.name}. Played pieces: ${status.playedPieces.length}. Points: ${status.score}');
+      '${status.player.name}. '
+      'Played pieces: ${status.playedPieces.length}. '
+      'Pieces in hand: ${status.piecesInPlayersHand}. '
+      'Points: ${status.score}',
+    );
   }
 }
 
