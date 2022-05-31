@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import 'package:triomino_core/game.dart';
 import 'package:triomino_core/game_event.dart';
-import 'package:triomino_core/game_point.dart';
+import 'package:triomino_core/lay_piece_event_builder.dart';
 import 'package:triomino_core/models/identifier.dart';
 import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
@@ -262,6 +262,62 @@ void main() {
         );
         expect(game.events.length, 2);
       });
+    });
+  });
+
+  group('player status', () {
+    test('game simulation shold return correct statuses', () {
+      final game = Game();
+      final player1 = game.players[0];
+      final player2 = game.players[1];
+      final rule = game.ruleBook.bonusGameRule;
+
+      game.add(
+        LayPieceEventBuilder(
+          player: player1,
+          piece: Piece.triple(5),
+          rule: rule,
+        )
+            .addBonus(LayPieceBonusType.hexagon)
+            .addBonus(LayPieceBonusType.bridge)
+            .build(),
+      );
+      game.add(
+        LayPieceEventBuilder(
+          player: player2,
+          piece: Piece(3, 2, 5),
+          rule: rule,
+        ).build(),
+      );
+      game.add(
+        LayPieceEventBuilder(
+          player: player1,
+          piece: Piece.triple(3),
+          rule: rule,
+        ).build(),
+      );
+
+      final statuses = game.playerStatuses;
+      expect(statuses.length, 2);
+
+      final firstPlayerStatus = statuses[0];
+      final secondPlayerStatus = statuses[1];
+
+      expect(firstPlayerStatus.player, player1);
+      expect(firstPlayerStatus.playedPieces, [
+        Piece.triple(5),
+        Piece.triple(3),
+      ]);
+      expect(firstPlayerStatus.piecesInPlayersHand, 7);
+      expect(firstPlayerStatus.score, 114);
+      // TODO: should be 124 (10 bonus points for start round with a triple)
+
+      expect(secondPlayerStatus.player, player2);
+      expect(secondPlayerStatus.playedPieces, [
+        Piece(2, 3, 5),
+      ]);
+      expect(secondPlayerStatus.piecesInPlayersHand, 8);
+      expect(secondPlayerStatus.score, 10);
     });
   });
 }
