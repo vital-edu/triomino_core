@@ -1,6 +1,7 @@
 import 'package:test/test.dart';
 import 'package:triomino_core/game.dart';
 import 'package:triomino_core/game_event.dart';
+import 'package:triomino_core/game_point.dart';
 import 'package:triomino_core/lay_piece_event_builder.dart';
 import 'package:triomino_core/models/identifier.dart';
 import 'package:triomino_core/models/piece.dart';
@@ -266,36 +267,37 @@ void main() {
   });
 
   group('player status', () {
+    void playPiece(
+      Piece piece, {
+      required Game game,
+      List<LayPieceBonusType> bonuses = const [],
+    }) {
+      final builder = LayPieceEventBuilder(
+        player: game.playerOnTurn ?? game.players.first,
+        piece: piece,
+        rule: game.ruleBook.bonusGameRule,
+      );
+
+      for (final bonus in bonuses) {
+        builder.addBonus(bonus);
+      }
+
+      game.add(builder.build());
+    }
+
     test('game simulation shold return correct statuses', () {
       final game = Game();
       final player1 = game.players[0];
       final player2 = game.players[1];
       final rule = game.ruleBook.bonusGameRule;
 
-      game.add(
-        LayPieceEventBuilder(
-          player: player1,
-          piece: Piece.triple(5),
-          rule: rule,
-        )
-            .addBonus(LayPieceBonusType.hexagon)
-            .addBonus(LayPieceBonusType.bridge)
-            .build(),
+      playPiece(
+        Piece.triple(5),
+        game: game,
+        bonuses: [LayPieceBonusType.hexagon, LayPieceBonusType.bridge],
       );
-      game.add(
-        LayPieceEventBuilder(
-          player: player2,
-          piece: Piece(3, 2, 5),
-          rule: rule,
-        ).build(),
-      );
-      game.add(
-        LayPieceEventBuilder(
-          player: player1,
-          piece: Piece.triple(3),
-          rule: rule,
-        ).build(),
-      );
+      playPiece(Piece(3, 2, 5), game: game);
+      playPiece(Piece.triple(3), game: game);
 
       final statuses = game.playerStatuses;
       expect(statuses.length, 2);
@@ -318,6 +320,25 @@ void main() {
       ]);
       expect(secondPlayerStatus.piecesInPlayersHand, 8);
       expect(secondPlayerStatus.score, 10);
+
+      playPiece(Piece.triple(2), game: game);
+      playPiece(Piece(5, 2, 4), game: game);
+      playPiece(Piece(1, 2, 4), game: game);
+      playPiece(Piece(1, 3, 3), game: game);
+      playPiece(Piece.triple(1), game: game);
+      playPiece(Piece(1, 1, 5), game: game);
+      playPiece(Piece(2, 1, 5), game: game);
+      playPiece(Piece(3, 1, 5), game: game);
+      playPiece(Piece(4, 4, 5), game: game);
+      playPiece(Piece.triple(4), game: game);
+      playPiece(Piece(4, 0, 0), game: game);
+      playPiece(Piece(4, 1, 5), game: game);
+      playPiece(Piece.triple(0), game: game);
+      playPiece(Piece(0, 5, 5), game: game);
+      playPiece(Piece(0, 5, 4), game: game);
+      playPiece(Piece(0, 5, 3), game: game);
+
+      expect(game.playerStatuses[0].piecesInPlayersHand, 0);
     });
   });
 }
