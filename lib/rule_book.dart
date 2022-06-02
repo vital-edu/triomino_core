@@ -61,6 +61,14 @@ class RuleBook {
         unknown: (UnknownGamePlayerTurn turn) {
           final undeterminedPlayers =
               players.where((player) => player != nextEvent.player).toList();
+
+          if (undeterminedPlayers.length == 1) {
+            return GamePlayerTurn.determined(
+              undeterminedPlayers.first,
+              playersOnOrder: [nextEvent.player, undeterminedPlayers.first],
+            );
+          }
+
           return GamePlayerTurn.partiallyDetermined(
             determinedPlayers: [nextEvent.player],
             undeterminedPlayers: undeterminedPlayers,
