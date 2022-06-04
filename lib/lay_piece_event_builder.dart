@@ -1,9 +1,9 @@
-import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/game_point.dart';
 import 'package:triomino_core/models/identifier.dart';
 import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
-import 'package:triomino_core/rules/bonus_game_rule.dart';
+import 'package:triomino_core/round_event.dart';
+import 'package:triomino_core/rules/round/bonus_game_rule.dart';
 
 enum LayPieceBonusType { bridge, hexagon }
 
@@ -55,8 +55,8 @@ class LayPieceEventBuilder {
     return this;
   }
 
-  LayPieceGameEvent build() {
-    return LayPieceGameEvent(
+  LayPieceRoundEvent build() {
+    return LayPieceRoundEvent(
       piece,
       id: Identifier.uniq(),
       player: player,

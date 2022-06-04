@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/rules/game_rule.dart';
-import 'package:triomino_core/rules/quantity_of_players_rule.dart';
+import 'package:triomino_core/rules/game/quantity_of_players_rule.dart';
 
 part 'available_pieces_game_rule.freezed.dart';
 

@@ -1,19 +1,22 @@
 import 'package:triomino_core/extensions/list_extension.dart';
 import 'package:triomino_core/game_event.dart';
+import 'package:triomino_core/game_round.dart';
 import 'package:triomino_core/models/identifier.dart';
 import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
-import 'package:triomino_core/rule_book.dart';
-import 'package:triomino_core/rules/bonus_game_rule.dart';
+import 'package:triomino_core/round_event.dart';
+import 'package:triomino_core/rules/game/game_rule_book.dart';
+import 'package:triomino_core/rules/round/bonus_game_rule.dart';
 import 'package:triomino_core/rules/errors/game_rule_error.dart';
 import 'package:triomino_core/rules/errors/game_state_error.dart';
 import 'package:triomino_core/rules/errors/invalid_event_error.dart';
 import 'package:triomino_core/rules/errors/remove_event_error.dart';
 import 'package:triomino_core/rules/errors/wrong_player_turn_error.dart';
-import 'package:triomino_core/rules/piece_game_rule.dart';
+import 'package:triomino_core/rules/round/lay_piece_round_rule.dart';
 import 'package:triomino_core/rules/player_status.dart';
-import 'package:triomino_core/rules/player_validation_game_rule.dart';
-import 'package:triomino_core/rules/quantity_of_players_rule.dart';
+import 'package:triomino_core/rules/game/player_validation_game_rule.dart';
+import 'package:triomino_core/rules/game/quantity_of_players_rule.dart';
+import 'package:triomino_core/rules/round/round_rule_book.dart';
 import 'package:triomino_core/rules/start_game_rule.dart';
 
 class Game {
@@ -22,6 +25,8 @@ class Game {
     AddPlayerEvent(Player(name: 'Player 2'), id: Identifier.uniq()),
   ]);
   List<GameEvent> get events => List.unmodifiable(_events);
+  List<GameRound> _pastRounds = []; // TODO: implement _pastRounds
+  GameRound _currentRound = GameRound.unknown();
 
   set events(List<GameEvent> events) {
     final oldEvents = _events;
@@ -40,14 +45,17 @@ class Game {
     _events = events;
   }
 
-  final RuleBook ruleBook;
+  final RoundRuleBook roundRuleBook;
+  final GameRuleBook gameRuleBook;
 
   Game()
-      : ruleBook = RuleBook(
+      : gameRuleBook = GameRuleBook(
           quantityOfPlayersGameRule: QuantityOfPlayersGameRule.regular(),
           playerValidationGameRule: PlayerValidationGameRule(),
-          pieceGameRule: PieceGameRule(),
           startGameRule: StartGameRule(),
+        ),
+        roundRuleBook = RoundRuleBook(
+          pieceGameRule: LayPieceRoundRule(),
           bonusGameRule: BonusGameRule(
             bridgeBonus: 50,
             hexagonBonus: 40,
@@ -56,58 +64,64 @@ class Game {
 
   List<Player> get players => events.players.toList();
 
-  List<Piece> get playedPieces =>
-      events.whereType<LayPieceGameEvent>().map((e) => e.piece).toList();
+  List<Piece> get playedPieces => _currentRound.playedPieces;
 
-  List<PlayerStatus> get playerStatuses {
-    final layPieceEvents = events.whereType<LayPieceGameEvent>();
-    final addplayerEvents = events.whereType<AddPlayerEvent>();
-    final initialPiecesInPlayersHand = ruleBook.quantityOfPlayersGameRule
-        .piecesByPlayer(quantityOfPlayers: addplayerEvents.length);
+  // List<PlayerStatus> _calculatePlayerStatuses(List<GameEvent> events) {
+  //   final layPieceEvents = events.whereType<LayPieceRoundEvent>();
+  //   final addplayerEvents = events.whereType<AddPlayerEvent>();
+  //   final initialPiecesInPlayersHand = ruleBook.quantityOfPlayersGameRule
+  //       .piecesByPlayer(quantityOfPlayers: addplayerEvents.length);
 
-    final playersStatuses = {
-      for (final event in addplayerEvents)
-        event.player.hashCode: PlayerStatus(
-          player: event.player,
-          score: 0,
-          piecesInPlayersHand: initialPiecesInPlayersHand,
-        )
-    };
+  //   final playersStatuses = {
+  //     for (final event in addplayerEvents)
+  //       event.player.hashCode: PlayerStatus(
+  //         player: event.player,
+  //         score: 0,
+  //         piecesInPlayersHand: initialPiecesInPlayersHand,
+  //       )
+  //   };
 
-    return layPieceEvents
-        .fold<Map<int, PlayerStatus>>(playersStatuses,
-            (previousValue, element) {
-          final status = previousValue[element.player.hashCode]!;
+  //   return layPieceEvents
+  //       .fold<Map<int, PlayerStatus>>(playersStatuses,
+  //           (previousValue, element) {
+  //         final status = previousValue[element.player.hashCode]!;
 
-          return {
-            ...previousValue,
-            element.player.hashCode: status.copyWith(
-              playedPieces: [...status.playedPieces, element.piece],
-              piecesInPlayersHand: status.piecesInPlayersHand - 1,
-              score: status.score + element.points,
-            )
-          };
-        })
-        .values
-        .toList();
-  }
+  //         return {
+  //           ...previousValue,
+  //           element.player.hashCode: status.copyWith(
+  //             playedPieces: [...status.playedPieces, element.piece],
+  //             piecesInPlayersHand: status.piecesInPlayersHand - 1,
+  //             score: status.score + element.points,
+  //           )
+  //         };
+  //       })
+  //       .values
+  //       .toList();
+  // }
 
-  void add(GameEvent event) {
-    final newEvents = <GameEvent>[...events, event];
+  List<PlayerStatus> get playerStatuses => _currentRound.statuses;
+
+  void addRoundEvent(RoundEvent event) {
     event.map(
-      addPlayer: (newEvent) {
-        ruleBook.playerValidationGameRule.validate(newEvents);
-      },
-      startGame: (newEvent) {
-        ruleBook.startGameRule.validate(newEvents);
-        ruleBook.quantityOfPlayersGameRule.validate(newEvents);
-      },
-      startRound: (StartRoundGameEvent value) {
-        // TODO: implement it
-      },
-      layPiece: (gameEvent) {
-        ruleBook.pieceGameRule.validate(newEvents);
-        ruleBook.playerTurn(events: events).map(
+      layPiece: (roundEvent) {
+        // final newRoundState = _currentRound.map(
+        //   onGoing: (round) {},
+        //   finished: (round) {},
+        //   unknown: (round) {
+        //     final newRoundEvents = [gameEvent];
+        //     return OnGoingGameRound(
+        //       events: newRoundEvents,
+        //       status: _calculatePlayerStatuses(newRoundEvents),
+        //     );
+        //   },
+        // );
+
+        final newEvents = [..._currentRound.events, roundEvent];
+
+        roundRuleBook.pieceGameRule.validate(newEvents);
+        roundRuleBook
+            .playerTurn(events: _currentRound.events, players: players)
+            .map(
           unknown: (turn) {
             // nothing to do
           },
@@ -115,24 +129,52 @@ class Game {
             throw GameStateError(turn: turn, events: events);
           },
           determined: (turn) {
-            if (turn.player != gameEvent.player) {
+            if (turn.player != roundEvent.player) {
               throw WrongPlayerTurnError(
                 turn: turn,
-                cheaterPlayer: gameEvent.player,
+                cheaterPlayer: roundEvent.player,
               );
             }
           },
           partiallyDetermined: (turn) {
-            if (!turn.undeterminedPlayers.contains(gameEvent.player)) {
+            if (!turn.undeterminedPlayers.contains(roundEvent.player)) {
               throw WrongPlayerTurnError(
                 turn: turn,
-                cheaterPlayer: gameEvent.player,
+                cheaterPlayer: roundEvent.player,
               );
             }
           },
         );
+
+        // _currentRound = _currentRound.map(
+        //   onGoing: (onGoing) {
+        //     return onGoing.copyWith(
+        //       events: [...onGoing.events, roundEvent],
+        //     );
+        //   },
+        //   finished: finished,
+        //   unknown: unknown,
+        // );
+        // TODO: finish points rule
+        // ruleBook.pointsRule.validate(newEvents);
       },
-      drawPiece: (DrawPieceGameEvent value) {
+      drawPiece: (roundEvent) {
+        // TODO: implement it
+      },
+    );
+  }
+
+  void add(GameEvent event) {
+    final newEvents = <GameEvent>[...events, event];
+    event.map(
+      addPlayer: (newEvent) {
+        gameRuleBook.playerValidationGameRule.validate(newEvents);
+      },
+      startGame: (newEvent) {
+        gameRuleBook.startGameRule.validate(newEvents);
+        gameRuleBook.quantityOfPlayersGameRule.validate(newEvents);
+      },
+      round: (newEvent) {
         // TODO: implement it
       },
     );
@@ -142,17 +184,18 @@ class Game {
 
   bool get hasGameStarted => events.whereType<StartGameEvent>().isNotEmpty;
 
-  Player? get playerOnTurn => ruleBook
-      .playerTurn(events: events)
+  Player? get playerOnTurn => roundRuleBook
+      .playerTurn(events: _currentRound.events, players: players)
       .maybeMap(determined: (turn) => turn.player, orElse: () => null);
 
-  List<Player> get remainingPlayersToPlay =>
-      ruleBook.playerTurn(events: events).map(
-            unknown: (_) => players,
-            invalid: (turn) => throw GameStateError(turn: turn, events: events),
-            determined: (_) => [],
-            partiallyDetermined: (turn) => turn.undeterminedPlayers,
-          );
+  List<Player> get remainingPlayersToPlay => roundRuleBook
+      .playerTurn(events: _currentRound.events, players: players)
+      .map(
+        unknown: (_) => players,
+        invalid: (turn) => throw GameStateError(turn: turn, events: events),
+        determined: (_) => [],
+        partiallyDetermined: (turn) => turn.undeterminedPlayers,
+      );
 
   void remove(GameEvent event) {
     final newEvents = events.where((e) => e.id != event.id).toList();
@@ -160,7 +203,7 @@ class Game {
       throw RemoveEventError(event);
     }
 
-    ruleBook.quantityOfPlayersGameRule.validate(newEvents);
+    gameRuleBook.quantityOfPlayersGameRule.validate(newEvents);
     events = newEvents;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/models/player.dart';
 import 'package:collection/collection.dart';
+import 'package:triomino_core/round_event.dart';
 
 class GameUtils {
   final _playerNameRegex = RegExp(r'^Player (\d)+$');
@@ -46,26 +47,27 @@ class GameUtils {
         startGame: (_) {
           print('Game started');
         },
-        startRound: (e) {
-          print(
-            'Round started by ${e.event.player.name}: ${e.event.piece}',
-          );
-        },
-        layPiece: (e) {
-          print('${e.player.name} played ${e.piece}. Points: ${e.points}');
-          print('  --> Bonuses');
-          for (final bonus in e.gamePoints) {
-            bonus.map(layPiece: (e) {
-              print('    -> Lay piece bonus: ${e.points} points.');
-            }, createBridge: (e) {
-              print('    -> Create bridge bonus: ${e.points} points.');
-            }, createHexagon: (e) {
-              print('    -> Create hexagon bonus: ${e.points} points.');
-            });
-          }
-        },
-        drawPiece: (e) {
-          print('${e.player.name} drew ${e.piece}');
+        round: (gameEvent) {
+          print('Round ${gameEvent.roundNumber} started');
+          gameEvent.round.events.map((roundEvent) => roundEvent.map(
+                layPiece: (event) {
+                  print(
+                      '${event.player.name} played ${event.piece}. Points: ${event.points}');
+                  print('  --> Bonuses');
+                  for (final bonus in event.gamePoints) {
+                    bonus.map(layPiece: (e) {
+                      print('    -> Lay piece bonus: ${e.points} points.');
+                    }, createBridge: (e) {
+                      print('    -> Create bridge bonus: ${e.points} points.');
+                    }, createHexagon: (e) {
+                      print('    -> Create hexagon bonus: ${e.points} points.');
+                    });
+                  }
+                },
+                drawPiece: (event) {
+                  print('${event.player.name} drew ${event.piece}');
+                },
+              ));
         },
       );
     }

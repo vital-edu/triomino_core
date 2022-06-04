@@ -3,7 +3,7 @@ import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/models/identifier.dart';
 import 'package:triomino_core/models/player.dart';
 import 'package:triomino_core/rules/errors/invalid_quantity_of_players_error.dart';
-import 'package:triomino_core/rules/quantity_of_players_rule.dart';
+import 'package:triomino_core/rules/game/quantity_of_players_rule.dart';
 
 import '../../custom_matcher/game_rule_error_has_message.dart';
 

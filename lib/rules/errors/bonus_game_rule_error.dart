@@ -1,5 +1,5 @@
 import 'package:triomino_core/models/piece.dart';
-import 'package:triomino_core/rules/bonus_game_rule.dart';
+import 'package:triomino_core/rules/round/bonus_game_rule.dart';
 import 'package:triomino_core/rules/errors/game_rule_error.dart';
 
 class BonusGameRuleError extends GameRuleError {

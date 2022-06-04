@@ -1,11 +1,11 @@
 import 'package:test/test.dart';
 import 'package:triomino_core/game.dart';
 import 'package:triomino_core/game_event.dart';
-import 'package:triomino_core/game_point.dart';
 import 'package:triomino_core/lay_piece_event_builder.dart';
 import 'package:triomino_core/models/identifier.dart';
 import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
+import 'package:triomino_core/round_event.dart';
 import 'package:triomino_core/rules/errors/game_rule_error.dart';
 import 'package:triomino_core/rules/errors/invalid_quantity_of_players_error.dart';
 import 'package:triomino_core/rules/errors/piece_game_rule_error.dart';
@@ -89,16 +89,16 @@ void main() {
 
         final firstPlayer = game.players.first;
         final piece = Piece.triple(5);
-        final lay1stPieceEvent = GameEvent.layPiece(
+        final lay1stPieceEvent = RoundEvent.layPiece(
           piece,
           gamePoints: [],
           player: firstPlayer,
           id: Identifier.uniq(),
         );
 
-        expect(() => game.add(lay1stPieceEvent), returnsNormally);
+        expect(() => game.addRoundEvent(lay1stPieceEvent), returnsNormally);
         expect(
-          () => game.add(lay1stPieceEvent),
+          () => game.addRoundEvent(lay1stPieceEvent),
           throwsA(
             allOf(
               isA<PieceGameRuleError>(),
@@ -113,7 +113,7 @@ void main() {
 
         final firstPlayer = game.players.first;
         final piece1 = Piece.triple(5);
-        final lay1stPieceEvent = GameEvent.layPiece(
+        final lay1stPieceEvent = RoundEvent.layPiece(
           piece1,
           gamePoints: [],
           player: firstPlayer,
@@ -121,16 +121,16 @@ void main() {
         );
 
         final piece2 = Piece.triple(4);
-        final lay2ndPieceEvent = GameEvent.layPiece(
+        final lay2ndPieceEvent = RoundEvent.layPiece(
           piece2,
           gamePoints: [],
           player: firstPlayer,
           id: Identifier.uniq(),
         );
 
-        expect(() => game.add(lay1stPieceEvent), returnsNormally);
+        expect(() => game.addRoundEvent(lay1stPieceEvent), returnsNormally);
         expect(
-          () => game.add(lay2ndPieceEvent),
+          () => game.addRoundEvent(lay2ndPieceEvent),
           throwsA(allOf(
             isA<WrongPlayerTurnError>(),
             GameRuleErrorHasMessage(equals(
@@ -150,7 +150,7 @@ void main() {
 
         final firstPlayer = game.players.first;
         final piece1 = Piece.triple(5);
-        final lay1stPieceEvent = GameEvent.layPiece(
+        final lay1stPieceEvent = RoundEvent.layPiece(
           piece1,
           gamePoints: [],
           player: firstPlayer,
@@ -158,16 +158,16 @@ void main() {
         );
 
         final piece2 = Piece.triple(4);
-        final lay2ndPieceEvent = GameEvent.layPiece(
+        final lay2ndPieceEvent = RoundEvent.layPiece(
           piece2,
           gamePoints: [],
           player: firstPlayer,
           id: Identifier.uniq(),
         );
 
-        expect(() => game.add(lay1stPieceEvent), returnsNormally);
+        expect(() => game.addRoundEvent(lay1stPieceEvent), returnsNormally);
         expect(
-          () => game.add(lay2ndPieceEvent),
+          () => game.addRoundEvent(lay2ndPieceEvent),
           throwsA(allOf(
             isA<WrongPlayerTurnError>(),
             GameRuleErrorHasMessage(equals(
@@ -187,51 +187,46 @@ void main() {
 
         final allPlayers = game.players;
 
-        final piece1 = Piece.triple(5);
-        final lay1stPieceEvent = GameEvent.layPiece(
+        final lay1stPieceEvent = RoundEvent.layPiece(
           Piece.triple(5),
           gamePoints: [],
           player: allPlayers[0],
           id: Identifier.uniq(),
         );
 
-        final piece2 = Piece.triple(4);
-        final lay2ndPieceEvent = GameEvent.layPiece(
-          piece2,
+        final lay2ndPieceEvent = RoundEvent.layPiece(
+          Piece.triple(4),
           gamePoints: [],
           player: allPlayers[1],
           id: Identifier.uniq(),
         );
 
-        final piece3 = Piece.triple(3);
-        final lay3rdPieceEvent = GameEvent.layPiece(
-          piece3,
+        final lay3rdPieceEvent = RoundEvent.layPiece(
+          Piece.triple(3),
           gamePoints: [],
           player: allPlayers[2],
           id: Identifier.uniq(),
         );
 
-        final piece4 = Piece.triple(2);
-        final lay4thPieceEvent = GameEvent.layPiece(
-          piece4,
+        final lay4thPieceEvent = RoundEvent.layPiece(
+          Piece.triple(2),
           gamePoints: [],
           player: allPlayers[3],
           id: Identifier.uniq(),
         );
 
-        final piece5 = Piece.triple(1);
-        final lay5thPieceEvent = GameEvent.layPiece(
-          piece5,
+        final lay5thPieceEvent = RoundEvent.layPiece(
+          Piece.triple(1),
           gamePoints: [],
           player: allPlayers[0],
           id: Identifier.uniq(),
         );
 
-        expect(() => game.add(lay1stPieceEvent), returnsNormally);
-        expect(() => game.add(lay2ndPieceEvent), returnsNormally);
-        expect(() => game.add(lay3rdPieceEvent), returnsNormally);
-        expect(() => game.add(lay4thPieceEvent), returnsNormally);
-        expect(() => game.add(lay5thPieceEvent), returnsNormally);
+        expect(() => game.addRoundEvent(lay1stPieceEvent), returnsNormally);
+        expect(() => game.addRoundEvent(lay2ndPieceEvent), returnsNormally);
+        expect(() => game.addRoundEvent(lay3rdPieceEvent), returnsNormally);
+        expect(() => game.addRoundEvent(lay4thPieceEvent), returnsNormally);
+        expect(() => game.addRoundEvent(lay5thPieceEvent), returnsNormally);
       });
     });
 
@@ -275,21 +270,20 @@ void main() {
       final builder = LayPieceEventBuilder(
         player: game.playerOnTurn ?? game.players.first,
         piece: piece,
-        rule: game.ruleBook.bonusGameRule,
+        rule: game.roundRuleBook.bonusGameRule,
       );
 
       for (final bonus in bonuses) {
         builder.addBonus(bonus);
       }
 
-      game.add(builder.build());
+      game.addRoundEvent(builder.build());
     }
 
     test('game simulation shold return correct statuses', () {
       final game = Game();
       final player1 = game.players[0];
       final player2 = game.players[1];
-      final rule = game.ruleBook.bonusGameRule;
 
       playPiece(
         Piece.triple(5),

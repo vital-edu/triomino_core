@@ -65,11 +65,11 @@ void playMenu(Game game, GameUtils utils) {
   final layPieceEvent = addBonus(LayPieceEventBuilder(
     player: playerOnTurn,
     piece: piece,
-    rule: game.ruleBook.bonusGameRule,
+    rule: game.roundRuleBook.bonusGameRule,
   )).build();
 
   try {
-    game.add(layPieceEvent);
+    game.addRoundEvent(layPieceEvent);
   } on GameRuleError catch (error) {
     print(error.message);
     return playMenu(game, utils);

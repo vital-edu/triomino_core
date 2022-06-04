@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:triomino_core/game_point.dart';
+import 'package:triomino_core/game_round.dart';
 import 'package:triomino_core/models/identifier.dart';
-import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
 
 part 'game_event.freezed.dart';
@@ -19,26 +18,9 @@ class GameEvent with _$GameEvent {
     required Identifier id,
   }) = StartGameEvent;
 
-  const factory GameEvent.startRound(
-    LayPieceGameEvent event, {
+  const factory GameEvent.round(
+    FinishedGameRound round, {
+    required int roundNumber,
     required Identifier id,
-  }) = StartRoundGameEvent;
-
-  const factory GameEvent.layPiece(
-    Piece piece, {
-    required List<GamePoint> gamePoints,
-    required Player player,
-    required Identifier id,
-  }) = LayPieceGameEvent;
-
-  const factory GameEvent.drawPiece(
-    Piece piece, {
-    required Player player,
-    required Identifier id,
-  }) = DrawPieceGameEvent;
-}
-
-extension LayPieceGameEventPoints on LayPieceGameEvent {
-  int get points => gamePoints.fold(
-      0, (previousValue, gamePoint) => previousValue + gamePoint.points);
+  }) = RoundGameEvent;
 }

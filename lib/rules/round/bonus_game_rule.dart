@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:triomino_core/game_event.dart';
+import 'package:triomino_core/round_event.dart';
 import 'package:triomino_core/rules/errors/bonus_game_rule_error.dart';
 import 'package:triomino_core/rules/game_rule.dart';
 
@@ -17,7 +18,7 @@ class BonusGameRule with _$BonusGameRule implements GameRule {
 
   @override
   void validate(List<GameEvent> events) {
-    final pieceEvents = events.whereType<LayPieceGameEvent>();
+    final pieceEvents = events.whereType<LayPieceRoundEvent>();
 
     for (final event in pieceEvents) {
       for (final bonusEvent in event.gamePoints) {
