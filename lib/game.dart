@@ -26,7 +26,8 @@ class Game {
   ]);
   List<GameEvent> get events => [
         ..._events,
-        GameEvent.round(_currentRound, id: Identifier.uniq()),
+        if (hasGameStarted)
+          GameEvent.round(_currentRound, id: Identifier.uniq()),
       ];
   GameRound _currentRound = GameRound.unknown();
 
@@ -136,18 +137,44 @@ class Game {
         );
 
         _currentRound = _currentRound.map(
-          onGoing: (round) => round.copyWith(
-            events: [...round.events, event],
-            statuses: round.statuses
-                .map<PlayerStatus>((e) => e.player == roundEvent.player
-                    ? e.copyWith(
-                        playedPieces: [...e.playedPieces, roundEvent.piece],
-                        piecesInPlayersHand: e.piecesInPlayersHand - 1,
-                        score: e.score + roundEvent.points,
-                      )
-                    : e)
-                .toList(),
-          ),
+          onGoing: (round) {
+            try {
+              final roundWinner = round.statuses
+                  .firstWhere((element) => element.piecesInPlayersHand == 1);
+
+              add(
+                GameEvent.round(
+                  GameRound.finished(
+                    roundNumber: round.roundNumber,
+                    events: round.events,
+                    statuses: _calculatePlayerStatuses(
+                      [...round.events, event],
+                    ),
+                  ),
+                  id: Identifier.uniq(),
+                ),
+              );
+
+              return GameRound.onGoing(
+                roundNumber: round.roundNumber + 1,
+                events: [],
+                statuses: _calculatePlayerStatuses([]),
+              );
+            } on StateError {
+              return round.copyWith(
+                events: [...round.events, event],
+                statuses: round.statuses
+                    .map<PlayerStatus>((e) => e.player == roundEvent.player
+                        ? e.copyWith(
+                            playedPieces: [...e.playedPieces, roundEvent.piece],
+                            piecesInPlayersHand: e.piecesInPlayersHand - 1,
+                            score: e.score + roundEvent.points,
+                          )
+                        : e)
+                    .toList(),
+              );
+            }
+          },
           finished: (round) {
             // TODO: implement custom error
             throw ArgumentError("should not happen");
@@ -185,7 +212,7 @@ class Game {
     _events = newEvents;
   }
 
-  bool get hasGameStarted => events.whereType<StartGameEvent>().isNotEmpty;
+  bool get hasGameStarted => _events.whereType<StartGameEvent>().isNotEmpty;
 
   Player? get playerOnTurn => roundRuleBook
       .playerTurn(events: _currentRound.events, players: players)
