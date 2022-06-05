@@ -84,7 +84,7 @@ void main() {
     });
 
     group('lay piece', () {
-      test('should not allow lay a piece twice in a game', () {
+      test('should not allow lay a piece twice in a round', () {
         final game = Game();
 
         final firstPlayer = game.players.first;

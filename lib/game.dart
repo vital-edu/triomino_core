@@ -66,58 +66,45 @@ class Game {
 
   List<Piece> get playedPieces => _currentRound.playedPieces;
 
-  // List<PlayerStatus> _calculatePlayerStatuses(List<GameEvent> events) {
-  //   final layPieceEvents = events.whereType<LayPieceRoundEvent>();
-  //   final addplayerEvents = events.whereType<AddPlayerEvent>();
-  //   final initialPiecesInPlayersHand = ruleBook.quantityOfPlayersGameRule
-  //       .piecesByPlayer(quantityOfPlayers: addplayerEvents.length);
+  List<PlayerStatus> _calculatePlayerStatuses(List<RoundEvent> events) {
+    final players = this.players;
+    final layPieceEvents = events.whereType<LayPieceRoundEvent>();
+    final initialPiecesInPlayersHand = gameRuleBook.quantityOfPlayersGameRule
+        .piecesByPlayer(quantityOfPlayers: players.length);
 
-  //   final playersStatuses = {
-  //     for (final event in addplayerEvents)
-  //       event.player.hashCode: PlayerStatus(
-  //         player: event.player,
-  //         score: 0,
-  //         piecesInPlayersHand: initialPiecesInPlayersHand,
-  //       )
-  //   };
+    final playersStatuses = {
+      for (final player in players)
+        player.hashCode: PlayerStatus(
+          player: player,
+          score: 0,
+          piecesInPlayersHand: initialPiecesInPlayersHand,
+        )
+    };
 
-  //   return layPieceEvents
-  //       .fold<Map<int, PlayerStatus>>(playersStatuses,
-  //           (previousValue, element) {
-  //         final status = previousValue[element.player.hashCode]!;
+    return layPieceEvents
+        .fold<Map<int, PlayerStatus>>(playersStatuses,
+            (previousValue, element) {
+          final status = previousValue[element.player.hashCode]!;
 
-  //         return {
-  //           ...previousValue,
-  //           element.player.hashCode: status.copyWith(
-  //             playedPieces: [...status.playedPieces, element.piece],
-  //             piecesInPlayersHand: status.piecesInPlayersHand - 1,
-  //             score: status.score + element.points,
-  //           )
-  //         };
-  //       })
-  //       .values
-  //       .toList();
-  // }
+          return {
+            ...previousValue,
+            element.player.hashCode: status.copyWith(
+              playedPieces: [...status.playedPieces, element.piece],
+              piecesInPlayersHand: status.piecesInPlayersHand - 1,
+              score: status.score + element.points,
+            )
+          };
+        })
+        .values
+        .toList();
+  }
 
   List<PlayerStatus> get playerStatuses => _currentRound.statuses;
 
   void addRoundEvent(RoundEvent event) {
+    final newEvents = [..._currentRound.events, event];
     event.map(
       layPiece: (roundEvent) {
-        // final newRoundState = _currentRound.map(
-        //   onGoing: (round) {},
-        //   finished: (round) {},
-        //   unknown: (round) {
-        //     final newRoundEvents = [gameEvent];
-        //     return OnGoingGameRound(
-        //       events: newRoundEvents,
-        //       status: _calculatePlayerStatuses(newRoundEvents),
-        //     );
-        //   },
-        // );
-
-        final newEvents = [..._currentRound.events, roundEvent];
-
         roundRuleBook.pieceGameRule.validate(newEvents);
         roundRuleBook
             .playerTurn(events: _currentRound.events, players: players)
@@ -146,15 +133,30 @@ class Game {
           },
         );
 
-        // _currentRound = _currentRound.map(
-        //   onGoing: (onGoing) {
-        //     return onGoing.copyWith(
-        //       events: [...onGoing.events, roundEvent],
-        //     );
-        //   },
-        //   finished: finished,
-        //   unknown: unknown,
-        // );
+        _currentRound = _currentRound.map(
+          onGoing: (round) {
+            return round.copyWith(
+              events: [...round.events, event],
+              statuses: round.statuses
+                  .map<PlayerStatus>((e) => e.player == roundEvent.player
+                      ? e.copyWith(
+                          playedPieces: [...e.playedPieces, roundEvent.piece],
+                          piecesInPlayersHand: e.piecesInPlayersHand - 1,
+                          score: e.score + roundEvent.points,
+                        )
+                      : e)
+                  .toList(),
+            );
+          },
+          finished: (round) {
+            // TODO: implement custom error
+            throw ArgumentError("should not happen");
+          },
+          unknown: (round) {
+            return OnGoingGameRound(
+                events: [event], statuses: _calculatePlayerStatuses([event]));
+          },
+        );
         // TODO: finish points rule
         // ruleBook.pointsRule.validate(newEvents);
       },

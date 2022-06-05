@@ -16,8 +16,8 @@ class RoundRuleBook extends RuleBook {
 
   GamePlayerTurn playerTurn(
       {required List<Player> players, required List<RoundEvent> events}) {
-    final List<LayPieceRoundEvent> layPieceEvents =
-        events.whereType<LayPieceRoundEvent>().toList();
+    final Iterable<LayPieceRoundEvent> layPieceEvents =
+        events.whereType<LayPieceRoundEvent>();
 
     return layPieceEvents.fold(GamePlayerTurn.unknown(),
         (previousState, nextEvent) {
