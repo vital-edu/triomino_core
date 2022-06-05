@@ -16,33 +16,38 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$GameRound {
+  int get roundNumber => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            List<RoundEvent> events, List<PlayerStatus> statuses)
+    required TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)
         onGoing,
-    required TResult Function(
-            List<RoundEvent> events, List<PlayerStatus> statuses)
+    required TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)
         finished,
-    required TResult Function() unknown,
+    required TResult Function(int roundNumber) unknown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         onGoing,
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         finished,
-    TResult Function()? unknown,
+    TResult Function(int roundNumber)? unknown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         onGoing,
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         finished,
-    TResult Function()? unknown,
+    TResult Function(int roundNumber)? unknown,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -68,12 +73,17 @@ mixin _$GameRound {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $GameRoundCopyWith<GameRound> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $GameRoundCopyWith<$Res> {
   factory $GameRoundCopyWith(GameRound value, $Res Function(GameRound) then) =
       _$GameRoundCopyWithImpl<$Res>;
+  $Res call({int roundNumber});
 }
 
 /// @nodoc
@@ -83,14 +93,29 @@ class _$GameRoundCopyWithImpl<$Res> implements $GameRoundCopyWith<$Res> {
   final GameRound _value;
   // ignore: unused_field
   final $Res Function(GameRound) _then;
+
+  @override
+  $Res call({
+    Object? roundNumber = freezed,
+  }) {
+    return _then(_value.copyWith(
+      roundNumber: roundNumber == freezed
+          ? _value.roundNumber
+          : roundNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$$OnGoingGameRoundCopyWith<$Res> {
+abstract class _$$OnGoingGameRoundCopyWith<$Res>
+    implements $GameRoundCopyWith<$Res> {
   factory _$$OnGoingGameRoundCopyWith(
           _$OnGoingGameRound value, $Res Function(_$OnGoingGameRound) then) =
       __$$OnGoingGameRoundCopyWithImpl<$Res>;
-  $Res call({List<RoundEvent> events, List<PlayerStatus> statuses});
+  @override
+  $Res call(
+      {int roundNumber, List<RoundEvent> events, List<PlayerStatus> statuses});
 }
 
 /// @nodoc
@@ -106,10 +131,15 @@ class __$$OnGoingGameRoundCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? roundNumber = freezed,
     Object? events = freezed,
     Object? statuses = freezed,
   }) {
     return _then(_$OnGoingGameRound(
+      roundNumber: roundNumber == freezed
+          ? _value.roundNumber
+          : roundNumber // ignore: cast_nullable_to_non_nullable
+              as int,
       events: events == freezed
           ? _value._events
           : events // ignore: cast_nullable_to_non_nullable
@@ -126,12 +156,15 @@ class __$$OnGoingGameRoundCopyWithImpl<$Res>
 
 class _$OnGoingGameRound extends OnGoingGameRound {
   const _$OnGoingGameRound(
-      {required final List<RoundEvent> events,
+      {required this.roundNumber,
+      required final List<RoundEvent> events,
       required final List<PlayerStatus> statuses})
       : _events = events,
         _statuses = statuses,
         super._();
 
+  @override
+  final int roundNumber;
   final List<RoundEvent> _events;
   @override
   List<RoundEvent> get events {
@@ -148,7 +181,7 @@ class _$OnGoingGameRound extends OnGoingGameRound {
 
   @override
   String toString() {
-    return 'GameRound.onGoing(events: $events, statuses: $statuses)';
+    return 'GameRound.onGoing(roundNumber: $roundNumber, events: $events, statuses: $statuses)';
   }
 
   @override
@@ -156,6 +189,8 @@ class _$OnGoingGameRound extends OnGoingGameRound {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$OnGoingGameRound &&
+            const DeepCollectionEquality()
+                .equals(other.roundNumber, roundNumber) &&
             const DeepCollectionEquality().equals(other._events, _events) &&
             const DeepCollectionEquality().equals(other._statuses, _statuses));
   }
@@ -163,6 +198,7 @@ class _$OnGoingGameRound extends OnGoingGameRound {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(roundNumber),
       const DeepCollectionEquality().hash(_events),
       const DeepCollectionEquality().hash(_statuses));
 
@@ -174,41 +210,45 @@ class _$OnGoingGameRound extends OnGoingGameRound {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            List<RoundEvent> events, List<PlayerStatus> statuses)
+    required TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)
         onGoing,
-    required TResult Function(
-            List<RoundEvent> events, List<PlayerStatus> statuses)
+    required TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)
         finished,
-    required TResult Function() unknown,
+    required TResult Function(int roundNumber) unknown,
   }) {
-    return onGoing(events, statuses);
+    return onGoing(roundNumber, events, statuses);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         onGoing,
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         finished,
-    TResult Function()? unknown,
+    TResult Function(int roundNumber)? unknown,
   }) {
-    return onGoing?.call(events, statuses);
+    return onGoing?.call(roundNumber, events, statuses);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         onGoing,
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         finished,
-    TResult Function()? unknown,
+    TResult Function(int roundNumber)? unknown,
     required TResult orElse(),
   }) {
     if (onGoing != null) {
-      return onGoing(events, statuses);
+      return onGoing(roundNumber, events, statuses);
     }
     return orElse();
   }
@@ -250,23 +290,30 @@ class _$OnGoingGameRound extends OnGoingGameRound {
 
 abstract class OnGoingGameRound extends GameRound {
   const factory OnGoingGameRound(
-      {required final List<RoundEvent> events,
+      {required final int roundNumber,
+      required final List<RoundEvent> events,
       required final List<PlayerStatus> statuses}) = _$OnGoingGameRound;
   const OnGoingGameRound._() : super._();
 
+  @override
+  int get roundNumber => throw _privateConstructorUsedError;
   List<RoundEvent> get events => throw _privateConstructorUsedError;
   List<PlayerStatus> get statuses => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
   _$$OnGoingGameRoundCopyWith<_$OnGoingGameRound> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FinishedGameRoundCopyWith<$Res> {
+abstract class _$$FinishedGameRoundCopyWith<$Res>
+    implements $GameRoundCopyWith<$Res> {
   factory _$$FinishedGameRoundCopyWith(
           _$FinishedGameRound value, $Res Function(_$FinishedGameRound) then) =
       __$$FinishedGameRoundCopyWithImpl<$Res>;
-  $Res call({List<RoundEvent> events, List<PlayerStatus> statuses});
+  @override
+  $Res call(
+      {int roundNumber, List<RoundEvent> events, List<PlayerStatus> statuses});
 }
 
 /// @nodoc
@@ -282,10 +329,15 @@ class __$$FinishedGameRoundCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? roundNumber = freezed,
     Object? events = freezed,
     Object? statuses = freezed,
   }) {
     return _then(_$FinishedGameRound(
+      roundNumber: roundNumber == freezed
+          ? _value.roundNumber
+          : roundNumber // ignore: cast_nullable_to_non_nullable
+              as int,
       events: events == freezed
           ? _value._events
           : events // ignore: cast_nullable_to_non_nullable
@@ -302,12 +354,15 @@ class __$$FinishedGameRoundCopyWithImpl<$Res>
 
 class _$FinishedGameRound extends FinishedGameRound {
   const _$FinishedGameRound(
-      {required final List<RoundEvent> events,
+      {required this.roundNumber,
+      required final List<RoundEvent> events,
       required final List<PlayerStatus> statuses})
       : _events = events,
         _statuses = statuses,
         super._();
 
+  @override
+  final int roundNumber;
   final List<RoundEvent> _events;
   @override
   List<RoundEvent> get events {
@@ -324,7 +379,7 @@ class _$FinishedGameRound extends FinishedGameRound {
 
   @override
   String toString() {
-    return 'GameRound.finished(events: $events, statuses: $statuses)';
+    return 'GameRound.finished(roundNumber: $roundNumber, events: $events, statuses: $statuses)';
   }
 
   @override
@@ -332,6 +387,8 @@ class _$FinishedGameRound extends FinishedGameRound {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FinishedGameRound &&
+            const DeepCollectionEquality()
+                .equals(other.roundNumber, roundNumber) &&
             const DeepCollectionEquality().equals(other._events, _events) &&
             const DeepCollectionEquality().equals(other._statuses, _statuses));
   }
@@ -339,6 +396,7 @@ class _$FinishedGameRound extends FinishedGameRound {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(roundNumber),
       const DeepCollectionEquality().hash(_events),
       const DeepCollectionEquality().hash(_statuses));
 
@@ -350,41 +408,45 @@ class _$FinishedGameRound extends FinishedGameRound {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            List<RoundEvent> events, List<PlayerStatus> statuses)
+    required TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)
         onGoing,
-    required TResult Function(
-            List<RoundEvent> events, List<PlayerStatus> statuses)
+    required TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)
         finished,
-    required TResult Function() unknown,
+    required TResult Function(int roundNumber) unknown,
   }) {
-    return finished(events, statuses);
+    return finished(roundNumber, events, statuses);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         onGoing,
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         finished,
-    TResult Function()? unknown,
+    TResult Function(int roundNumber)? unknown,
   }) {
-    return finished?.call(events, statuses);
+    return finished?.call(roundNumber, events, statuses);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         onGoing,
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         finished,
-    TResult Function()? unknown,
+    TResult Function(int roundNumber)? unknown,
     required TResult orElse(),
   }) {
     if (finished != null) {
-      return finished(events, statuses);
+      return finished(roundNumber, events, statuses);
     }
     return orElse();
   }
@@ -426,22 +488,29 @@ class _$FinishedGameRound extends FinishedGameRound {
 
 abstract class FinishedGameRound extends GameRound {
   const factory FinishedGameRound(
-      {required final List<RoundEvent> events,
+      {required final int roundNumber,
+      required final List<RoundEvent> events,
       required final List<PlayerStatus> statuses}) = _$FinishedGameRound;
   const FinishedGameRound._() : super._();
 
+  @override
+  int get roundNumber => throw _privateConstructorUsedError;
   List<RoundEvent> get events => throw _privateConstructorUsedError;
   List<PlayerStatus> get statuses => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
   _$$FinishedGameRoundCopyWith<_$FinishedGameRound> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnknownGameRoundCopyWith<$Res> {
+abstract class _$$UnknownGameRoundCopyWith<$Res>
+    implements $GameRoundCopyWith<$Res> {
   factory _$$UnknownGameRoundCopyWith(
           _$UnknownGameRound value, $Res Function(_$UnknownGameRound) then) =
       __$$UnknownGameRoundCopyWithImpl<$Res>;
+  @override
+  $Res call({int roundNumber});
 }
 
 /// @nodoc
@@ -454,65 +523,94 @@ class __$$UnknownGameRoundCopyWithImpl<$Res>
 
   @override
   _$UnknownGameRound get _value => super._value as _$UnknownGameRound;
+
+  @override
+  $Res call({
+    Object? roundNumber = freezed,
+  }) {
+    return _then(_$UnknownGameRound(
+      roundNumber: roundNumber == freezed
+          ? _value.roundNumber
+          : roundNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$UnknownGameRound extends UnknownGameRound {
-  const _$UnknownGameRound() : super._();
+  const _$UnknownGameRound({this.roundNumber = 0}) : super._();
+
+  @override
+  @JsonKey()
+  final int roundNumber;
 
   @override
   String toString() {
-    return 'GameRound.unknown()';
+    return 'GameRound.unknown(roundNumber: $roundNumber)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UnknownGameRound);
+        (other.runtimeType == runtimeType &&
+            other is _$UnknownGameRound &&
+            const DeepCollectionEquality()
+                .equals(other.roundNumber, roundNumber));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(roundNumber));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$UnknownGameRoundCopyWith<_$UnknownGameRound> get copyWith =>
+      __$$UnknownGameRoundCopyWithImpl<_$UnknownGameRound>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            List<RoundEvent> events, List<PlayerStatus> statuses)
+    required TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)
         onGoing,
-    required TResult Function(
-            List<RoundEvent> events, List<PlayerStatus> statuses)
+    required TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)
         finished,
-    required TResult Function() unknown,
+    required TResult Function(int roundNumber) unknown,
   }) {
-    return unknown();
+    return unknown(roundNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         onGoing,
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         finished,
-    TResult Function()? unknown,
+    TResult Function(int roundNumber)? unknown,
   }) {
-    return unknown?.call();
+    return unknown?.call(roundNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         onGoing,
-    TResult Function(List<RoundEvent> events, List<PlayerStatus> statuses)?
+    TResult Function(int roundNumber, List<RoundEvent> events,
+            List<PlayerStatus> statuses)?
         finished,
-    TResult Function()? unknown,
+    TResult Function(int roundNumber)? unknown,
     required TResult orElse(),
   }) {
     if (unknown != null) {
-      return unknown();
+      return unknown(roundNumber);
     }
     return orElse();
   }
@@ -553,6 +651,13 @@ class _$UnknownGameRound extends UnknownGameRound {
 }
 
 abstract class UnknownGameRound extends GameRound {
-  const factory UnknownGameRound() = _$UnknownGameRound;
+  const factory UnknownGameRound({final int roundNumber}) = _$UnknownGameRound;
   const UnknownGameRound._() : super._();
+
+  @override
+  int get roundNumber => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$UnknownGameRoundCopyWith<_$UnknownGameRound> get copyWith =>
+      throw _privateConstructorUsedError;
 }

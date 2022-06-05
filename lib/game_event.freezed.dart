@@ -21,25 +21,21 @@ mixin _$GameEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Player player, Identifier id) addPlayer,
     required TResult Function(Identifier id) startGame,
-    required TResult Function(
-            FinishedGameRound round, int roundNumber, Identifier id)
-        round,
+    required TResult Function(GameRound round, Identifier id) round,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(FinishedGameRound round, int roundNumber, Identifier id)?
-        round,
+    TResult Function(GameRound round, Identifier id)? round,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(FinishedGameRound round, int roundNumber, Identifier id)?
-        round,
+    TResult Function(GameRound round, Identifier id)? round,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -186,9 +182,7 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Player player, Identifier id) addPlayer,
     required TResult Function(Identifier id) startGame,
-    required TResult Function(
-            FinishedGameRound round, int roundNumber, Identifier id)
-        round,
+    required TResult Function(GameRound round, Identifier id) round,
   }) {
     return addPlayer(player, id);
   }
@@ -198,8 +192,7 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(FinishedGameRound round, int roundNumber, Identifier id)?
-        round,
+    TResult Function(GameRound round, Identifier id)? round,
   }) {
     return addPlayer?.call(player, id);
   }
@@ -209,8 +202,7 @@ class _$AddPlayerEvent extends AddPlayerEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(FinishedGameRound round, int roundNumber, Identifier id)?
-        round,
+    TResult Function(GameRound round, Identifier id)? round,
     required TResult orElse(),
   }) {
     if (addPlayer != null) {
@@ -336,9 +328,7 @@ class _$StartGameEvent extends StartGameEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Player player, Identifier id) addPlayer,
     required TResult Function(Identifier id) startGame,
-    required TResult Function(
-            FinishedGameRound round, int roundNumber, Identifier id)
-        round,
+    required TResult Function(GameRound round, Identifier id) round,
   }) {
     return startGame(id);
   }
@@ -348,8 +338,7 @@ class _$StartGameEvent extends StartGameEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(FinishedGameRound round, int roundNumber, Identifier id)?
-        round,
+    TResult Function(GameRound round, Identifier id)? round,
   }) {
     return startGame?.call(id);
   }
@@ -359,8 +348,7 @@ class _$StartGameEvent extends StartGameEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(FinishedGameRound round, int roundNumber, Identifier id)?
-        round,
+    TResult Function(GameRound round, Identifier id)? round,
     required TResult orElse(),
   }) {
     if (startGame != null) {
@@ -424,7 +412,9 @@ abstract class _$$RoundGameEventCopyWith<$Res>
           _$RoundGameEvent value, $Res Function(_$RoundGameEvent) then) =
       __$$RoundGameEventCopyWithImpl<$Res>;
   @override
-  $Res call({FinishedGameRound round, int roundNumber, Identifier id});
+  $Res call({GameRound round, Identifier id});
+
+  $GameRoundCopyWith<$Res> get round;
 }
 
 /// @nodoc
@@ -440,43 +430,41 @@ class __$$RoundGameEventCopyWithImpl<$Res> extends _$GameEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? round = freezed,
-    Object? roundNumber = freezed,
     Object? id = freezed,
   }) {
     return _then(_$RoundGameEvent(
       round == freezed
           ? _value.round
           : round // ignore: cast_nullable_to_non_nullable
-              as FinishedGameRound,
-      roundNumber: roundNumber == freezed
-          ? _value.roundNumber
-          : roundNumber // ignore: cast_nullable_to_non_nullable
-              as int,
+              as GameRound,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as Identifier,
     ));
   }
+
+  @override
+  $GameRoundCopyWith<$Res> get round {
+    return $GameRoundCopyWith<$Res>(_value.round, (value) {
+      return _then(_value.copyWith(round: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$RoundGameEvent extends RoundGameEvent {
-  const _$RoundGameEvent(this.round,
-      {required this.roundNumber, required this.id})
-      : super._();
+  const _$RoundGameEvent(this.round, {required this.id}) : super._();
 
   @override
-  final FinishedGameRound round;
-  @override
-  final int roundNumber;
+  final GameRound round;
   @override
   final Identifier id;
 
   @override
   String toString() {
-    return 'GameEvent.round(round: $round, roundNumber: $roundNumber, id: $id)';
+    return 'GameEvent.round(round: $round, id: $id)';
   }
 
   @override
@@ -485,8 +473,6 @@ class _$RoundGameEvent extends RoundGameEvent {
         (other.runtimeType == runtimeType &&
             other is _$RoundGameEvent &&
             const DeepCollectionEquality().equals(other.round, round) &&
-            const DeepCollectionEquality()
-                .equals(other.roundNumber, roundNumber) &&
             const DeepCollectionEquality().equals(other.id, id));
   }
 
@@ -494,7 +480,6 @@ class _$RoundGameEvent extends RoundGameEvent {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(round),
-      const DeepCollectionEquality().hash(roundNumber),
       const DeepCollectionEquality().hash(id));
 
   @JsonKey(ignore: true)
@@ -507,11 +492,9 @@ class _$RoundGameEvent extends RoundGameEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Player player, Identifier id) addPlayer,
     required TResult Function(Identifier id) startGame,
-    required TResult Function(
-            FinishedGameRound round, int roundNumber, Identifier id)
-        round,
+    required TResult Function(GameRound round, Identifier id) round,
   }) {
-    return round(this.round, roundNumber, id);
+    return round(this.round, id);
   }
 
   @override
@@ -519,10 +502,9 @@ class _$RoundGameEvent extends RoundGameEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(FinishedGameRound round, int roundNumber, Identifier id)?
-        round,
+    TResult Function(GameRound round, Identifier id)? round,
   }) {
-    return round?.call(this.round, roundNumber, id);
+    return round?.call(this.round, id);
   }
 
   @override
@@ -530,12 +512,11 @@ class _$RoundGameEvent extends RoundGameEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Player player, Identifier id)? addPlayer,
     TResult Function(Identifier id)? startGame,
-    TResult Function(FinishedGameRound round, int roundNumber, Identifier id)?
-        round,
+    TResult Function(GameRound round, Identifier id)? round,
     required TResult orElse(),
   }) {
     if (round != null) {
-      return round(this.round, roundNumber, id);
+      return round(this.round, id);
     }
     return orElse();
   }
@@ -576,13 +557,11 @@ class _$RoundGameEvent extends RoundGameEvent {
 }
 
 abstract class RoundGameEvent extends GameEvent {
-  const factory RoundGameEvent(final FinishedGameRound round,
-      {required final int roundNumber,
-      required final Identifier id}) = _$RoundGameEvent;
+  const factory RoundGameEvent(final GameRound round,
+      {required final Identifier id}) = _$RoundGameEvent;
   const RoundGameEvent._() : super._();
 
-  FinishedGameRound get round => throw _privateConstructorUsedError;
-  int get roundNumber => throw _privateConstructorUsedError;
+  GameRound get round => throw _privateConstructorUsedError;
   @override
   Identifier get id => throw _privateConstructorUsedError;
   @override

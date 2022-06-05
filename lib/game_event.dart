@@ -19,8 +19,7 @@ class GameEvent with _$GameEvent {
   }) = StartGameEvent;
 
   const factory GameEvent.round(
-    FinishedGameRound round, {
-    required int roundNumber,
+    GameRound round, {
     required Identifier id,
   }) = RoundGameEvent;
 }

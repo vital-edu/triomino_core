@@ -24,8 +24,10 @@ class Game {
     AddPlayerEvent(Player(name: 'Player 1'), id: Identifier.uniq()),
     AddPlayerEvent(Player(name: 'Player 2'), id: Identifier.uniq()),
   ]);
-  List<GameEvent> get events => List.unmodifiable(_events);
-  List<GameRound> _pastRounds = []; // TODO: implement _pastRounds
+  List<GameEvent> get events => [
+        ..._events,
+        GameEvent.round(_currentRound, id: Identifier.uniq()),
+      ];
   GameRound _currentRound = GameRound.unknown();
 
   set events(List<GameEvent> events) {
@@ -134,28 +136,27 @@ class Game {
         );
 
         _currentRound = _currentRound.map(
-          onGoing: (round) {
-            return round.copyWith(
-              events: [...round.events, event],
-              statuses: round.statuses
-                  .map<PlayerStatus>((e) => e.player == roundEvent.player
-                      ? e.copyWith(
-                          playedPieces: [...e.playedPieces, roundEvent.piece],
-                          piecesInPlayersHand: e.piecesInPlayersHand - 1,
-                          score: e.score + roundEvent.points,
-                        )
-                      : e)
-                  .toList(),
-            );
-          },
+          onGoing: (round) => round.copyWith(
+            events: [...round.events, event],
+            statuses: round.statuses
+                .map<PlayerStatus>((e) => e.player == roundEvent.player
+                    ? e.copyWith(
+                        playedPieces: [...e.playedPieces, roundEvent.piece],
+                        piecesInPlayersHand: e.piecesInPlayersHand - 1,
+                        score: e.score + roundEvent.points,
+                      )
+                    : e)
+                .toList(),
+          ),
           finished: (round) {
             // TODO: implement custom error
             throw ArgumentError("should not happen");
           },
-          unknown: (round) {
-            return OnGoingGameRound(
-                events: [event], statuses: _calculatePlayerStatuses([event]));
-          },
+          unknown: (round) => OnGoingGameRound(
+            roundNumber: round.roundNumber,
+            events: [event],
+            statuses: _calculatePlayerStatuses([event]),
+          ),
         );
         // TODO: finish points rule
         // ruleBook.pointsRule.validate(newEvents);

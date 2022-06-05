@@ -48,26 +48,28 @@ class GameUtils {
           print('Game started');
         },
         round: (gameEvent) {
-          print('Round ${gameEvent.roundNumber} started');
-          gameEvent.round.events.map((roundEvent) => roundEvent.map(
-                layPiece: (event) {
-                  print(
-                      '${event.player.name} played ${event.piece}. Points: ${event.points}');
-                  print('  --> Bonuses');
-                  for (final bonus in event.gamePoints) {
-                    bonus.map(layPiece: (e) {
-                      print('    -> Lay piece bonus: ${e.points} points.');
-                    }, createBridge: (e) {
-                      print('    -> Create bridge bonus: ${e.points} points.');
-                    }, createHexagon: (e) {
-                      print('    -> Create hexagon bonus: ${e.points} points.');
-                    });
-                  }
-                },
-                drawPiece: (event) {
-                  print('${event.player.name} drew ${event.piece}');
-                },
-              ));
+          print('Round ${gameEvent.round.roundNumber} started');
+          for (final roundEvent in gameEvent.round.events) {
+            return roundEvent.map(
+              layPiece: (event) {
+                print(
+                    '${event.player.name} played ${event.piece}. Points: ${event.points}');
+                print('  --> Bonuses');
+                for (final bonus in event.gamePoints) {
+                  bonus.map(layPiece: (e) {
+                    print('    -> Lay piece bonus: ${e.points} points.');
+                  }, createBridge: (e) {
+                    print('    -> Create bridge bonus: ${e.points} points.');
+                  }, createHexagon: (e) {
+                    print('    -> Create hexagon bonus: ${e.points} points.');
+                  });
+                }
+              },
+              drawPiece: (event) {
+                print('${event.player.name} drew ${event.piece}');
+              },
+            );
+          }
         },
       );
     }
