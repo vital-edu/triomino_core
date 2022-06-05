@@ -22,7 +22,9 @@ class GameRound with _$GameRound {
   }) = FinishedGameRound;
 
   const factory GameRound.unknown({
-    @Default(0) int roundNumber,
+    @Default(1) int roundNumber,
+    @Default([]) List<RoundEvent> events,
+    @Default([]) List<PlayerStatus> statuses,
   }) = UnknownGameRound;
 
   List<Piece> get playedPieces => map(
@@ -34,18 +36,6 @@ class GameRound with _$GameRound {
           <Piece>[],
           (playedPieces, status) => [...playedPieces, ...status.playedPieces],
         ),
-        unknown: (round) => [],
-      );
-
-  List<PlayerStatus> get statuses => map(
-        onGoing: (round) => round.statuses,
-        finished: (round) => round.statuses,
-        unknown: (round) => [],
-      );
-
-  List<RoundEvent> get events => map(
-        onGoing: (round) => round.events,
-        finished: (round) => round.events,
         unknown: (round) => [],
       );
 }

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:triomino_core/extensions/list_extension.dart';
 import 'package:triomino_core/game_event.dart';
 import 'package:triomino_core/game_round.dart';
@@ -6,6 +7,7 @@ import 'package:triomino_core/models/piece.dart';
 import 'package:triomino_core/models/player.dart';
 import 'package:triomino_core/round_event.dart';
 import 'package:triomino_core/rules/game/game_rule_book.dart';
+import 'package:triomino_core/rules/player_game_status.dart';
 import 'package:triomino_core/rules/round/bonus_game_rule.dart';
 import 'package:triomino_core/rules/errors/game_rule_error.dart';
 import 'package:triomino_core/rules/errors/game_state_error.dart';
@@ -102,7 +104,20 @@ class Game {
         .toList();
   }
 
-  List<PlayerStatus> get playerStatuses => _currentRound.statuses;
+  List<PlayerGameStatus> _cumulatedStatuses = [];
+  List<PlayerStatus> get playerStatuses => _currentRound.statuses
+      .map(
+        (roundStatus) => roundStatus.copyWith(
+          score: roundStatus.score +
+              (_cumulatedStatuses
+                      .firstWhereOrNull(
+                        (gameStatus) => gameStatus.player == roundStatus.player,
+                      )
+                      ?.score ??
+                  0),
+        ),
+      )
+      .toList();
 
   void addRoundEvent(RoundEvent event) {
     final newEvents = [..._currentRound.events, event];
@@ -138,10 +153,13 @@ class Game {
 
         _currentRound = _currentRound.map(
           onGoing: (round) {
-            try {
-              final roundWinner = round.statuses
-                  .firstWhere((element) => element.piecesInPlayersHand == 1);
+            final roundWinner = round.statuses.firstWhereOrNull(
+              (roundStatus) =>
+                  roundStatus.player == roundEvent.player &&
+                  roundStatus.piecesInPlayersHand == 1,
+            );
 
+            if (roundWinner != null) {
               add(
                 GameEvent.round(
                   GameRound.finished(
@@ -160,20 +178,20 @@ class Game {
                 events: [],
                 statuses: _calculatePlayerStatuses([]),
               );
-            } on StateError {
-              return round.copyWith(
-                events: [...round.events, event],
-                statuses: round.statuses
-                    .map<PlayerStatus>((e) => e.player == roundEvent.player
-                        ? e.copyWith(
-                            playedPieces: [...e.playedPieces, roundEvent.piece],
-                            piecesInPlayersHand: e.piecesInPlayersHand - 1,
-                            score: e.score + roundEvent.points,
-                          )
-                        : e)
-                    .toList(),
-              );
             }
+
+            return round.copyWith(
+              events: [...round.events, event],
+              statuses: round.statuses
+                  .map<PlayerStatus>((e) => e.player == roundEvent.player
+                      ? e.copyWith(
+                          playedPieces: [...e.playedPieces, roundEvent.piece],
+                          piecesInPlayersHand: e.piecesInPlayersHand - 1,
+                          score: e.score + roundEvent.points,
+                        )
+                      : e)
+                  .toList(),
+            );
           },
           finished: (round) {
             // TODO: implement custom error
@@ -203,16 +221,32 @@ class Game {
       startGame: (newEvent) {
         gameRuleBook.startGameRule.validate(newEvents);
         gameRuleBook.quantityOfPlayersGameRule.validate(newEvents);
+        _cumulatedStatuses =
+            players.map((e) => PlayerGameStatus(player: e, score: 0)).toList();
       },
       round: (newEvent) {
-        // TODO: implement it
+        gameRuleBook.startGameRule.validate(newEvents);
+        _cumulatedStatuses = _cumulatedStatuses
+            .map(
+              (status) => status.copyWith(
+                score: status.score +
+                    newEvent.round.statuses
+                        .firstWhere((roundStatus) =>
+                            roundStatus.player == status.player)
+                        .score,
+              ),
+            )
+            .toList();
       },
     );
 
     _events = newEvents;
   }
 
-  bool get hasGameStarted => _events.whereType<StartGameEvent>().isNotEmpty;
+  bool get hasGameStarted =>
+      _events
+          .firstWhereOrNull((event) => event.runtimeType == StartGameEvent) !=
+      null;
 
   Player? get playerOnTurn => roundRuleBook
       .playerTurn(events: _currentRound.events, players: players)

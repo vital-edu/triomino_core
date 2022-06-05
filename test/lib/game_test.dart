@@ -285,6 +285,7 @@ void main() {
       final player1 = game.players[0];
       final player2 = game.players[1];
 
+      game.add(GameEvent.startGame(id: Identifier.uniq()));
       playPiece(
         Piece.triple(5),
         game: game,
@@ -329,10 +330,14 @@ void main() {
       playPiece(Piece(4, 1, 5), game: game);
       playPiece(Piece.triple(0), game: game);
       playPiece(Piece(0, 5, 5), game: game);
-      playPiece(Piece(0, 5, 4), game: game);
-      playPiece(Piece(0, 5, 3), game: game);
 
-      expect(game.playerStatuses[0].piecesInPlayersHand, 0);
+      expect(game.playerStatuses[0].piecesInPlayersHand, 9);
+      expect(game.playerStatuses[1].piecesInPlayersHand, 9);
+
+      // TODO: calculate correct score (bonus for winning and remaining pieces)
+      expect(game.playerStatuses[0].score, 180);
+
+      expect(game.events.whereType<RoundGameEvent>().last.round.roundNumber, 1);
     });
   });
 }
